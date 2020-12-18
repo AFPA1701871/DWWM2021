@@ -1,0 +1,9 @@
+\\ Module principal
+\\Exo12
+DÉBUT
+	number =0
+	TANTQUE number > 3 OU number <1 FAIRE
+		Requete "entrer un nombre entre 1 et 3: ", number
+	FINTANTQUE
+	
+FIN
