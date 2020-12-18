@@ -1,0 +1,15 @@
+\\ Module principal
+\\Exo13
+DÉBUT
+	number =0
+	TANTQUE number > 20 OU number <10 FAIRE
+		Requete "entrer un nombre entre 10 et 20: ", number
+		SI number > 20 ALORS
+			écrire "Plus petit !"
+		FINSI
+		SI number < 10 ALORS
+			écrire "Plus grand !"
+		FINSI
+	FINTANTQUE
+	
+FIN
