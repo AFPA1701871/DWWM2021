@@ -1,9 +1,0 @@
-\\ Module principal
-\\Exo14
-DÉBUT
-	Requete "entrer un nombre: ", number
-	POUR compteur=1 JUSQU'À 10 FAIRE
-		écrire number + compteur
-	FINPOUR
-	
-FIN
