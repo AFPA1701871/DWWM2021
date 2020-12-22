@@ -13,7 +13,7 @@
 
     // Tant que nombre essai OK et NON gagné 
     while($intEssai <=20 && $strAleatoire <> $strMaProposition)
-        
+    {    
         $intEssai = $intEssai + 1;
 
         echo $strAleatoire;
@@ -43,6 +43,7 @@
             }
              
         }
+        
         echo $strResultat;
 
         //Boucler sur le resultat
@@ -52,11 +53,11 @@
             if($carResultat = "x")
             {
                 //Boucler sur les autres X (position+1)
-                for ($intCOmpt2=$intCompt+1; $intCompt2 < 6 ; $intCOmpt2++) 
+                for ($intCompt2=$intCompt+1; $intCompt2 < 6 ; $intCOmpt2++) 
                 { 
                     $carResultat= substr($strResultat,$intCompt2,1);
                     //Si X
-                    if(substr($strResultat,$intCompt2,1)= "x")
+                    if ($carResultat= "x")
                     {
                         //SI caractere =  car(intCompt resultat)
                         $carMaProposition1= substr($strMaProposition,$intCompt2,1);
@@ -65,8 +66,7 @@
                         {
                             for ($intCompt3=$intCompt2+1; $intCompt3 < 6 ; $intCompt3++) 
                             { 
-                                //$strResultat = substr($strMaProposition,1,$carMaProposition1intCompt3) && "o" && _ 
-                                                substr($strMaProposition,($intCompt3),strlen($strMaProposition)-(2+$intCompt3))) 
+                                $strResultat = substr($strMaProposition,1,$carMaProposition1intCompt3) && "o" && substr($strMaProposition,($intCompt3),strlen($strMaProposition)-(2+$intCompt3)); 
                             }    
                         }
                             
@@ -77,6 +77,4 @@
             }
         }
     }
-}
-
 ?>
