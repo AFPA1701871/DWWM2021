@@ -40,10 +40,9 @@
             } else 
             {
                 $strResultat = $strResultat && "x";
-            }
-             
+            }   
         }
-        
+
         echo $strResultat;
 
         //Boucler sur le resultat
@@ -68,12 +67,9 @@
                             { 
                                 $strResultat = substr($strMaProposition,1,$carMaProposition1intCompt3) && "o" && substr($strMaProposition,($intCompt3),strlen($strMaProposition)-(2+$intCompt3)); 
                             }    
-                        }
-                            
+                        }  
                     }
-                        
                 }
-                 
             }
         }
     }
