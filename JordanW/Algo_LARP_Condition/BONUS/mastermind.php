@@ -16,14 +16,15 @@
         
         $intEssai = $intEssai + 1;
 
-        echo strAleatoire;
-        $strMaProposition = readline("Saisir 5 chiffres : ");
+        echo $strAleatoire;
+        echo 'Saisir 5 chiffres : ' ;
+        $strMaProposition = trim(fgets(STDIN));
 
-        echo strMaProposition;
+        echo $carMaPropositionstrMaProposition;
 
-        $strResultat = ""
+        $strResultat = "";
         //Boucler sur mes caracteres
-        for ($intCompt=1; $intCompt<6; $intCompt++) 
+        for($intCompt=1; $intCompt<6; $intCompt++) 
         { 
             //Tester JUSTE v / x
             //Boucler sur les caracteres de mastermind
@@ -47,25 +48,25 @@
         //Boucler sur le resultat
         for ($intCompt=1; $intCompt<6; $intCompt++) 
         { 
-            $carResultat =substr(strResultat,intCompt,1);      
+            $carResultat =substr($strResultat,$intCompt,1);      
             if($carResultat = "x")
             {
                 //Boucler sur les autres X (position+1)
                 for ($intCOmpt2=$intCompt+1; $intCompt2 < 6 ; $intCOmpt2++) 
                 { 
-                    $carResultat= substr(strResultat,intCompt2,1);
+                    $carResultat= substr($strResultat,$intCompt2,1);
                     //Si X
-                    if(substr(strResultat,intCompt2,1)= "x")
+                    if(substr($strResultat,$intCompt2,1)= "x")
                     {
                         //SI caractere =  car(intCompt resultat)
-                        $carMaProposition1= substr(strMaProposition,intCompt2,1);
-                        $carAleatoire = substr(strAleatoire,intCompt2,1); 
-                        if (carMaProposition1 = carAleatoire)
+                        $carMaProposition1= substr($strMaProposition,$intCompt2,1);
+                        $carAleatoire = substr($strAleatoire,$intCompt2,1); 
+                        if ($carMaProposition1 = $carAleatoire)
                         {
-                            for ($intCompt3=intCompt2+1; $intCompt3 < 6 ; $intCompt3++) 
+                            for ($intCompt3=$intCompt2+1; $intCompt3 < 6 ; $intCompt3++) 
                             { 
                                 //$strResultat = substr($strMaProposition,1,$carMaProposition1intCompt3) && "o" && _ 
-                                                substr($strMaProposition,($intCompt3),strlen(strMaProposition)-(2+$intCompt3))) 
+                                                substr($strMaProposition,($intCompt3),strlen($strMaProposition)-(2+$intCompt3))) 
                             }    
                         }
                             
