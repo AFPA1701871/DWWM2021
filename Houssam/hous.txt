@@ -1,2 +1,135 @@
-text cfevgrgerg
-grgrt dvdsv
+\\ 2 TABLEAUX
+DÉBUT
+    monTableau1=[4,8,7,9,1,5,4,6]
+    monTableau2=[7,6,5,2,1,3,7,4]
+    monTableau3=[]
+    pour i=1 jusqu'à compter(monTableau1)  faire
+        monTableau3[i]=monTableau1[i]+monTableau2[i]
+    finpour
+    ecrire monTableau3
+FIN
+
+\\ Tableau - NEG POS
+
+DÉBUT
+    monTableau=[]
+    negative=0
+    positive=0
+    requete"Écrivez un nombre : ",nbr
+    pour i=1 jusqu'à nbr faire
+        requete "Écrivez une valeur : ",monTableau[i]
+        si monTableau[i]<0 alors
+        negative=negative+1
+        sinon si monTableau[i]>0 alors
+        positive=positive+1
+        finsi
+    finpour
+    ecrire "Le nombre de valeurs negative est : ",negative
+    ecrire "Le nombre de valeurs positive est : ",positive
+FIN
+
+\\ EXO 6 - BIG + POSITION
+
+DEBUT
+    big = 0
+    POUR i=1 jusqu'à 20 faire
+    requete "Entrez un nombre : ",nbr
+    si i = 1 ou nbr>big alors
+    big=nbr
+    laposition = i
+    finsi
+    finpour
+    ecrire "Le nombre le plus grand était : ",big
+    ecrire "Il a été saisi en position numéro ",laposition
+FIN
+
+\\ Tableau - Big Position
+
+DÉBUT
+    monTableau=[]
+    big=0
+    requete"Écrivez un nombre : ",nbr
+    pour i=1 jusqu'à nbr faire
+        requete "Écrivez une valeur : ",monTableau[i]
+        si monTableau[i]>big alors
+        big=monTableau[i]
+        laposition=i
+        finsi
+    finpour
+
+    ecrire monTableau 
+    ecrire "La plus grande valeur était : ",big
+    ecrire "Il a été saisi en position numéro ",laposition
+FIN
+
+
+\\ MOYENNE
+
+DÉBUT
+    monTableau=[]
+    notes=0
+    pour i=1 jusqu'à 9 faire
+        requete "Écrivez une note : ",monTableau[i]
+        notes=notes+monTableau[i]
+    finpour
+    moyenne = notes/9
+    ecrire moyenne
+FIN
+
+\\ 2 TABLEAUX SCHTROUMPH
+DÉBUT
+    Tableau1=[4,8,7,9,1,5,4,6]
+    Tableau2=[7,6,5,2,1,3,7,4]
+    somme=0
+    pour i=1 jusqu'à compter(Tableau1)  faire
+    pour j=1 jusqu'à compter(Tableau2)  faire
+        somme=somme+(Tableau2[j]*Tableau1[i])
+    finpour
+    finpour
+    ecrire somme
+FIN
+
+
+\\ Tableau - NEG POS
+
+DÉBUT
+    monTableau=[]
+    negative=0
+    positive=0
+    requete"Écrivez un nombre : ",nbr
+    pour i=1 jusqu'à nbr faire
+        requete "Écrivez une valeur : ",monTableau[i]
+        si monTableau[i]<0 alors
+        negative=negative+1
+        sinon si monTableau[i]>0 alors
+        positive=positive+1
+        finsi
+    finpour
+    ecrire "Le nombre de valeurs negative est : ",negative
+    ecrire "Le nombre de valeurs positive est : ",positive
+FIN
+
+\\ Tableau - NOTES CLASSE
+
+DÉBUT
+    monTableau=[]
+    notes=0
+    nbrNotes=0
+    requete"Écrivez le nombre d'élèves : ",nbr
+    tantque nbr<=0 ou nbr//1<>nbr faire
+    requete"Faux ! Écrivez un nombre eniter et positif : ",nbr
+    fintantque
+    pour i=1 jusqu'à nbr faire
+        requete "Écrivez une note : ",monTableau[i]
+        notes= notes+monTableau[i]
+    finpour    
+        moyenne=notes/nbr
+    pour i=1 jusqu'à nbr faire
+        si monTableau[i]>moyenne alors
+        nbrNotes=nbrNotes+1
+        finsi
+    finpour
+    ecrire "Les notes de la classe sont : ",monTableau 
+    ecrire "La moyenne de la classe est : ",moyenne
+    ecrire "Le nombre des notes supérieur à la moyenne est : ",nbrNotes 
+FIN
