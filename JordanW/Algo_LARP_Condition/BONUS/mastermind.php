@@ -1,74 +1,68 @@
 <?php
 
-    $strAleatoire == "";
-    for($intCompt=1; $intCompt=5; $intCompt++)
-    {
-        $strAleatoire = $strAleatoire && RAND(0,9);
-    }
-    Echo $strAleatoire;
+    //$strAleatoire == "";
+    $arrayAleatoire = array(rand(0,9), rand(0,9), ran(0,9), rand(0,9),rand(0,9));
+    Echo $arrayAleatoire;
 
 
     $intEssai = 0;
     $strMaProposition = "";
+    $intGagne=0;
 
     // Tant que nombre essai OK et NON gagné 
-    while($intEssai <=20 && $strAleatoire <> $strMaProposition)
+    while($intEssai <=20 && $intGagne ==0)
     {    
-        $intEssai = $intEssai + 1;
+        $intEssai += + 1;
+       
+        echo $arrayAleatoire;
+        echo '';
 
-        echo $strAleatoire;
-        echo 'Saisir 5 chiffres : ' ;
-        $strMaProposition = trim(fgets(STDIN));
+        echo 'Saisir 5 chiffres : ';
 
-        echo $carMaPropositionstrMaProposition;
+        $strMaProposition = readline('Saisir 5 chiffres :');
+
+        $arrayMaProposition(0)= substr($strMaProposition,1,1);
+        $arrayMaProposition(1)= substr($strMaProposition,1,1);
+        $arrayMaProposition(2)= substr($strMaProposition,1,1);
+        $arrayMaProposition(3)= substr($strMaProposition,1,1);
+        $arrayMaProposition(4)= substr($strMaProposition,1,1);
+        $arrayMaProposition(5)= substr($strMaProposition,1,1);
+
+        echo $arrayMaProposition;
 
         $strResultat = "";
+
         //Boucler sur mes caracteres
-        for($intCompt=1; $intCompt<6; $intCompt++) 
+        for($intCompt=0; $intCompt<5; $intCompt++) 
         { 
             //Tester JUSTE v / x
             //Boucler sur les caracteres de mastermind
     
             //Test la concordance du caractere
-            echo substr($strMaProposition, (1-strlen($strMaProposition)));
-            $carMaProposition = substr($strMaProposition, (1-strlen($strMaProposition)));
-            $carAleatoire = substr($carAleatoire, (1-strlen($carAleatoire)));
-
-            if ($carMaProposition = $carAleatoire) 
+            if ($arrayMaProposition($intCompt)=($arrayAleatoire($intCompt))) 
             {
-                $strResultat = $strResultat &&  "v";
-            } else 
-            {
-                $strResultat = $strResultat && "x";
-            }   
+                $arrayResultat($intCompt)="v";
+            }
+            else {
+                $arrayResultat($intCompt)="x";
+            }  
         }
 
-        echo $strResultat;
+        echo $arrayResultat;
 
         //Boucler sur le resultat
-        for ($intCompt=1; $intCompt<6; $intCompt++) 
-        { 
-            $carResultat =substr($strResultat,$intCompt,1);      
-            if($carResultat = "x")
+        for ($intCompt=0; $intCompt<5; $intCompt++) 
+        {    
+            if($arrayResultat(intCompt) == "x")
             {
-                //Boucler sur les autres X (position+1)
-                for ($intCompt2=$intCompt+1; $intCompt2 < 6 ; $intCOmpt2++) 
+                //Boucler dans ma propososition
+                for ($intCompt2=1; $intCompt2 < 5 ; $intCompt2++) 
                 { 
-                    $carResultat= substr($strResultat,$intCompt2,1);
                     //Si X
-                    if ($carResultat= "x")
+                    if ($arrayMaProposition($intCompt)== $arrayAleatoire($intCompt2) && $arrayResultat($intCompt2)=="x")
                     {
-                        //SI caractere =  car(intCompt resultat)
-                        $carMaProposition1= substr($strMaProposition,$intCompt2,1);
-                        $carAleatoire = substr($strAleatoire,$intCompt2,1); 
-                        if ($carMaProposition1 = $carAleatoire)
-                        {
-                            for ($intCompt3=$intCompt2+1; $intCompt3 < 6 ; $intCompt3++) 
-                            { 
-                                $strResultat = substr($strMaProposition,1,$carMaProposition1intCompt3) && "o" && substr($strMaProposition,($intCompt3),strlen($strMaProposition)-(2+$intCompt3)); 
-                            }    
-                        }  
-                    }
+                        $arrayResultat($intCompt)="o";
+                    }    
                 }
             }
         }
