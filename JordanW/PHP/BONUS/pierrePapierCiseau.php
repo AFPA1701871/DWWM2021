@@ -1,7 +1,7 @@
 <?php
 
-$tabChoix = ["PIERRE","FEUILLE","CISEAUX"];
-$tabChoixPerdant = [2,3,1];
+$tabChoix = array("PIERRE","FEUILLE","CISEAUX");
+$tabChoixPerdant = array(2,3,1);
 
 $intScoreMoi = 0;
 $intScoreAdversaire = 0;
@@ -12,36 +12,36 @@ $intManche =0;
 $intChoixMoi = 0;
 $intChoixAdversaire = 0;
 
-while( intManche < intMancheTotal){
+while( $intManche < $intMancheTotal){
     //Saisi 1/2/3 pour pierre feuille ciseaux
-    REQUETE "Saisir 1 pour PIERRE, 2 pour FEUILLE, 3 pour Ciseaux : ",intChoixMoi;
+    $intChoixMoi =0;
     while ($intChoixMoi <> 1 && $intChoixMoi <> 2 && $intChoixMoi <> 3){
-        REQUETE "Saisir 1 pour PIERRE, 2 pour FEUILLE, 3 pour Ciseaux : ",intChoixMoi;
+        $intChoixMoi = readline("Saisir 1 pour PIERRE, 2 pour FEUILLE, 3 pour Ciseaux : ");
     }
 
     $intChoixAdversaire = random_int(1,3);
-    Echo "Adversaire :".$tabChoix[intChoixAdversaire];
-    echo "Moi :".$tabChoix[intChoixMoi];
+    Echo "Adversaire :".$tabChoix[$intChoixAdversaire] . "\n";
+    Echo "Moi :".$tabChoix[$intChoixMoi] . "\n";
 
     //CONFRONTATION
     if ($intChoixMoi = $intChoixAdversaire){
-        echo "EGALITE";
+        echo "EGALITE" . "\n";
     }else{}
         if($intChoixMoi = $tabChoixPerdant[$intChoixAdversaire]){
-            echo "JE gagne (". $tabChoix[intChoixMoi]." gagne contre ". $tabChoix[intChoixAdversaire] +" )"
-            intScoreMoi = intScoreMoi +1
+            echo "JE gagne (". $tabChoix[$intChoixMoi]." gagne contre ". $tabChoix[$intChoixAdversaire] ." )". "\n";
+            $intScoreMoi ++;
         }else
-             echo "JE PERD (". $tabChoix[intChoixMoi]." perd contre ". $tabChoix[intChoixAdversaire] +" )"
-            $intScoreAdversaire = $intScoreAdversaire +1;
+             echo "JE PERD (". $tabChoix[$intChoixMoi]." perd contre ". $tabChoix[$intChoixAdversaire] ." )". "\n";
+            $intScoreAdversaire ++;
         {
-        $intManche=$intManche+1;
+    $intManche++;
     }
 }
 
 if ($intScoreMoi > $intScoreAdversaire){
-    echo "VOUS AVEZ GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGNE";
-{else{
-    echo "VOUS AVEZ PEEEEEEEEEEEEEEEEEEERDU"; 
+    echo "VOUS AVEZ GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGNE" . "\n";
+}else{
+    echo "VOUS AVEZ PEEEEEEEEEEEEEEEEEEERDU" . "\n";
 }
 
 ?>
