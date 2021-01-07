@@ -124,9 +124,6 @@ function testColonne($tab)
 {
     $resultat = 0;
     for ($intCompt=0; $intCompt <=2 ; $intCompt++) { 
-            echo $tab[0][$intCompt];
-            echo $tab[1][$intCompt]; 
-            echo $tab[2][$intCompt];
         if(($tab[0][$intCompt] ==  $tab[1][$intCompt]) &&
              ($tab[1][$intCompt] == $tab[2][$intCompt])){
             if($tab[0][$intCompt]=="x"){
@@ -142,9 +139,9 @@ function testLigne($tab)
 {
     $resultat = 0;
     for ($intCompt=0; $intCompt <=2 ; $intCompt++) { 
-            echo $intCompt."0 = ".$tab[$intCompt][0]."\n";
-            echo $intCompt."1 = ".$tab[$intCompt][1]."\n"; 
-            echo $intCompt."2 = ".$tab[$intCompt][2]."\n";
+            echo "case ".$intCompt."0 = ".$tab[$intCompt][0]."\n";
+            echo "case ".$intCompt."1 = ".$tab[$intCompt][1]."\n"; 
+            echo "case ".$intCompt."2 = ".$tab[$intCompt][2]."\n";
         if(($tab[$intCompt][0] ==  $tab[$intCompt][1]) && 
             ($tab[$intCompt][1] == $tab[$intCompt][2])){
             
