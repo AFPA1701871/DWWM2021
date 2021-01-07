@@ -5,14 +5,16 @@
     do{
         $intAge = readline("Saisir l'age");
     }while($intSexe !=0 && $intSexe !=1);
-
+    $boolImpot=false;
     switch($intSexe){
         case 1 :
             if ($intAge>=18 && $intAge<=35){
                 $boolImpot = true;   
-            }else{
-                $boolImpot=false;
             }
+        case 0 :
+            if ($intAge>=20){
+                $boolImpot = true;   
+            }   
             break;
         default:
             $boolImpot=false;
