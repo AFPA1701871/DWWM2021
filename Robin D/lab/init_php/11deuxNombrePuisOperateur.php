@@ -22,5 +22,5 @@
     }
     
 
-    echo "$nombre1 $operateur $nombre2  est égal à : $resultatCalcul ";
+    echo "$nombre1 $operateur $nombre2  est égal à : ".$resultatCalcul ; 
 ?>
