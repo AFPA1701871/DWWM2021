@@ -1,13 +1,17 @@
 <?php
+
 $sum=1;
 $due=0;
 $cash=0;
-while ($sum!=0){
+$e1=0;
+$e5=0;
+$e10=0;
+
     $sum=readline("Saisir le montant à payer en euros\n");
     $due=$due+$sum;
     echo "Le client nous doit $due euros\n";
     echo "somme versée $cash\n";
-}
+
 while ($sum<$due){
     $cash=readline("Somme versée insuffisante, veuillez recommencer");
   
