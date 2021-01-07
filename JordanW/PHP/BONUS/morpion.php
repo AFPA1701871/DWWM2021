@@ -1,39 +1,60 @@
 <?php
 
     //initialise tableau
+    $tabMorpion=[];
+
     $tabMorpion = initTab($tabMorpion);
     afficherTab($tabMorpion);
 
     $intGagne = 2;
-    $intFin = 0;
+    $intFin = 2;
     $intTour = 0;
-    $intMonTour = 1;
+    $boolMonTour = false;
+    $boolTabPlein =false;
 
     do {
-        //$intMonTour = 1 -> moi
-        tour($intMonTour,$tabMorpion);
+        //Inverse le tour
+        $boolMonTour = !$boolMonTour;
+
+        tour($boolMonTour,$tabMorpion);
+        echo "\n";
         afficherTab($tabMorpion);
-        if($intMonTour==1){
-            $intMonTour--;
-        }else{
-            $intMonTour++;
-        }
+        echo "\n";
+
         //Après le tour, on test si gagné/perdu
-        $intFin = testDiagonale($tab,$fin,$gagne);
-        $intFin = testColonne($tab,$fin,$gagne);
-        $intFin = testLigne($tab,$fin,$gagne);
+        $intFin = testDiagonale($tab,$intFin,$intGagne);
+        $intFin = testColonne($tab,$intFin,$intGagne);
+        $intFin = testLigne($tab,$intFin,$intGagne);
+        
+        $boolTabPlein= testFini($tab);
 
-    }while($intFin <20 && $intTour < 10);
+    }while($intFin !=0 OR $boolTabPlein=true);
     
-    if($intGagne==20){
-        echo "VOUS AVEZ PERDU". "/n";
-    }elseif($intGagne==10){
-        echo "VOUS AVEZ GAGNE" . "/n";
-    }elseif($intGagne==2){
-        echo "EGAAALITE". "/n";
+    //Test qui gagne
+    echo testGagne($intGagne);
+
+function testFini(&$tab)
+{
+    $bVide = false;
+    for ($intC1=0; $intC1 <=2 ; $intC1++) {
+        for ($intC2=0; $intC2 <=2 ; $intC2++) {
+            if($tab[$intC1][$intC2]== ""){
+                $bVide=true;
+            }
+        }
     }
-
-
+    return $bVide;
+}
+function testGagne($gagne)
+{
+    if($Gagne==20){
+        echo "VOUS AVEZ PERDU". "\n";
+    }elseif($Gagne==10){
+        echo "VOUS AVEZ GAGNE" . "\n";
+    }elseif($Gagne==0){
+        echo "EGAAALITE". "\n";
+    }
+}
 function tour($intQui, &$tab)
 {
     // C'est a moi
@@ -47,47 +68,43 @@ function tour($intQui, &$tab)
                 $intNumColonne= readline("Saisir un n° de colonne : ");
             } while (($intNumColonne === 0) OR ($intNumColonne === 1) OR ($intNumColonne=== 2));
         //Jusqu'a case vide
-        }while ($tab[$intNumLigne][$intNumColonne]!="");
+        }while ($tab[$intNumLigne][$intNumColonne]!="_");
         //Mettre le X dans la bonne case
-        remplirTab($tab,$intNumColonne,$intNumLigne,"x");     
+        remplirTab($tab,$intNumLigne,$intNumColonne,"x");     
     } else {
     // C'est lui
         do {
             $intNumLigne = random_int(0,2);
             $intNumColonne=random_int(0,2);
-        } while ($tab[$intNumColonne][$intNumLigne] =="");
+        } while ($tab[$intNumLigne][$intNumColonne] != "_");
         //Mettre le O dans la bonne case    
-        remplirTab($tab,$intNumColonne,$intNumLigne,"o"); 
+        remplirTab($tab,$intNumLigne,$intNumColonne,"o"); 
     }
-
 }
 function initTab(&$tab)
 {
-    for ($i = 0; $i <= 2; $i++) {
-        $tab[$i] = array();
-        for ($i2 = 0; $i2 <= 2; $i2++) {
-            remplirTab($tab,$i2,$i1,"");
-        }
-    }
+    $tab[0]=["_","_","_"];
+    $tab[1]=["_","_","_"];
+    $tab[2]=["_","_","_"];
     return $tab;
 }
-function remplirTab(&$tab,$colonne,$ligne,$car)
+function remplirTab(&$tab,$ligne,$colonne,$car)
 {
-    $tab[$colonne][$ligne] = $car;
+    $tab[$ligne][$colonne] = $car;
     return $tab;
 }
 function afficherTab(&$tab)
 {
-    for ($i=0; $i <=2 ; $i++){ 
-        for ($i2=0; $i2 <= 2; $i2++){ 
-            echo $tabMorpion[$i][$i2];
+    foreach ($tab as $i => $n){
+        foreach($n as $ni => $nn){
+            echo $nn . " ";
         }
+        echo "\n";
     }
 }
-
 function testDiagonale($tab,&$fin,&$gagne)
 {
-    $resultat = 2;
+    $resultat = 0;
     if(($tab[0][2] == $tab[1][1])  &&  ($tab[1][1] == $tab[2][0])){
         if($tab[0][2] == "x"){
            $resultat = 10;
@@ -96,35 +113,23 @@ function testDiagonale($tab,&$fin,&$gagne)
          }
    }elseif($tab[2][2] == $tab[1][1]  && $tab[1][1]=$tab[0][0]){
        if($tab[2][2] == "x"){
-        $resultat = 10;
+            $resultat = 10;
        }elseif($tab[2][2] == "o"){
-        $resultat = 20;
+            $resultat = 20;
        }
    }   
     return $resultat;
 }
 function testColonne($tab)
 {
-    $resultat = 2;
+    $resultat = 0;
     for ($intCompt=0; $intCompt <=2 ; $intCompt++) { 
-        if(($tab[$intCompt][0] ==  $tab[$intCompt][1]) &&
-             ($tab[$intCompt][1] == $tab[$intCompt][2])){
-            if($tag[$intCompt][0]=="x"){
-                $resultat = 10;
-            }elseif($tab[$intCompt][0]=="o"){
-                $resultat = 20;
-            }
-        }
-    }   
-    return $resultat;
-}
-function testLigne($tab)
-{
-    $resultat = 2;
-    for ($intCompt=0; $intCompt <=2 ; $intCompt++) { 
+            echo $tab[0][$intCompt];
+            echo $tab[1][$intCompt]; 
+            echo $tab[2][$intCompt];
         if(($tab[0][$intCompt] ==  $tab[1][$intCompt]) &&
              ($tab[1][$intCompt] == $tab[2][$intCompt])){
-            if($tag[0][$intCompt]=="x"){
+            if($tab[0][$intCompt]=="x"){
                 $resultat = 10;
             }elseif($tab[0][$intCompt]=="o"){
                 $resultat = 20;
@@ -133,8 +138,24 @@ function testLigne($tab)
     }   
     return $resultat;
 }
-
-
-
-
+function testLigne($tab)
+{
+    $resultat = 0;
+    for ($intCompt=0; $intCompt <=2 ; $intCompt++) { 
+            echo $intCompt."0 = ".$tab[$intCompt][0]."\n";
+            echo $intCompt."1 = ".$tab[$intCompt][1]."\n"; 
+            echo $intCompt."2 = ".$tab[$intCompt][2]."\n";
+        if(($tab[$intCompt][0] ==  $tab[$intCompt][1]) && 
+            ($tab[$intCompt][1] == $tab[$intCompt][2])){
+            
+            if($tab[$intCompt][0]=="x"){
+                $resultat = 10;
+            }elseif($tab[$intCompt][0]=="o"){
+                $resultat = 20;
+            }
+        }
+    }
+   echo $resultat;
+    return $resultat;
+}
 ?>
