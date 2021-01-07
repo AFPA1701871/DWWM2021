@@ -14,12 +14,9 @@
     */
 
     $strValTemp = $strValB;
-    $strValB = $strValA;
-    $strValA = $strValTemp;
-
-    $strValTemp = $strValC;
-    $strValC = $strValA;
-    $strValA = $strValTemp;
+    $strValA = $strValC;
+    $strValC = $strValB;
+    $strValB = $strValTemp;
 
     echo "valeur A : ". $strValA . "\n";
     echo "valeur B : ". $strValB. "\n";
