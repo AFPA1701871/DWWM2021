@@ -127,7 +127,7 @@ DÉBUT
     pour i=1 jusqu'à nbr faire
         si monTableau[i]>moyenne alors
         nbrNotes=nbrNotes+1
-        finsi
+        finsi  
     finpour
     ecrire "Les notes de la classe sont : ",monTableau 
     ecrire "La moyenne de la classe est : ",moyenne
