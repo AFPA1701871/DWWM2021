@@ -1,7 +1,7 @@
 <?php
 
 $tabChoix = array("PIERRE","FEUILLE","CISEAUX");
-$tabChoixPerdant = array(2,3,1);
+$tabChoixPerdant = array(1,2,0);
 
 $intScoreMoi = 0;
 $intScoreAdversaire = 0;
@@ -14,26 +14,26 @@ $intChoixAdversaire = 0;
 
 while( $intManche < $intMancheTotal){
     //Saisi 1/2/3 pour pierre feuille ciseaux
-    $intChoixMoi =0;
-    while ($intChoixMoi <> 1 && $intChoixMoi <> 2 && $intChoixMoi <> 3){
-        $intChoixMoi = readline("Saisir 1 pour PIERRE, 2 pour FEUILLE, 3 pour Ciseaux : ");
+    $intChoixMoi =3;
+    while ($intChoixMoi <> 0 && $intChoixMoi <> 1 && $intChoixMoi <> 2){
+        $intChoixMoi = readline("Saisir 0 pour PIERRE, 1 pour FEUILLE, 2 pour Ciseaux : ");
     }
 
-    $intChoixAdversaire = random_int(1,3);
+    $intChoixAdversaire = random_int(0,2);
     Echo "Adversaire :".$tabChoix[$intChoixAdversaire] . "\n";
     Echo "Moi :".$tabChoix[$intChoixMoi] . "\n";
 
     //CONFRONTATION
-    if ($intChoixMoi = $intChoixAdversaire){
+    if ($intChoixMoi == $intChoixAdversaire){
         echo "EGALITE" . "\n";
-    }else{}
-        if($intChoixMoi = $tabChoixPerdant[$intChoixAdversaire]){
+    }else{
+        if($intChoixMoi == $tabChoixPerdant[$intChoixAdversaire-1]){
             echo "JE gagne (". $tabChoix[$intChoixMoi]." gagne contre ". $tabChoix[$intChoixAdversaire] ." )". "\n";
             $intScoreMoi ++;
-        }else
+        }else{
              echo "JE PERD (". $tabChoix[$intChoixMoi]." perd contre ". $tabChoix[$intChoixAdversaire] ." )". "\n";
             $intScoreAdversaire ++;
-        {
+        }
     $intManche++;
     }
 }
