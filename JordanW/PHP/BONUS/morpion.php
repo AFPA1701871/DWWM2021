@@ -1,3 +1,4 @@
+
 <?php
 
     //initialise tableau
@@ -6,11 +7,8 @@
     $tabMorpion = initTab($tabMorpion);
     afficherTab($tabMorpion);
 
-    $intGagne = 2;
-    $intFin = 2;
     $intTour = 0;
     $boolMonTour = false;
-    $boolTabPlein =false;
 
     do {
         //Inverse le tour
@@ -21,38 +19,40 @@
         afficherTab($tabMorpion);
         echo "\n";
 
-        //Après le tour, on test si gagné/perdu
-        $intFin = testDiagonale($tab,$intFin,$intGagne);
-        $intFin = testColonne($tab,$intFin,$intGagne);
-        $intFin = testLigne($tab,$intFin,$intGagne);
-        
-        $boolTabPlein= testFini($tab);
+        $intTour++;
+        echo "tour n°".$intTour."/n";
+        /*Les test renvois 0 pour rien
+                            10 pour gagné
+                            20 pour perdu*/
+        $intScoreDiag = testDiagonale($tabMorpion);
+        $intScoreCol = testColonne($tabMorpion);
+        $intScoreLig = testLigne($tabMorpion);
 
-    }while($intFin !=0 OR $boolTabPlein=true);
+    //Personne n'a gagne et tour <9
+    }while(($intScoreDiag+$intScoreCol+$intScoreLig == 0) OR ($intTour>=9));
     
     //Test qui gagne
-    echo testGagne($intGagne);
+    echo testGagne($intScoreDiag,$intScoreCol,$intScoreLig);
 
 function testFini(&$tab)
 {
-    $bVide = false;
-    for ($intC1=0; $intC1 <=2 ; $intC1++) {
-        for ($intC2=0; $intC2 <=2 ; $intC2++) {
-            if($tab[$intC1][$intC2]== ""){
-                $bVide=true;
+    $bVide = true;
+    for ($intC1=0; $intC1 <3 ; $intC1++) {
+        for ($intC2=0; $intC2 <3 ; $intC2++) {
+            if($tab[$intC1][$intC2]== "_"){
+                $bVide=false;
             }
         }
     }
     return $bVide;
 }
-function testGagne($gagne)
-{
-    if($Gagne==20){
-        echo "VOUS AVEZ PERDU". "\n";
-    }elseif($Gagne==10){
-        echo "VOUS AVEZ GAGNE" . "\n";
-    }elseif($Gagne==0){
-        echo "EGAAALITE". "\n";
+function testGagne($intscoreD,$intScoreC,$intScoreL){
+    if($intscoreD==0 && $intScoreC==0 && $intScoreL==0){
+        echo "EGALITE";    
+    }elseif ($intscoreD==10 OR $intScoreC==10 OR $intScoreL==10){
+        echo "Vous avez gagne !";
+    }elseif($intscoreD==20 OR $intScoreC==20 OR $intScoreL==20){
+        echo "Vous avez perdu !";   
     }
 }
 function tour($intQui, &$tab)
@@ -102,7 +102,7 @@ function afficherTab(&$tab)
         echo "\n";
     }
 }
-function testDiagonale($tab,&$fin,&$gagne)
+function testDiagonale(&$tab)
 {
     $resultat = 0;
     if(($tab[0][2] == $tab[1][1])  &&  ($tab[1][1] == $tab[2][0])){
@@ -111,21 +111,21 @@ function testDiagonale($tab,&$fin,&$gagne)
          }elseif($tab[0][2] == "o"){
            $resultat = 20;
          }
-   }elseif($tab[2][2] == $tab[1][1]  && $tab[1][1]=$tab[0][0]){
+   }elseif(($tab[2][2] == $tab[1][1])  && ($tab[1][1]=$tab[0][0])){
        if($tab[2][2] == "x"){
             $resultat = 10;
        }elseif($tab[2][2] == "o"){
             $resultat = 20;
        }
-   }   
+   } 
+
     return $resultat;
 }
-function testColonne($tab)
+function testColonne(&$tab)
 {
     $resultat = 0;
-    for ($intCompt=0; $intCompt <=2 ; $intCompt++) { 
-        if(($tab[0][$intCompt] ==  $tab[1][$intCompt]) &&
-             ($tab[1][$intCompt] == $tab[2][$intCompt])){
+    for ($intCompt=0; $intCompt <3 ; $intCompt++) { 
+        if(($tab[0][$intCompt] ==  $tab[1][$intCompt]) && ($tab[1][$intCompt] == $tab[2][$intCompt])){
             if($tab[0][$intCompt]=="x"){
                 $resultat = 10;
             }elseif($tab[0][$intCompt]=="o"){
@@ -135,16 +135,11 @@ function testColonne($tab)
     }   
     return $resultat;
 }
-function testLigne($tab)
+function testLigne(&$tab)
 {
     $resultat = 0;
-    for ($intCompt=0; $intCompt <=2 ; $intCompt++) { 
-            echo "case ".$intCompt."0 = ".$tab[$intCompt][0]."\n";
-            echo "case ".$intCompt."1 = ".$tab[$intCompt][1]."\n"; 
-            echo "case ".$intCompt."2 = ".$tab[$intCompt][2]."\n";
-        if(($tab[$intCompt][0] ==  $tab[$intCompt][1]) && 
-            ($tab[$intCompt][1] == $tab[$intCompt][2])){
-            
+    for ($intCompt=0; $intCompt <3 ; $intCompt++) { 
+        if(($tab[$intCompt][0] ==  $tab[$intCompt][1]) && ($tab[$intCompt][1] == $tab[$intCompt][2])){
             if($tab[$intCompt][0]=="x"){
                 $resultat = 10;
             }elseif($tab[$intCompt][0]=="o"){
@@ -152,7 +147,6 @@ function testLigne($tab)
             }
         }
     }
-   echo $resultat;
     return $resultat;
 }
 ?>
