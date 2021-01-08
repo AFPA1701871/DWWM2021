@@ -1,25 +1,19 @@
 <?php
 
-    $nb=1;
-    $a=1;
-    $plus=0;
-    $pos=1;
-
-    while($nb!=="fin"){
-            $nb=readline("entrer votre valeur (fin pour finir) ");
-            $a++;
-            if($nb!=0){
-                if($a=1){
-                    $plus=$nb;
-                    $pos=$a;
-                }
+    $nb=readline("entrer le nombre de valeur à saisir ");
+    
+    for($i=1;$i<$nb+1;$i++){
+            $val=readline("entrer votre valeur (fin pour finir) ");
+            if($i<2){
+                $plus=$val;
+                $j=1;
             }
-            else if($nb>$plus){
+            else if($plus>$val){
                 $plus=$nb;
-                $pos=$a;
+                $j++;
             }
     }
 
-    echo "le plus grand nombre est ".$plus."en position ".$pos;
+    echo "le plus grand nombre est ".$plus;
 
 ?>
