@@ -27,7 +27,7 @@ while( $intManche < $intMancheTotal){
     if ($intChoixMoi == $intChoixAdversaire){
         echo "EGALITE" . "\n";
     }else{
-        if($intChoixMoi == $tabChoixPerdant[$intChoixAdversaire-1]){
+        if($intChoixMoi == $tabChoixPerdant[$intChoixAdversaire]){
             echo "JE gagne (". $tabChoix[$intChoixMoi]." gagne contre ". $tabChoix[$intChoixAdversaire] ." )". "\n";
             $intScoreMoi ++;
         }else{
