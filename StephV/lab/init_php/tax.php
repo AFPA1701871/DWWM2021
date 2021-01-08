@@ -9,7 +9,8 @@ switch($sex){
         }    
         else{
             echo "pas imposable";
-        }    
+        } 
+        break;   
     case "f" :
         if (($age>=18)and($age<=35)){
             echo "imposable";
@@ -17,5 +18,6 @@ switch($sex){
         else
             echo "non imposable";
         }
+        break;
             
 ?>

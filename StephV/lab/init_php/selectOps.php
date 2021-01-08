@@ -2,20 +2,23 @@
 $nb1=readline("saisir nombre 1");
 $nb2=readline("saisir nombre 2");
 $ops=readline("sélectionner opérateur");
-
-switch($nb){
-    case 1 : 
-        $nb==$nb1+$nb2;
-        echo $nb;
+echo $nb1. "". $ops. "". $nb2. "=" ;
+switch($ops){
+    case "+" : 
+        echo $nb1+$nb2;
         break;
-    case 2 :
-        echo "$nb==$nb1-$nb2";
+    case "-" :
+        echo $nb1-$nb2;
         break;
-    case 3 :
-        echo "$nb==$nb1*$nb2";
+    case "*" :
+        echo $nb1*$nb2;
         break;
-    case 4 :
-        echo "$nb==$nb1/$nb2";
-        break;            
+    case "/" :
+        echo $nb1/$nb2;
+        break; 
+    default:
+        echo "error";
+        break;           
 }
+
 ?>
