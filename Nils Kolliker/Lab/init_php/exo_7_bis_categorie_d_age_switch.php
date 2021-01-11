@@ -1,5 +1,5 @@
 <?php
-$age=readline("age de l'enfant: ");
+$age=readline("age de l'enfant: ");//on a pas encore les boucles donc pour l'instant, on doit faire confiance à l'utilisateur
 if ($age>=6){
     switch($age){
         case 6:
@@ -14,7 +14,7 @@ if ($age>=6){
         case 11:
             $categorie="minime";
         break;
-        default :
+        default ://en théorie un joueur de 35 ans est toujours un cadet d'après l'énoncé
             $categorie="cadet";
     }
 }else{

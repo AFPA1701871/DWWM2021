@@ -2,7 +2,9 @@
     echo "EXO 8 APRES-MIDI FIGURE"."\n";
 
     //PREMIERE FIGURE
-    $intLigne= readline("Saisir nombre de ligne :");
+    do{
+        $intLigne= readline("Saisir nombre de ligne :");
+    }while(is_numeric($intLigne)==false);
     
     for ($i=1; $i <= $intLigne; $i++) { 
         $strFigure = "";

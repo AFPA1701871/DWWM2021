@@ -1,9 +1,10 @@
 <?php
-
+    //initialisation des variables et opérateur
     $nombre1 = readline("Nombre 1 : ");
     $nombre2 = readline("Nombre 2 : ");
     $operateur = readline("Operateur : ");
 
+    // switch case su l'opérateur
     switch($operateur){
         case "+" :
             $resultat = $nombre1+$nombre2;
