@@ -6,23 +6,22 @@ $intPrixTotal = 0;
 $intPosition = 1;
 
 while( $intNombre!=0){
-    $intNombre =  readline("Saisir prix".$intPosition." :");
+    do{
+        $intNombre =  readline("Saisir prix".$intPosition." :");
+    }while(is_numeric($intNombre)==false);
     $intPosition++;
     $intPrixTotal += $intNombre;
 }
 
-echo "Le client doit ",$intPrixTotal,"e";
+echo "Le client doit ",$intPrixTotal,"e"."\n";
 
-$intMonnaieClient= readline("Le Client donne : ");
-
-while($intMonnaieClient < $intPrixTotal){
-    echo "Il manque de l'argent";
-    $intMonnaieClient = readline("Le Client donne : ");
-}
+do{
+    $intMonnaieClient= readline("Le Client donne : ");
+}while(is_numeric($intMonnaieClient)==false OR ($intMonnaieClient < $intPrixTotal));
 
 $intMonnaieRendre = $intMonnaieClient- $intPrixTotal;
 
-echo "On doit au Client : ";
+echo "/n"."On doit au Client : ";
 echo intDiv($intMonnaieRendre,10)."billet(s) de 10e"."\n";
 $intMonnaieRendre = $intMonnaieRendre - (intDiv($intMonnaieRendre,10)*10);
 

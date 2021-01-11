@@ -1,7 +1,9 @@
 <?php
 
-    for ($intCompt=0; $intCompt <=8 ; $intCompt++) { 
+    for ($intCompt=0; $intCompt <=8 ; $intCompt++) {
+        do{
         $tabMorpion[$intCompt]=readline("Saisir valeur ". ($intCompt+1) . " : ");
+        }while(is_numeric($tabMorpion[$intCompt])==false);
     }
     $intSomme=0;    
     foreach ($tabMorpion as $intVal) { 
