@@ -1,7 +1,7 @@
 <?php
     $nombre1=readline("entrez un nombre");
-    $operateur=readline("entrez l'opérateur arithmétique de votre choix");
     $nombre2=readline("entrez un deuxième nombre");
+    $operateur=readline("entrez l'opérateur arithmétique de votre choix");
     
     switch ($operateur) {
         case '+':
