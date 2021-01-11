@@ -1,14 +1,15 @@
 <?php
 
     $nb=readline("entrer le nombre de valeur à saisir ");
+    $val=readline("entrer votre valeur ");
     
-    for($i=1;$i<$nb+1;$i++){
-            $val=readline("entrer votre valeur (fin pour finir) ");
-            if($i<2){
-                $plus=$val;
+    for($i=0;$i<$nb-1;$i++){
+            $val2=readline("entrer votre valeur ");
+            if($val2>$val){
+                $plus=$val2;
             }
-            else if($plus>$val){
-                $plus=$nb;
+            else{
+                $plus=$val;
             }
     }
 

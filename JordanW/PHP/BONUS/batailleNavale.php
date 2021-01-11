@@ -1,5 +1,10 @@
 <?php
 
+define("NOMBRE_LIGNE",5);
+define("NOMBRE_COLONNE",5);
+define("LONGUEUR_BATEAU",3);
+define("NOMBRE_BATEAU_LIGNE",1);
+define("NOMBRE_BATEAU_COLONNE",1);
 
 /* Initialiser adverse
  $tabAdversaire = f_initialiserJeux();
@@ -13,7 +18,7 @@ f_afficherJeux($tabAdversaire);*/
 //Initialiser le jeu
 $tabEnnemie = f_initialiserJeux();
 //Dessiner le bateau
-f_DessinerBateau($tabEnnemie,rand(0,3),rand(0,1));
+f_DessinerBateau($tabEnnemie,NOMBRE_BATEAU_LIGNE,NOMBRE_COLONNE);
 //Afficher le jeux
 f_afficherJeux($tabEnnemie);
 
@@ -40,8 +45,8 @@ echo "Touché, coulé !";
 function f_testToucheCoule(array $tab,array $tab2){
     //verifie que les b dans ennemie soit des x dans montab
     $bool=true;
-    for ($i=0; $i <=3 ; $i++) { 
-        for ($j=0; $j <=3 ; $j++) { 
+    for ($i=0; $i <NOMBRE_LIGNE ; $i++) { 
+        for ($j=0; $j <NOMBRE_COLONNE ; $j++) { 
             if($tab2[$i][$j]=="b" && $tab[$i][$j]!="x"){
                 $bool=false;
                 break;
@@ -62,15 +67,21 @@ function f_testTouche(array &$tab, array $tab2, int $l,int $c){
 }
 
 function f_saisir(string $strSaisie){
-    do{
-        $intSaisie=readline("Saisir un n° de ".$strSaisie." : ");
-    }while($intSaisie < 0 && $intSaisie>3);
+    if($strSaisie=="ligne"){
+        do{
+            $intSaisie=readline("Saisir un n° de ".$strSaisie." : ");
+        }while($intSaisie < 0 && $intSaisie>(NOMBRE_LIGNE-1));       
+    }else{
+        do{
+            $intSaisie=readline("Saisir un n° de ".$strSaisie." : ");
+        }while($intSaisie < 0 && $intSaisie>(NOMBRE_COLONNE-1));
+    }
     return $intSaisie;
 }
 
 function f_initialiserJeux(){
-    for ($i=0; $i <=3 ; $i++) { 
-        for ($j=0; $j <=3 ; $j++) { 
+    for ($i=0; $i <NOMBRE_LIGNE ; $i++) { 
+        for ($j=0; $j <NOMBRE_COLONNE ; $j++) { 
             $tab[$i][$j] = "_";
         }
     }
@@ -79,7 +90,15 @@ function f_initialiserJeux(){
 
 function f_afficherJeux(array $tab){
     echo "Bataille navale : "."\n";
+    echo "_ ";
+    for ($i=0; $i <NOMBRE_COLONNE ; $i++) { 
+        echo $i." ";
+    }
+    echo "\n";
+    $i=0;
     foreach ($tab as $l){
+        echo $i." ";
+        $i++;
         foreach($l as $valeur){
             echo $valeur . " ";
         }
@@ -87,10 +106,47 @@ function f_afficherJeux(array $tab){
     }
 }
 
-function f_DessinerBateau(array &$tab,int $intL,int $intC){
-    for ($i=0; $i <=2 ; $i++){ 
-        $tab[$intL][$i+$intC]="b";
+function f_DessinerBateau(array &$tab,int $nbBateauLigne,int $nbBateauColonne){
+    
+    //Dessiner Bateau ligne
+    for ($i=0; $i <$nbBateauLigne ; $i++) { 
+        // pour chaque bateau
+        $intL = rand(0,NOMBRE_LIGNE-1);
+        $intC = rand(0,NOMBRE_COLONNE-1-(LONGUEUR_BATEAU));
+        // verifier toutes les cases sont accessibles (!="_")
+        do{
+            $boolAccessible = true;
+            for ($j=0; $j <= (LONGUEUR_BATEAU-1); $j++){ 
+                if ($tab[$intL][$j+$intC]=="b"){
+                    $boolAccessible=false;
+                };
+            }
+        }while(!$boolAccessible);
+        for ($j=0; $j <= (LONGUEUR_BATEAU-1); $j++){ 
+            $tab[$intL][$j+$intC]="b";
+        }
     }
+
+    //Dessiner bateau colonne
+    //Dessiner Bateau ligne
+    for ($i=0; $i <$nbBateauColonne; $i++) { 
+        // pour chaque bateau
+        $intL = rand(0,NOMBRE_LIGNE-1-(LONGUEUR_BATEAU));
+        $intC = rand(0,NOMBRE_COLONNE-1);
+        // verifier toutes les cases sont accessibles (!="_")
+        do{
+            $boolAccessible = true;
+            for ($j=0; $j <= (LONGUEUR_BATEAU-1); $j++){ 
+                if ($tab[$intL+$j][$intC]=="b"){
+                    $boolAccessible=false;
+                };
+            }
+        }while(!$boolAccessible);
+        for ($j=0; $j <= (LONGUEUR_BATEAU-1); $j++){ 
+            $tab[$intL+$j][$intC]="b";
+        }
+    }
+
 }
 
 ?>
