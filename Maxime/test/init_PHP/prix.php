@@ -14,7 +14,7 @@
         $payer=readline("montant payé : ");
     } while($payer<$prix);
 
-    $rendu=$payer-$prix;
+    $rendu=$payer-$somme;
     echo "à rendre : $rendu \n";
 
     $billet10=intval($rendu/10);
