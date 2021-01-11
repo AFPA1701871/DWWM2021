@@ -1,7 +1,8 @@
 <?php
-
+    //initialisation du déplacement avec un chiffre 2,4,6,8
     $deplace = readline("Saisir votre déplacement : ");
 
+    //type de déplacement selon caractere saisis
     switch ($deplace){
         case 2 : 
             echo "Le personnage va en bas.";

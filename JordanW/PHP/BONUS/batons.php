@@ -78,7 +78,7 @@
     for ($intCompt=1; $intCompt <=$intNombreBaton ; $intCompt++) { 
         $strMessageBaton = $strMessageBaton . "| ";
     }
-    echo $strMessageBaton;
+    echo $strMessageBaton."\n";
 
     if($boolMonTour == true){
             echo "Tu as gagné ";
