@@ -24,7 +24,6 @@ while ($payer < $somme) {
 $rendu = $payer - $somme;
 
 //On cherche le nombre de billet de dix
-$billetDix = 0;
 while ($rendu >=10) {
     $billetDix = $rendu/10;
     $rendu = $rendu-($billetDix*10);
