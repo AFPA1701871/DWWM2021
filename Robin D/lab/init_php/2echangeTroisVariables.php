@@ -10,7 +10,7 @@
     $c=$temp;
 
     $a=$temp2;
-    echo "$a\n";
-    echo "$b\n";
-    echo "$c\n";
+    echo "la variable a est égale à: $a\n";
+    echo "la variable b est égale à: $b\n";
+    echo "la variable c est égale à: $c\n";
 ?>
