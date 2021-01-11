@@ -1,5 +1,7 @@
 <?php
-$nombre=readline("nombre de nombre: ");
+do{
+    $nombre=readline("nombre de nombre: ");
+}while ($nombre<=0 or $nombre!=intval($nombre));
 $theBig=readline("besoin d'un nombre: ");
 $rang=1;
 for ($i=1;($i<$nombre);$i++){
