@@ -1,6 +1,13 @@
 <?php
     do{
         $notes=readline("Notez une notes :");
+        if ($notes > 20){
+            do{
+                echo "La notes n'est pas correct veillez saisir une notes correct.";
+                $notes=readline("Notez une notes correct svp :");
+            }
+            while($notes > 20);
+        }
         $tab[] = $notes;
     } 
     while(sizeof($tab)<>9);

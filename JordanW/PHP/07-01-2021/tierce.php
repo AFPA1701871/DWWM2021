@@ -1,12 +1,13 @@
 <?php
     echo "EXO 7 APRES-MIDI TIERCE"."\n";
 
-    $intChevaux = readline("Saisir nombre de chevaux :");
-    $intChevauxJoue = readline("Saisir nombre de chevaux joué :");
+    do{
+        $intChevaux = readline("Saisir nombre de chevaux :");
+    }while(is_numeric($intChevaux)==false);
 
-    while($intChevauxJoue > $intChevaux){
-        $intChevauxJoue = readline("Saisir nombre de chevaux joué (inférieur ou égal au nombre de chevaux :");
-    }
+    do{
+        $intChevauxJoue = readline("Saisir nombre de chevaux joué :");
+    }while(is_numeric($intChevauxJoue)==false OR $intChevauxJoue>$intChevaux);
     
     $intChanceOrdre = 1;
     $intChanceDesordre = 1;

@@ -14,8 +14,10 @@
             case 8 : echo $magnitude." Important, Dommages sérieux dans des zones de plusieurs centaines de km."; break;
             case 9 : echo $magnitude." Devastateur, dévaste des zones sur des milliers de km à la ronde"; break;
         }
-    } else {
+    } elseif ($magnitude<1) {
         echo "Votre saisie est hors échelle.";
+    } else {
+        echo "Bienvenue dans l'Apocalypse!!!";
     }
 
 
