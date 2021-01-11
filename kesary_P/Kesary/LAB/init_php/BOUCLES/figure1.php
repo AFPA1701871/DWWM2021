@@ -1,11 +1,15 @@
 <?php
-$rows = readline("Entrez le  nombre de rangée :");
-
-for ($i=0; $i < $rows ; $i++) { 
-    for ($j=0; $j <= $i; $j++) { 
-        echo "*";
-    }
-    echo "\n";
+for ($i=1; $i <= 8 ; $i++) { 
+   $ligne ="\n";
+   for ($j=1; $j <= $i; $j++) { 
+       if (($j==1) || ($j==$i)) {
+           $ligne = $ligne. "x";
+       }elseif($i != 8){
+           $ligne = $ligne. "o";
+       }else {
+           $ligne = $ligne. "x";
+       }
+   }
+   echo $ligne;
 }
-
 ?>

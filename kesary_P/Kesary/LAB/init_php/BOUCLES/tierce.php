@@ -1,6 +1,15 @@
 <?php
 $nbreChevauxPartant = readline("Donnez le nombre de chevaux partant : ");
 $nbreChevauxjoues = readline("DDonnez le nombre de chevaux joués : ");
+//Vérification de la saisie utilisateur
+while (! is_numeric($nbreChevauxPartant) || (! is_numeric($nbreChevauxjoues))) {
+    echo "Recommencez \n";
+    if (! is_numeric($nbreChevauxPartant)) {
+        $nbreChevauxPartant = readline("Donnez le nombre de chevaux partant : ");
+    }elseif(! is_numeric($nbreChevauxjoues)){
+        $nbreChevauxjoues = readline("DDonnez le nombre de chevaux joués : ");
+    }
+}
 
 //Initialisation des variables
     $nfactorielle = 1;
