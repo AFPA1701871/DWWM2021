@@ -1,10 +1,12 @@
 <?php
     do{
-        $intSexe = readline("Saisir le sexe (0 homme : 1 femme");
+        $intSexe = readline("Saisir le sexe (0 homme : 1 femme) : ");
     }while($intSexe !=0 && $intSexe !=1);
+
     do{
-        $intAge = readline("Saisir l'age");
-    }while($intSexe !=0 && $intSexe !=1);
+        $intAge = readline("Saisir l'age : ");
+    }while(is_numeric($intAge) ==false);
+
     $boolImpot=false;
     switch($intSexe){
         case 1 :
@@ -22,7 +24,7 @@
     }
     echo tuPaieOuPas($boolImpot);
 
-function tuPaieOuPas($boolImpot){
+function tuPaieOuPas(bool $boolImpot){
     if ($boolImpot==false){
         return "tu paie nada"."\n";
     }else{

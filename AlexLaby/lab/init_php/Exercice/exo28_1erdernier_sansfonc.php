@@ -10,10 +10,10 @@
         }
         "\n";
     
-    for ($i=1;$i<(intdiv($count, $num2));$i++){
+    for ($i=0;$i<=(intdiv($count, $num2));$i++){
         $temp=$tab[$i];
-        $tab[$i]=$tab[$count-$i+1];
-        $tab[$count-$i+1]=$temp;
+        $tab[$i]=$tab[$count-$i-1];
+        $tab[$count-$i-1]=$temp;
     }
     
     echo "Les premiers sont les derniers : ";

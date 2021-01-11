@@ -1,6 +1,9 @@
 <?php
+    // variables
     $age = readline("Age de l'enfant : ");
-    $age = intval($age);
+    $age = intval($age); // pour que age soit un entier
+
+    // switch case sur l'age de l'enfant
     switch($age){
         case 1:
         case 2:
@@ -25,6 +28,7 @@
             $cat = "cadet";
     };
 
+    //affichage de la catégorie de l'enfant
     echo "Votre enfant est ".$cat.".";
 
 ?>
