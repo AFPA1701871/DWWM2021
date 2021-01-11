@@ -20,7 +20,7 @@
         echo "\n";
 
         $intTour++;
-        echo "tour n°".$intTour."/n";
+        echo "tour n°".$intTour."\n";
         /*Les test renvois 0 pour rien
                             10 pour gagné
                             20 pour perdu*/
@@ -95,11 +95,29 @@ function remplirTab(&$tab,$ligne,$colonne,$car)
 }
 function afficherTab(&$tab)
 {
+    echo "_____________";
+    echo "\n";
+    $j=0;
     foreach ($tab as $i => $n){
+        echo "| ";
+        $i=0;
         foreach($n as $ni => $nn){
-            echo $nn . " ";
+            if ($i == 2){
+                echo $nn . " |";
+            }else{
+                echo $nn . " ┆ ";
+            }
+            $i++;
+        }
+        
+        echo "\n";
+        if($j==2){
+            echo "|___┆___┆___|";
+        }else{
+            echo "|---┆---┆---|";
         }
         echo "\n";
+        $j++;
     }
 }
 function testDiagonale(&$tab)

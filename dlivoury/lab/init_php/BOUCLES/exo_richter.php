@@ -1,5 +1,5 @@
 <?php
-    $echelle=readline("indiquez la puissancez du tremblement: ");
+    $echelle=readline("indiquez la puissance du tremblement: ");
 
     if ($echelle<1){
         echo"erreur de saise,hors echelle";

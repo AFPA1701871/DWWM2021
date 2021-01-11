@@ -1,19 +1,25 @@
 <?php
 
     echo "EXO 5 APRES-MIDI"."\n";
-    $intVal= readline("Saisir nombre valeur : ");
+    do{
+        $intVal= readline("Saisir nombre valeur : ");
+    }while(is_numeric($intVal)==false);
     
-    $val1 = readline ("Saisir valeur1 : ");
+    do{
+        $intVal1= readline("Saisir valeur : ");
+    }while(is_numeric($intVal1)==false);
     $intPosition = 1;
 
     for ($intCompt=2; $intCompt<=$intVal; $intCompt++) {
-        $val2 = readline("Saisir valeur".$intCompt." : "); 
-        if ($val1<$val2){
+        do{
+            $intVal2= readline("Saisir valeur : ");
+        }while(is_numeric($intVal2)==false);
+        if ($intVal1<$intVal2){
             $intPosition = $intCompt;
-            $val1 = $val2;
+            $intVal1 = $intVal2;
         };
     }
-    echo "Le plus grand est ".$val1. " a la position ".$intPosition; 
+    echo "Le plus grand est ".$intVal1. " a la position ".$intPosition; 
 
     
 ?>

@@ -1,6 +1,7 @@
 <?php
 
-    $intEchelle = readline("Saisir l'echelle");
+        $intEchelle = readline("Saisir l'echelle");
+
     $strMsg = "Saisie incorrecte";
     if (!(is_int($intEchelle))){
         switch($intEchelle){
@@ -37,7 +38,7 @@
                 } 
                 break;
         }
-        echo "non integer"."\n";
+        echo "Saisie incorrect"."\n";
     }
     echo $strMsg;
 

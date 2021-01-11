@@ -1,8 +1,9 @@
 <?php
 
-$intAge = readline("Age:");
+do{
+    $intAge = readline("Age:");
+}while(is_numeric($intAge)==false);
 
-$intAge = intval($intAge);
 switch (true) {
     case ($intAge >= 12):
         echo "Cadet" . "\n";
