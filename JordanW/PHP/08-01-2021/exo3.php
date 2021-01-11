@@ -1,8 +1,11 @@
 <?php
-
-    $intNombreVal = readline ("Saisir nombre de valeur : ");
+    do{
+        $intNombreVal = readline ("Saisir nombre de valeur : ");
+    }while(is_numeric($intNombreVal)==false);
     for ($intCompt=0; $intCompt <=$intNombreVal-1 ; $intCompt++) { 
-        $tabMorpion[$intCompt]=readline("Saisir valeur ". ($intCompt+1) . " : ");
+        do{
+            $tabMorpion[$intCompt]=readline("Saisir valeur ". ($intCompt+1) . " : ");
+        }while(is_numeric($tabMorpion[$intCompt])==false);
     }
     $intSomme=0;
 
@@ -11,6 +14,6 @@
     }
     echo "Somme : ". $intSomme;
     echo "\n";
-    echo "Somme :  ".array_sum($tabMorpion);
+    echo "Somme : ".array_sum($tabMorpion);
 
 ?>
