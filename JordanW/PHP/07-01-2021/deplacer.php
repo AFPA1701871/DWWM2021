@@ -1,6 +1,7 @@
 <?php
-
+    
     $intEchelle = readline("Saisir touche (6 pour droite / 4 pour gauche / 8 pour haut / 2 pour bas");
+
     $strMsg ="";
     switch($intEchelle){
         case 6 :
