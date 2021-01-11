@@ -21,6 +21,6 @@
     $chancesDansLordre=$factorielleNbPartants/$factorielleNbPartantsMoinsNbJoues;
     $chancesDansLeDesordre=$factorielleNbPartants/($factorielleNbJoues*$factorielleNbPartantsMoinsNbJoues);
 
-    echo "vous avez une chance sur".$chancesDansLordre."de gagner dans l'ordre\n";
-    echo "vous avez une chance sur".$chancesDansLeDesordre."de gagner dans le desordre";
+    echo "vous avez une chance sur ".$chancesDansLordre." de gagner dans l'ordre\n";
+    echo "vous avez une chance sur ".$chancesDansLeDesordre." de gagner dans le desordre";
 ?>

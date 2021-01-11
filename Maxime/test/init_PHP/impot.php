@@ -8,11 +8,17 @@
             if($age>=20){
                 echo "imposable";
             }
+            else{
+                echo "non imposable";
+            }
         break;
 
         case "femme":
             if($age>=18 and $age<=35){
                 echo "imposable";
+            }
+            else{
+                echo "non imposable";
             }
         break;
 
