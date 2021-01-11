@@ -23,7 +23,7 @@
 
     $intNombreBaton = 17;
     $strMessageBaton = "";
-
+    $boolMonTour==true;
     while($intNombreBaton > 1){
 
         //Afficher les bâtons
@@ -34,15 +34,15 @@
         //Afficher les batons
         echo $strMessageBaton;
 
-        if ($intMonTour == 1){
+        if ($boolMonTour == true){
             //Mon tour
-            $intMonTour = 0;
+            $boolMonTour = false;
             //Si le reste des bâtons est inferieur a ce que j'ai le droit de prendre
             if ($intTriche == 1){
                 if (intval((($intNombreBaton-1)%4)) == 0){
                     echo "Triche ! Prendre 1 bâton";
                 }else{
-                    echo "Triche ! Prendre ". intval(((intNombreBaton-1)%4)) ."bâton(s)";
+                    echo "Triche ! Prendre ". intval((($intNombreBaton-1)%4)) ."bâton(s)";
                 }
             }
             $intBatonMoi = readline("Saisir un nombre de bâton(s) a retirer :");
@@ -54,7 +54,7 @@
 
         }else{
             //Tour de l'adversaire
-            $intMonTour = 1;
+            $boolMonTour = true;
 
             if($intNombreBaton == 4){
                 $intBatonLui = 3;
@@ -66,7 +66,7 @@
                 $intBatonLui = rand(1,3);
             }
             echo "L'adversaire a choisi : ". $intBatonLui . "baton(s)";
-            $intNombreBaton = $intNombreBaton - $intBatonlui;
+            $intNombreBaton = ($intNombreBaton - $intBatonlui);
         }
     }
 
@@ -77,7 +77,7 @@
     }
     echo $strMessageBaton;
 
-    if($intMonTour == 0){
+    if($boolMonTour == true){
             echo "Tu as gagné ";
     }else{
             echo "Tu as perdu ";
