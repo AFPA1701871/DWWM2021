@@ -4,8 +4,14 @@
     $factorielleP=1;
     $factorielleNP=1;
 
-    $nbPartants = readline("Nombre de chevaux partants : ");
-    $nbJoues = readline("Nombre de chevaux joués : ");
+    do{
+        $nbPartants = readline("Nombre de chevaux partants : ");
+    } while ($nbPartants <= 0 or $nbPartants <> intdiv($nbPartants, 1));
+    
+    do{
+        $nbJoues = readline("Nombre de chevaux joués : ");
+    } while ($nbJoues <= 0 or $nbJoues <> intdiv($nbJoues, 1));
+    
 
     for ($i = 1;$i<=$nbPartants;$i++){
         $factorielleN = $factorielleN * $i;

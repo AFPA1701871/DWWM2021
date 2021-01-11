@@ -2,8 +2,9 @@
 
     $nb=readline("saisir un nombre ");
 
-    for($a=1;$a<=$nb;$a++){
-        echo "$a"."\n";
+    for($a=0;$a<=9;$a++){
+        $nb=$nb+1;
+        echo "$nb"."\n";
         
     }
 
