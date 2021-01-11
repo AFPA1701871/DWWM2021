@@ -1,8 +1,8 @@
 <?php
 
-$intSaisie1 = readline("Chiffre : ");
-
-$intSaisie1 = intval($intSaisie1);
+do{
+    $intSaisie1 = readline("Chiffre : ");
+}while(is_numeric($intSaisie1)==false);
 
 switch (true) {
     case $intSaisie1==0:

@@ -23,7 +23,7 @@
 
     $intNombreBaton = 17;
     $strMessageBaton = "";
-    $boolMonTour==true;
+    $boolMonTour=true;
     while($intNombreBaton > 1){
 
         //Afficher les bâtons
@@ -32,7 +32,7 @@
             $strMessageBaton = $strMessageBaton . "| ";
         }
         //Afficher les batons
-        echo $strMessageBaton;
+        echo $strMessageBaton."\n";
 
         if ($boolMonTour == true){
             //Mon tour
@@ -44,12 +44,14 @@
                 }else{
                     echo "Triche ! Prendre ". intval((($intNombreBaton-1)%4)) ."bâton(s)";
                 }
+                echo "\n";
             }
             $intBatonMoi = readline("Saisir un nombre de bâton(s) a retirer :");
             while (($intBatonMoi <1 OR $intBatonMoi >3) OR ($intBatonMoi >= $intNombreBaton)){
                 echo "Saisie incorrecte";
                 $intBatonMoi = readline("Saisir un nombre de bâton(s) a retirer :");
             }
+            echo "\n";
             $intNombreBaton = ($intNombreBaton - $intBatonMoi);
 
         }else{
@@ -59,21 +61,22 @@
             if($intNombreBaton == 4){
                 $intBatonLui = 3;
             }elseif($intNombreBaton == 3){
-                $intBatonLui =2;
+                $intBatonLui = 2;
             }elseif($intNombreBaton == 2 OR $intNombreBaton == 6){
                 $intBatonLui = 1;
             }else{
                 $intBatonLui = rand(1,3);
             }
-            echo "L'adversaire a choisi : ". $intBatonLui . "baton(s)";
-            $intNombreBaton = ($intNombreBaton - $intBatonlui);
+            echo "L'adversaire a choisi : ". $intBatonLui . "baton(s)"."\n";
+
+            $intNombreBaton = ($intNombreBaton - $intBatonLui);
         }
     }
 
     //Afficher les bâtons
     $strMessageBaton = "";
     for ($intCompt=1; $intCompt <=$intNombreBaton ; $intCompt++) { 
-        $strMessageBaton = $strMessageBaton + "| ";
+        $strMessageBaton = $strMessageBaton . "| ";
     }
     echo $strMessageBaton;
 
