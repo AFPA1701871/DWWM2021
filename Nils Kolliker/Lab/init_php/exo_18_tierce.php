@@ -2,7 +2,7 @@
 do{
     $chevauxPartants=readline("nombre de chevaux partant? ");
     $chevauxJoues=readline("nombre de chevaux joués? ");
-}while($chevauxJoues<=0 or $chevauxPartants<$chevauxJoues or intval($chevauxJoues)!=$chevauxJoues or intval($chevauxPartants)!=$chevauxPartants);
+}while($chevauxJoues<=0 or $chevauxPartants<$chevauxJoues or $chevauxJoues!=strval(intval($chevauxJoues)) or $chevauxPartants!=strval(intval($chevauxPartants)));
 $dansLOrdre=1;
 $chevauxJouesFactorielle=1;
 for($i=1;$i<=$chevauxJoues;$i++){
