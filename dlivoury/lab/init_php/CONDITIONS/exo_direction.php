@@ -1,5 +1,6 @@
 <?php
     $nombre=readline("saisir un nombre: ");
+
                 switch($nombre){
                     case 6:
                         echo"le perso va droite";
