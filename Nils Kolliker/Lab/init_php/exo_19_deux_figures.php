@@ -9,8 +9,10 @@ for($i=1;$i<7;$i++){
     }
     echo"X\n";
 }
-echo"XXXXXXXX\n";
-echo"\n\n";
+for($j=1;$j<$i+2;$j++){
+    echo"X";
+}
+echo"\n\n\n";
 
 
 
