@@ -3,12 +3,12 @@
 
 do{
     $intNombreVal = readline ("Saisir nombre de note : ");
-}while(is_int($intNombreVal));
+}while(is_numeric($intNombreVal)==false);
 
 for ($intCompt=0; $intCompt <=$intNombreVal-1 ; $intCompt++) { 
     do{
         $tabVal[$intCompt]=readline("Saisir note ". ($intCompt+1) . " : ");
-    }while(is_int($tabVal[$intCompt]));
+    }while(is_numeric($tabVal[$intCompt])==false);
     $intSomme+=$tabVal[$intCompt];
 }
     $intComptNote=0;

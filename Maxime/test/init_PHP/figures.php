@@ -1,34 +1,33 @@
 <?php
 
-    echo "\n";
-    echo "figure 1 :"."\n"."\n";
+    echo "figure 1 :"."\n";
     echo "X"."\n";
 
-    for($i=1;$i<7;$i++){
+    for($i=0;$i<6;$i++){
         echo "X";
-        for($j=1;$j<$i;$j++){
+        for($j=0;$j<$i;$j++){
             echo "O";
         }
         echo "X"."\n";
     }
 
-    echo "XXXXXXXXX"."\n";
-    echo "\n";
-    echo "figure 2 :"."\n"."\n";
+    echo "XXXXXXXX"."\n"."\n";
 
-    $ligne="";
+    echo "figure 2 :"."\n";
 
-    for($i=1;$i<=7;$i++){
+    for($i=0;$i<=6;$i++){
         $ligne="*";
-        echo "$ligne"."\n";
+        echo "$ligne";
     }
 
-    for($i=6;$i>=1;$i--){
+    echo "\n";
+
+    for($i=5;$i>=0;$i--){
         $ligne="";
-        for($j=1;$j<=$i;$j++){
+        for($j=0;$j<=$i;$j++){
             $ligne="*";
         }
-        echo "$ligne"."\n";
+        echo "$ligne";
     }
 
 ?>

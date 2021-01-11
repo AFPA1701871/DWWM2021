@@ -4,7 +4,7 @@
     $cercle ="O";
     $symbole = [];
     $symbole2 = [];
-    $bouclage = 20;
+    $bouclage = 8;
 
     for ($i = 1; $i<=$bouclage-1 ; $i++){
         $symbole[$i]=$croix;
