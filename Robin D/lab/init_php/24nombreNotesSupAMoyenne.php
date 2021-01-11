@@ -10,9 +10,7 @@
         do {
             $notes[$i]=readline("entrez la note N°$numNote: ");
         } while ($notes[$i] < 1);
-        echo "la note n° $numNote est: $notes[$i]\n";
         $sommeNotesClasse=$sommeNotesClasse+$notes[$i];
-        echo "la somme des notes de la classe est: $sommeNotesClasse\n";
     }
 
     $moyenneClasse=$sommeNotesClasse/$nbNotes;

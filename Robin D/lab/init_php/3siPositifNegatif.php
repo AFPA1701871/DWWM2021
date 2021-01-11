@@ -4,7 +4,7 @@
     if ($nombre>0) {
         echo "le nombre $nombre est positif";
     }
-    else {
+    else if ($nombre<0) {
         echo "le nombre $nombre est négatif";
     }
 ?>
