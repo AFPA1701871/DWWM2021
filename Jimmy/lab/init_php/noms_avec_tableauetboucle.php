@@ -4,8 +4,8 @@
         $tabfinal[$numero] = $noms;
     }
     if(($tabfinal[0]<$tabfinal[1]) && ($tabfinal[1]<$tabfinal[2])){
-        echo "Les mots sont dans l'ordre alphabetique";
+        echo "Les noms sont dans l'ordre alphabetique";
     }else{
-        echo "Les mots ne sont pas dans l'ordre alphabetique";
+        echo "Les noms ne sont pas dans l'ordre alphabetique";
     }
   ?>

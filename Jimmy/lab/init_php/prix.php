@@ -8,7 +8,7 @@
         $prix = readline('Ecrire le prix');
         $Sommes = $Sommes + $prix;
         if ( $prix == 0){
-            echo "Le montant a payer est de : ".$Sommes."euro";
+            echo "Le montant a payer est de : ".$Sommes."euro"."\n";
          }   
     } 
     
