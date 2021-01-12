@@ -15,7 +15,7 @@
 
     echo "Note minimale est : ".min($tabDWWM). " ".array_search(min($tabDWWM),$tabDWWM);
     echo "\n";
-    echo "Note Maximale est : ".max($tabDWWM). " ".array_search(min($tabDWWM),$tabDWWM);
+    echo "Note Maximale est : ".max($tabDWWM). " ".array_search(max($tabDWWM),$tabDWWM);
     echo "\n";
 
     arsort($tabDWWM);
