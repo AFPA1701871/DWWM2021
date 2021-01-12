@@ -1,7 +1,7 @@
 <?php
-    $nom1=readline("Saisissez un nom");
-    $nom2=readline("Saisissez un deuxième nom");
-    $nom3=readline("Saisissez un troisième nom");
+    $nom1=readline("Saisissez un nom ");
+    $nom2=readline("Saisissez un deuxième nom ");
+    $nom3=readline("Saisissez un troisième nom ");
 
     if ($nom1<$nom2 and $nom2<$nom3)
     {
