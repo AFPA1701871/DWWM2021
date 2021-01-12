@@ -22,19 +22,13 @@
             if ($tableau1[$i] < $tableau2[$i]){
 
                     array_push($tableau3, $tableau1[$i]);
-
-                    if ($tableau2[$i] > $tableau1[$i+1]){
-                        array_push($tableau3, $tableau2[$i]);
-                    }
+                    array_push($tableau3, $tableau2[$i]);
 
                 } 
             if ($tableau2[$i] < $tableau1[$i]) {
 
                     array_push($tableau3, $tableau2[$i]);
-
-                    if  ($tableau1[$i] >$tableau2[$i+1]){
-                        array_push($tableau3, $tableau1[$i]);
-                    }
+                    array_push($tableau3, $tableau1[$i]);
 
             }
 
