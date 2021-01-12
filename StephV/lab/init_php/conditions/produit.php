@@ -3,13 +3,13 @@
     $nb2=readline("Saisissez un nombre:");
     $nb=$nb1*$nb2;
         if ($nb<0){
-            echo "nombre négatif";
+            echo "produit négatif";
         }
         elseif ($nb==0){
-            echo "nombre nul";
+            echo "produit nul";
         }
         elseif ($nb>0){
-            echo "nombre positif";
+            echo "produit positif";
         }
-       
+        
 ?>
