@@ -1,20 +1,26 @@
 <?php
 
     echo"\n";
-    echo "figure1 :"."\n"."\n";
+    echo "figure 1 :"."\n"."\n";
 
-    echo"X\n";
-    for($i=1;$i<7;$i++){
-        echo"X";
-        for($j=1;$j<$i;$j++){
-            echo"O";
+    
+
+    for($i=1;$i<=8;$i++){ 
+        $line=" ";     
+        for($j=1;$j<=$i;$j++){
+            if($j==1 or $j==$i){
+                $line=$line."x";
+            }else if($i!=8){
+                $line=$line."o";
+            }else{
+                $line=$line."x";
+            }
         }
-        echo"X\n";
+        echo $line."\n";
     }
-    echo"XXXXXXXX\n";
-    echo"\n";
 
-    echo "figure2 :"."\n"."\n";
+    echo "\n";
+    echo "figure 2 :"."\n"."\n";
 
     $ligne = "";
     for ($i=1; $i <= 7; $i++) { 
