@@ -7,21 +7,21 @@
     $int10e=0;
     $int5e=0;
     $int1e=0;
+    $intSommeDue=$intSommeDue+$intAchat;
 
     while ($intAchat!== "y"){
-        $intAchat=readline ("Appuyez sur y quand vous avez terminé de donner les prix des articles.");
-        $intSommeDue=$intSommeDue+$intAchat;
+        $intAchat=readline ("Appuyez sur y quand vous avez terminé de donner les prix des articles. ");
         if ($intAchat== "y"){
             echo "Le client doit la somme de ". $intSommeDue. " euros";
         }
     }
 
-    $intSommePaye=readline (" Quelle somme à payé le client ?");
+    $intSommePaye=readline (" Quelle somme à payé le client ? ");
         if ($intSommePaye<$intSommeDue){
             $a=$intSommeDue-$intSommePaye;
             while ($a!==0){
                 echo "Le client vous doit encore ". $a. " euros";
-                $intSommePaye=readline(" Combien vous-a-t-il donné ?");
+                $intSommePaye=readline(" Combien vous-a-t-il donné ? ");
                 $a=$a-$intSommePaye;
             }
             echo "Le client a payé";
