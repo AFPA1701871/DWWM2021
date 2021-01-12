@@ -1,9 +1,8 @@
 <?php
     $tabValeur=[];
-    $somme=0;
     $nbValeur=readline("saisir le nombre de valeur a calculer: ");
 
-    while($nbValeur<=0 or $nbValeur!=is_numeric($nbValeur)){
+    while(($nbValeur<=0) or ($nbValeur!=is_numeric($nbValeur)) or (intdiv($nbValeur,1)!=$nbValeur)) {
         $nbValeur=readline("saisir une valeur valide: ");
     }
 
@@ -11,9 +10,8 @@
         $tabValeur[$i]=readline("saisir une valeur: ");
         while($tabValeur[$i]!=is_numeric($tabValeur[$i])){
             $tabValeur[$i]=readline("saisir une valeur valide: ");
-        }
-        $somme=$somme+$tabValeur[$i];
+        }   
     }
     print_r($tabValeur);
-        echo "$somme".' '."est l'addition des valeurs saisies";
-?>
+    echo"somme des entiers du tableau= ".' '.array_sum($tabValeur);
+
