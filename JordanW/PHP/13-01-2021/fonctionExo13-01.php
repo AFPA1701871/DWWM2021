@@ -21,12 +21,12 @@ function f_purge(string $chaine,string $purge){
         $bool=false;
         //Boucle sur la chaine recherche
         for ($j=0; $j <strlen($purge) ; $j++) {
-            if(substr($chaine,$i,1)===substr($purge,$j,1)){
-                $bool==true;;
+            if(substr($chaine,$i,1)==substr($purge,$j,1)){
+                $bool=true;
             }
         }
-        if($bool==false){
-            $resultat .=substr($chaine,$i,1);
+        if(!$bool){
+            $resultat .= substr($chaine,$i,1);
         }
     }
     

@@ -2,11 +2,13 @@
 
     require("fonctionExo13-01.php");
 
-    echo "\n PREMIERE VERSION SANS FONCTION PREDEFINIE \n";
-
     $strSaisie = readline("Saisir quelque chose : \n");
-    $strPurge = readline("Saisir chaine a purger : \n");
-
+    do {
+        $strPurge = readline("Saisir caractere a purger : \n");
+    }while(strlen($strPurge)!=1);
+    
     echo "Après purge : ". f_purge($strSaisie,$strPurge)."\n";
+
+    echo "Après purge avec fonction str_replace() : ". str_replace($strPurge,"",$strSaisie)."\n";
 
 ?>
