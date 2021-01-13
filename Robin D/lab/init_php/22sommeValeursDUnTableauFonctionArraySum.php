@@ -1,7 +1,7 @@
 <?php
     do {
         $nbValeurs=readline("entrez le nombre de valeurs: ");
-    } while ($nbValeurs < 1);
+    } while ($nbValeurs<1 or intdiv($nbValeurs,1)!=$nbValeurs);
 
     for ($i=0; $i < $nbValeurs; $i++) { 
         $numValeur=$i+1;

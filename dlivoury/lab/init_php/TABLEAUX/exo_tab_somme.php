@@ -14,8 +14,6 @@
         }
         $somme=$somme+$tabValeur[$i];
     }
-    foreach($tabValeur as $addition){
-        echo "$addition\n";
-    }
+    print_r($tabValeur);
         echo "$somme".' '."est l'addition des valeurs saisies";
 ?>

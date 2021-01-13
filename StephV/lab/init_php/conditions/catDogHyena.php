@@ -8,6 +8,6 @@
     $dog=$cat;
     $cat=$temp;
 
-    echo " cat:". $cat ." dog:". $dog . " hyena:" . $hyena;
+    echo " cat: ". $cat ." dog: ". $dog . " hyena: " . $hyena;
 
  ?>
