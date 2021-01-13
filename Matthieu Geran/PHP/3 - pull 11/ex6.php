@@ -2,7 +2,6 @@
 
     $notes = array("Franck" => 14,"Kesary" => 16,"Jimmy" => 15); //création du tableau avec des clés comme index
 
-    array_push($notes["Houssam"]); //ajout d'une valeur avec clé
     $notes["Houssam"] = 15;
 
     foreach ($notes as $cle => $valeur){
