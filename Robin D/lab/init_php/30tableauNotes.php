@@ -4,13 +4,13 @@
     // déclaration du tableau
     $tableauNotes=array("Franck"=>14,"Kesary"=>16,"Jimmy"=>15);
 
-    echo "le tableau des notes est : ";
+    echo "le tableau des notes initial est : ";
     foreach ($tableauNotes as $cle => $valeur) {
         echo "$cle=>$valeur, ";
     }
 
     // ajout de la note d'Houssam
-    echo "ajout de la note d'Houssam\n";
+    echo "\najout de la note d'Houssam : ";
     $tableauNotes["Houssam"]=15;
 
     echo "le tableau des notes est : ";
@@ -19,7 +19,7 @@
     }
 
     // suppresion de la note de Franck
-    echo "suppresion de la note de Franck\n";
+    echo "\nsuppression de la note de Franck : ";
     array_shift($tableauNotes);
 
     echo "le tableau des notes est : ";
@@ -34,15 +34,15 @@
     //tri du tableau par ordre alphabétique
     ksort($tableauNotes);
 
-    echo "le tableau des notes est : ";
+    echo "le tableau des notes triées par ordre alphabétique est : ";
     foreach ($tableauNotes as $cle => $valeur) {
         echo "$cle=>$valeur, ";
     }
     
     //tri du tableau par ordre de mérite
-    asort($tableauNotes);
+    arsort($tableauNotes);
 
-    echo "le tableau des notes est : ";
+    echo "\nle tableau des notes triées par ordre de mérite est : ";
     foreach ($tableauNotes as $cle => $valeur) {
         echo "$cle=>$valeur, ";
     }
