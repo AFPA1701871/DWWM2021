@@ -12,9 +12,9 @@
     for($i=0;$i<$nbValeur;$i++){
         $tabValeur[$i]=readline("saisir une valeur: ");
 
-    if($tabValeur[$i]!=is_numeric($tabValeur[$i])){
-        $tabValeur[$i]=readline("saisir une valeur valide: ");
-    }   
+        while($tabValeur[$i]!=is_numeric($tabValeur[$i])){
+            $tabValeur[$i]=readline("saisir une valeur valide: ");
+        }
         if($tabValeur[$i]> 0){
             $nombrePos++;
         }
@@ -23,9 +23,7 @@
             }
                 else if($tabValeur=0){
                     $nombreNul++;
-                }
-                  
-    }
+                }            }
     echo "$nombrePos".' '."positif\n";
     echo "$nombreNeg".' '."negatif\n";
     echo "$nombreNul".' '."nul";
