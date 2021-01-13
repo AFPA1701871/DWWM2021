@@ -29,7 +29,7 @@ function f_purge(string $chaine,string $purge){
             $resultat .= substr($chaine,$i,1);
         }
     }
-    
+
     return $resultat;
 }
 

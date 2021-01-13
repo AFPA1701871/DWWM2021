@@ -6,7 +6,4 @@
 
     echo "il y a ".f_compteCaracterePresent(strtoupper($strSaisie),"AEIOUY")." voyelle(s)"."\n";
 
-    echo "Fonction : il y a ".f_compteCaracterePresent(strtoupper($strSaisie),"AEIOUY")." voyelle(s)"."\n";
-
-
 ?>
