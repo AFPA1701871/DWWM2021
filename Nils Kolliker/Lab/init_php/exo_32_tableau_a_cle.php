@@ -4,8 +4,8 @@ foreach ($tableau as $cle => $caseAMontrer){
     echo $cle." ".$caseAMontrer."\n";
 }
 echo "\n";
-$tableau["houssam"]=15;
-array_shift($tableau);
+$tableau["Houssam"]=15;
+unset($tableau["Franck"]);
 foreach ($tableau as $cle => $caseAMontrer){
     echo $cle." ".$caseAMontrer."\n";
 }
