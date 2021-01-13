@@ -29,11 +29,11 @@ switch($scale){
     case 9 ;
         echo "Dévastateur";
         break; 
-    case 10||11||12 :
+    case 10 :
         echo "Hell on Earth";
-        break;    
-    default:
-        echo "hors-échelle";
+        break;
+    default : 
+        echo  "Welcome ! Stroll on Jupiter !";
         break;
                                                      
 }
