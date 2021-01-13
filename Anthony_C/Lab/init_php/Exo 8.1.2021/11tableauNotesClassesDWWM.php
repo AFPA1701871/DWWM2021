@@ -1,6 +1,6 @@
 <?php
     //Création du tableau.
-    $tabNotes=array("Clé" => "Valeur","Franck" => 14,"Kesary" => 16,"Jimmy" => 15);
+    $tabNotes=array("Franck" => 14,"Kesary" => 16,"Jimmy" => 15);
     print_r($tabNotes);
     echo "\n";
 
@@ -27,7 +27,7 @@
     echo "\n";
 
     //Afficher le tableau après l'avoir trié par ordre de mérite.
-    
+    arsort($tabNotes);
     print_r($tabNotes);
     echo "\n";
 

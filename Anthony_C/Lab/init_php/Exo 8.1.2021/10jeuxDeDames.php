@@ -7,10 +7,10 @@
 
     //Demande a l'utilisateur la position de son pion en ayant deux valeur d'entrer la ligne puis la colone.
     do{
-        $ligne=readline("Sur quelle ligne ce trouve votre pion? : ");
+        $ligne=readline("Sur quelle ligne ce trouve votre pion? entre 0 et 9 inclu : ");
     }while($ligne<0 or $ligne>9);
     do {
-        $colone=readline("Dans quelle colone ce trouve votre pion? : ");
+        $colone=readline("Dans quelle colone ce trouve votre pion? entre 0 et 9 inclu : ");
     }while ($colone<0 or $colone>9);
     $damier[$ligne][$colone]="X";
     afficherDamier($damier);
