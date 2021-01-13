@@ -20,7 +20,8 @@
 
     // suppresion de la note de Franck
     echo "\nsuppression de la note de Franck : ";
-    array_shift($tableauNotes);
+
+    unset($tableauNotes["Franck"]);
 
     echo "le tableau des notes est : ";
     foreach ($tableauNotes as $cle => $valeur) {
