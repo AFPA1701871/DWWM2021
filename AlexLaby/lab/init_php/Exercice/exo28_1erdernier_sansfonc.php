@@ -1,7 +1,6 @@
 <?php
 
     $tab= array(5,4,12,10,17);
-    $num2=2;
     $count = count($tab);
 
     echo "Le tableau de base : ";
@@ -10,7 +9,7 @@
         }
         "\n";
     
-    for ($i=0;$i<=(intdiv($count, $num2));$i++){
+    for ($i=0;$i<=(intdiv($count, 2));$i++){
         $temp=$tab[$i];
         $tab[$i]=$tab[$count-$i-1];
         $tab[$count-$i-1]=$temp;
@@ -20,6 +19,6 @@
     foreach ($tab as $element) {
         echo $element." ";
         }
-        "\n";
+
 
 ?>
