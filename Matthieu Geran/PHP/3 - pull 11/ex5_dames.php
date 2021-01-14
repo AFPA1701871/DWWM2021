@@ -34,7 +34,9 @@
 
     echo "\n";
 
+    do{
     $action = readline("Quelle action voulez-vous faire ? (0 en haut à gauche, 1 en haut à droite, 2 en bas à gauche, 3 en bas à droite.) ");
+    } while ($action <> 0 and $action and 1 and $action <> 2 and $action <> 3);
 
     switch ($action){
 
