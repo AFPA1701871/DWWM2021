@@ -2,7 +2,7 @@
     echo " **** Purge la chaine d'un ou plusieurs caractères ****\n";
     
     // fonction qui permet de purger la chaine $phrase des $caracteres de la chaine $CaracteresAPurger
-    function purgeChaineDUncaractere($phrase,$CaracteresAPurger) {
+    function purgeChaineDUnOuPlusieurscaracteres($phrase,$CaracteresAPurger) {
         $maPhraseEnMinuscule = strtolower($phrase);
         $tableauMaPhrase=str_split($maPhraseEnMinuscule);
         $CaractereAPurgerEnMinuscule=strtolower($CaracteresAPurger);
@@ -16,7 +16,6 @@
                 }
             }
         }
-        print_r($tableauMaPhrase);
         $phrasePurgee=implode($tableauMaPhrase);
         return $phrasePurgee;
     }
@@ -24,5 +23,5 @@
     $maChaine=readline("entrez une phrase :");
     $mesCaracteresAPurger=readline("entrez un ou plusieurs caractères à purger (en collant toutes les lettres) :");
 
-    echo "la phrase $maChaine purgée des caractères $mesCaracteresAPurger est : ".purgeChaineDUncaractere($maChaine,$mesCaracteresAPurger);
+    echo "la phrase $maChaine purgée des caractères $mesCaracteresAPurger est : ".purgeChaineDUnOuPlusieurscaracteres($maChaine,$mesCaracteresAPurger);
 ?>
