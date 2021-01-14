@@ -47,4 +47,11 @@ function multiPurge($string,$charAPurgers){
     return $string;
 }
 
+function inversionRecurcive($string){
+    if (strlen($string)==1){
+        return $string;
+    }else{
+        return inversionRecurcive(substr($string,1,(strlen($string)-1))).substr($string,0,1);
+    }
+}
 ?>
