@@ -15,7 +15,7 @@
 
     echo "\n";
     echo "\n";
-    $tabva=array_reverse($tabVal);
+    $tabVal=array_reverse($tabVal);
     foreach ($tabVal2 as $intVal) { 
         echo $intVal . " ";
     }

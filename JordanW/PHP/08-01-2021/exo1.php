@@ -1,15 +1,13 @@
 <?php
 
-    for ($intCompt=0; $intCompt <=8 ; $intCompt++) {
-        do{
-        $tabMorpion[$intCompt]=readline("Saisir valeur ". ($intCompt+1) . " : ");
-        }while(is_numeric($tabMorpion[$intCompt])==false);
+    for ($intCompt=0; $intCompt <=8 ; $intCompt++) { 
+        $tabVal[$intCompt]=readline("Saisir valeur ". ($intCompt+1) . " : ");
     }
     $intSomme=0;    
-    foreach ($tabMorpion as $intVal) { 
+    foreach ($tabVal as $intVal) { 
         $intSomme+=$intVal;
     }
-    echo "La moyenne est de ".($intSomme/count($tabMorpion));
+    echo "La moyenne est de ".($intSomme/count($tabVal));
     echo "\n";
-  echo "La moyenne est de ". array_sum($tabMorpion)/count($tabMorpion);
+  echo "La moyenne est de ". array_sum($tabVal)/count($tabVal);
 ?>
