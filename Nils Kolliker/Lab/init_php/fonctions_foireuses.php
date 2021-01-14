@@ -36,6 +36,9 @@ function purge($string,$charAPurger){
     return implode($tabString);
 }
 
+//retire toutes les occurences d'un ou plusieur caracteres dans une chaine de caractere
+//en entré, prend 2 chaines, la chaine à purger suivie des caractères à purger
+//en sortie, renvois une chaine
 function multiPurge($string,$charAPurgers){
     $tabCharAPurger=str_split($charAPurgers,1);
     for($i=0;$i<count($tabCharAPurger);$i++){
