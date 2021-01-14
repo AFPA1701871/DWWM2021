@@ -16,7 +16,7 @@
     function purge($mots,$lettre){
         
         $mots = str_split($mots,1);
-        $lettre = str_split($lettre,1);
+        
         
         for ($i=0; $i < count($mots) ; $i++) {
              
