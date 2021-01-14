@@ -17,8 +17,9 @@
     echo "\n";
     echo "Note Maximale est : ".max($tabDWWM). " ".array_search(max($tabDWWM),$tabDWWM);
     echo "\n";
+    
 
-    arsort($tabDWWM);
+    asort($tabDWWM);
     var_dump($tabDWWM);
     echo "\n";
 

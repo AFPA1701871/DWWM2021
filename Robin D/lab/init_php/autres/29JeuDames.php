@@ -17,8 +17,10 @@
     
     // Demander la position initiale du pion sur le damier
     echo "\n";
-    $positionPionLigne=readline("sur quelle ligne se trouve votre pion ? ");
-    $positionPionColonne=readline("sur quelle colonne se trouve votre pion ? ");
+    do {
+        $positionPionLigne=readline("sur quelle ligne se trouve votre pion ? ");
+        $positionPionColonne=readline("sur quelle colonne se trouve votre pion ? ");
+    } while ($positionPionLigne<1 or $positionPionColonne>10 or $positionPionColonne<1 or $positionPionColonne>10);
 
     $plateauJeu[$positionPionLigne-1][$positionPionColonne-1]="X";
 
@@ -33,7 +35,10 @@
 
     // Demander le déplacement du pion sur le damier
     echo "\n";
-    $mouvement=readline("quel mouvement souhaitez-vous effectuer? 0(en haut à gauche), 1(en haut à droite), 2(en bas à gauche), 3 (en bas à droite) : ");
+    
+    do {
+        $mouvement=readline("quel mouvement souhaitez-vous effectuer? 0(en haut à gauche), 1(en haut à droite), 2(en bas à gauche), 3 (en bas à droite) : ");
+    } while ($mouvement!=0 and $mouvement!=1 and $mouvement!=2 and $mouvement!=3);
 
     // Réinitilisation du plateau pour effacer la position antérieure du pion
     for ($i=0; $i < 10; $i++) { 
@@ -76,8 +81,4 @@
             }
         }
     }
-    
-
-    
-    
 ?>
