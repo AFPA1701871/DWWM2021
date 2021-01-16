@@ -293,44 +293,20 @@ do {
                         break;
                      } 
                         // recuperer champ=rchamp =>  autant de fois qu'il y en a
+                        $tabChamps=explode(",",substr($saisie,0,strpos($saisie," WHERE ")));// A TESTER
                         // recuperer apres WHERE
+                        $strChampsWhere = substr($saisie,strpos($saisie," WHERE ")+7); // A TESTER
                 } 
 
+                ///////////////////
+                ///////////////////
+                ///////////////////
+                ///////////////////
+                ///////////////////
+                ///////////////////
+                /////////////////// A TESTER
 
-                $strParametres="";
-                $strInstruction2="";
-                $strTable="";
-
-                // Decoupe la variable saisie pour obtenir les variables de la requetes
-                f_decoupageRequeteSelect($saisie,$strParametres,$strInstruction2,$strTable);
-                
-                $boolTrie=false;
-                // Test si Order by existe
-                 if(strPos($strTable,"Order by ")!=false){
-                     // si existe tester si ASC ou DESC existe a la fin
-                    if(substr($strTable,-3)!="ASC" && substr($strTable,-4)!="DESC"){
-                        echo "Le Order by doit absoument être couplé avec ASC ou DESC !!"."\n";
-                        $boolSaisieCorrecte=false;
-                        break;
-                    }
-
-                    // ORDER BY
-                    $boolTrie=true;
-                    $strReq=$strTable;
-                    // Recuperer la table
-                    $strTable=trim(substr($strReq,0,strPos($strReq," Order by ")));
-                    $strReq=substr($strReq,strlen($strTable)+strlen(" Order by "));
-                    // Recuperer le parametreTrie
-                    if(substr($strReq,-4)==" ASC"){
-                        $strParametreTrie=substr($strReq,0,-4);
-                        $strTrie="ASC";
-                    }elseif(substr($strReq,-5)==" DESC"){
-                        $strParametreTrie=substr($strReq,0,-5);
-                        $strTrie="DESC";
-                    }
-                }
-
-                // test si table existe deja
+                // test si table existe
                 if (file_exists($strTable.".dwwm")== false) {
                     echo "La table ".$strTable." n'éxiste pas !!"."\n";
                     $boolSaisieCorrecte=false;
