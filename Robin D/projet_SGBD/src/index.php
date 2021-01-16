@@ -27,7 +27,8 @@
             echo "identifiants incorrects\n";
         }
     } while ($logOk==false);
-
+    
+    
     // fonction permettant de créer une table dans le dossier BDD
     function createTable($nomTable) {
         $fp =fopen("./BDD/$nomTable.dwwm", "w");
