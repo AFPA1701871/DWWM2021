@@ -14,6 +14,7 @@ require("fonctionEchec.php");
 $tabEchec = f_initialiserEchec();
 
 
+
 //Faire le toss
 $boolMonTour = false;
 $boolFini = false;

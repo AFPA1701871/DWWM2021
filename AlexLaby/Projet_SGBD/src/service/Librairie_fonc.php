@@ -11,6 +11,7 @@ function initConfig(){
     fclose($fp);
 }
 
+//fonction pour se logger et accéder à la suite
 function login($inputLogin,$inputPassword){
     $fp = fopen("../BDD/config.ini", "r");
     $compteur=0;
@@ -20,9 +21,6 @@ function login($inputLogin,$inputPassword){
             $compteur++;
         }
     }
-
-
 }
-
 
 ?>
