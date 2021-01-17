@@ -34,12 +34,12 @@
 
         if (substr($requeteSQL,0,13)=="CREATE TABLE ") {
             $donneesTable=substr($requeteSQL,13); // donne la valeur de la requete moins "CREATE TABLE "
-            $posParanthese=strpos($donneesTable,"("); // donne la position de la première paranthese
+            $posParanthese=strpos($donneesTable,"("); // donne la position de la première parenthese
             $nomTable=substr($donneesTable,0,$posParanthese); // donne le nom de la table à créer
             $listeChamps=substr($donneesTable,$posParanthese); // donne le contenu(liste des champs) à inserer dans la table
             $listeChamps=strtr($listeChamps, ",", ";")."\n"; //convertit les "," qui séparent les champs en ";"
             $listeChamps=substr($listeChamps,1); // supprimer la "(" au début de $listeChamps
-            $posParanthese2=strrpos($listeChamps,")"); // donne la position de la dernière paranthese
+            $posParanthese2=strrpos($listeChamps,")"); // donne la position de la dernière parenthese
             $listeChamps=substr($listeChamps,0,$posParanthese2); // supprimer la ")" à la fin de $listeChamps
 
             $fp=fopen("./BDD/$nomTable.dwwm", "w"); // crée une table nommée $nomTable dans la base de données
@@ -53,7 +53,7 @@
             $valeursAEntrer=substr($contenuRequete,$posValues+7); // donne le contenu(valeur des champs) à inserer dans la table
             $valeursAEntrer=strtr($valeursAEntrer, ",", ";")."\n"; //convertit les "," qui séparent les valeurs en ";"
             $valeursAEntrer=substr($valeursAEntrer,1); // supprimer la "(" au début de $valeursAEntrer
-            $posParanthese2=strrpos($valeursAEntrer,")"); // donne la position de la dernière paranthese
+            $posParanthese2=strrpos($valeursAEntrer,")"); // donne la position de la dernière parenthese
             $valeursAEntrer=substr($valeursAEntrer,0,$posParanthese2); // supprimer la ")" à la fin de $valeursAEntrer
 
             $fp=fopen("./BDD/$nomTable.dwwm", "a"); // ouvre la table nommée $nomTable dans la base de données
