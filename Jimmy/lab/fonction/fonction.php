@@ -8,10 +8,10 @@
         foreach ($mots as $letter){
         if(in_array($letter, $voyelle))
             $nbVoyelles++;
-        }   
+        }
         return $nbVoyelles;   
     }         
-//*****************************FONCTION PURGE*****************************//                                  
+//*****************************FONCTION PURGE********************************//                                  
 
     function purge($mots,$lettre){
         
@@ -29,5 +29,18 @@
         }
         return implode($mots);
     }
- //***********************************************************************//   
+ //****************************FONCTION INVERSE*******************************//
+ 
+    function inverse($mot){
+        if(strlen($mot)==1){
+
+            return $mot;
+
+        }else{
+
+            return inverse(substr($mot,1,(strlen($mot)-1))).substr($mot,0,1);
+
+        }
+
+    }
 ?>
