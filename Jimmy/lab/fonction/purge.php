@@ -1,5 +1,5 @@
 <?php
-require('fonction.php');
+require('./fonction.php');
     $mots = readline('Ecrire un mot : ');
 do{
     
