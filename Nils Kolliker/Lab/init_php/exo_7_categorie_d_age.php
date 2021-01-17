@@ -8,7 +8,7 @@ if ($age<6){
     $categorie="pupille";
 }else if($age<12){
     $categorie="minime";
-}else {
+}else {//en théorie un joueur de 35 ans est toujours un cadet d'après l'énoncé
     $categorie="cadet";
 }  
 echo $categorie;

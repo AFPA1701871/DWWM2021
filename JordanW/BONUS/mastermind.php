@@ -68,7 +68,7 @@
                     for ($intCompt2=1; $intCompt2 < 5 ; $intCompt2++) 
                     { 
                         //Si X
-                        if ($arrayMaProposition[$intCompt]== $arrayAleatoire[$intCompt2] && $arrayResultat[$intCompt] <> "v" && $arrayResultat[$intCompt] <> "o")
+                        if ($arrayMaProposition[$intCompt]== $arrayAleatoire[$intCompt2] && $arrayResultat[$intCompt2] <> "v" && $arrayResultat[$intCompt2] <> "o")
                         {
                             $arrayResultat[$intCompt]="o";
                         }    

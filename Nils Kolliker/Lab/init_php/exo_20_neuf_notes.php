@@ -1,7 +1,9 @@
 <?php
 $moyenne=0;
 for($i=0;$i<9;$i++){
-    $note[]=readline("note n°".strval($i+1)." ? ");
+    do{
+        $note[$i]=readline("note n°".strval($i+1)." ? ");
+    }while($note[$i]!=strval(floatval($note[$i])));
     $moyenne=$moyenne+$note[$i];
 }
 $moyenne=$moyenne/9;
