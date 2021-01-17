@@ -1,7 +1,7 @@
 <?php
     echo " **** Purge la chaine d'un ou plusieurs caractères ****\n";
     
-    // fonction qui permet de purger la chaine $phrase des $caracteres de la chaine $CaracteresAPurger
+    // fonction qui permet de purger la chaine $phrase des caracteres de la chaine $CaracteresAPurger
     function purgeChaineDUnOuPlusieurscaracteres($phrase,$CaracteresAPurger) {
         $maPhraseEnMinuscule = strtolower($phrase);
         $tableauMaPhrase=str_split($maPhraseEnMinuscule);

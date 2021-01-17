@@ -1,7 +1,7 @@
 <?php
     echo " **** Purge la chaine d'un caractère ****\n";
     
-    // fonction qui permet de purger la chaine $phrase du $caractere de $CaractereAPurger
+    // fonction qui permet de purger la chaine $phrase du caractere de $CaractereAPurger
     function purgeChaineDUncaractere($phrase,$CaractereAPurger) {
         $maPhraseEnMinuscule = strtolower($phrase);
         $tableauMaPhrase=str_split($maPhraseEnMinuscule);
@@ -9,7 +9,7 @@
 
         for ($i=0; $i < count($tableauMaPhrase); $i++) { 
             if ($tableauMaPhrase[$i]==$CaractereAPurgerEnMinuscule) {
-                unset($tableauMaPhrase[$i]);
+                $tableauMaPhrase[$i]="";
             }
         }
         $phrasePurgee=implode($tableauMaPhrase);
@@ -17,7 +17,10 @@
     }
 
     $maChaine=readline("entrez une phrase :");
-    $monCaractereAPurger=readline("entrez un caractère à purger :");
+    
+    do {
+        $monCaractereAPurger=readline("entrez un caractère à purger :");
+    } while (strlen($monCaractereAPurger)>=2);
 
     echo "la phrase $maChaine purgée du caractère $monCaractereAPurger est : ".purgeChaineDUncaractere($maChaine,$monCaractereAPurger);
 ?>

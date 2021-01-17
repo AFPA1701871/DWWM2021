@@ -17,7 +17,7 @@
         return $nbVoyelles;
     }
 
-    // fonction qui permet de purger la chaine $phrase du $caractere de $CaractereAPurger
+    // fonction qui permet de purger la chaine $phrase du caractere de $CaractereAPurger
     function purgeChaineDUncaractere($phrase,$CaractereAPurger) {
         $maPhraseEnMinuscule = strtolower($phrase);
         $tableauMaPhrase=str_split($maPhraseEnMinuscule);
@@ -32,8 +32,8 @@
         return $phrasePurgee;
     }
 
-   // fonction qui permet de purger la chaine $phrase des $caracteres de la chaine $CaracteresAPurger
-   function purgeChaineDUnOuPlusieurscaracteres($phrase,$CaracteresAPurger) {
+    // fonction qui permet de purger la chaine $phrase des caracteres de la chaine $CaracteresAPurger
+    function purgeChaineDUnOuPlusieurscaracteres($phrase,$CaracteresAPurger) {
     $maPhraseEnMinuscule = strtolower($phrase);
     $tableauMaPhrase=str_split($maPhraseEnMinuscule);
     $CaractereAPurgerEnMinuscule=strtolower($CaracteresAPurger);

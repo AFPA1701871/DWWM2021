@@ -20,12 +20,8 @@
         echo "$tableau2[$i],";
     }
 
-    // Déclaration de curseurs pour permettre la progression dans le processus de fusion
-    $curseurTableau1=0;
-    $curseurTableau2=0;
-
     // Fusion des tableaux
-    $tableau3 = array_merge_recursive($tableau1,$tableau2);
+    $tableau3 = array_merge($tableau1,$tableau2);
     sort($tableau3);
 
     // Affichage du tableau3
