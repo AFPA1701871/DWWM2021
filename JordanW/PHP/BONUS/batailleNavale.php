@@ -6,19 +6,10 @@ define("LONGUEUR_BATEAU",3);
 define("NOMBRE_BATEAU_LIGNE",1);
 define("NOMBRE_BATEAU_COLONNE",1);
 
-/* Initialiser adverse
- $tabAdversaire = f_initialiserJeux();
-
-//Dessiner le bateau
-f_DessinerBateau($tabAdversaire,rand(0,3),rand(0,3));
-//Afficher le jeux Adversaire
-echo "Jeux adversaire : "."/n";
-f_afficherJeux($tabAdversaire);*/
-
 //Initialiser le jeu
 $tabEnnemie = f_initialiserJeux();
 //Dessiner le bateau
-f_DessinerBateau($tabEnnemie,NOMBRE_BATEAU_LIGNE,NOMBRE_COLONNE);
+f_DessinerBateau($tabEnnemie,NOMBRE_BATEAU_LIGNE,NOMBRE_BATEAU_COLONNE);
 //Afficher le jeux
 f_afficherJeux($tabEnnemie);
 
@@ -80,8 +71,9 @@ function f_saisir(string $strSaisie){
 }
 
 function f_initialiserJeux(){
-    for ($i=0; $i <NOMBRE_LIGNE ; $i++) { 
-        for ($j=0; $j <NOMBRE_COLONNE ; $j++) { 
+$tab=[];
+    for ($i=0; $i < NOMBRE_LIGNE ; $i++) { 
+        for ($j=0; $j < NOMBRE_COLONNE ; $j++) { 
             $tab[$i][$j] = "_";
         }
     }
@@ -91,7 +83,7 @@ function f_initialiserJeux(){
 function f_afficherJeux(array $tab){
     echo "Bataille navale : "."\n";
     echo "_ ";
-    for ($i=0; $i <NOMBRE_COLONNE ; $i++) { 
+    for ($i=0; $i < NOMBRE_COLONNE ; $i++) { 
         echo $i." ";
     }
     echo "\n";
