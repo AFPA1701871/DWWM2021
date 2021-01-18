@@ -21,10 +21,9 @@
     //Après s'être logger
     do{
         $inputUser=readline(SQL);
+        $inputUser=strtolower($inputUser);
         quit($inputUser);
     } while (call($inputUser)==false); 
-    
-    //Créer une table
-    createTable();
+
 
 ?>
