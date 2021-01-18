@@ -1,9 +1,29 @@
 <?php
 
-// analyse de la saisie et recupération des variables de traitement
+    // $variable1 ="CREATE TABLE monTest(nom,prenom,ville,manille=Martinique)";
+    // $variable2 ="INSERT INTO monTest VALUES(nom,prenom,taille)";
+    // $variable3 ="SELECT * FROM bonTest";
 
-function analyse($commande){
+    // $createMasque = '#CREATE TABLE [a-z]\w*\([\w{1,25},]+\w{1,24}\)#';
+    // $insertIntoMasque = '#INSERT INTO [a-z]\w* VALUES(...)#';
+    // $selectFromMasque = '#SELECT \* FROM [a-z]\w#';
+
+    // $masqueSaisie = [$createMasque,$insertIntoMasque,$selectFromMasque];
+
+    // for($i=0;$i<count($masqueSaisie);$i++){
+    //     if(preg_match($masqueSaisie[$i], $variable1,$matches)){
+    //         echo "c'est ok";
+    //         print_r ($matches);
+    //     }else {
+    //         echo "il y a une erreur";
+    //         print_r ($matches);
+    //     }
+
+    // }
+    $commande = "INSERT INTO monTest VALUES('nom','prenom','taille')"; 
+    $commande = strtolower($commande);   
     $tabCommande = explode(" ",$commande);
+
     if ($tabCommande[0]=="create" && $tabCommande[1]=="table"){
         $instruction =$tabCommande[0].$tabCommande[1];
         $fichier = $tabCommande[2];
@@ -37,19 +57,20 @@ function analyse($commande){
         $erreurSyntaxe = true;
     }
 
-    // if ($enteteFichier!=""){
-    //     $donneesTraitement = [$instruction, $nomFichier, $enteteFichier];
-    // }else {
-    //     $donneesTraitement = [$instruction, $nomFichier] ;
-    // }
+    if ($enteteFichier!=""){
+        $donneesTraitement = [$instruction, $nomFichier, $enteteFichier];
+    }else {
+        $donneesTraitement = [$instruction, $nomFichier] ;
+    }
 
+    foreach($tabCommande as $element){
+        echo $element."\n";
+    }
 
-
-
-}
-
-
-
+    
+    echo "\n".$instruction;
+    echo "\n".$nomFichier;
+    echo "\n".$enteteFichier;
 
 
 
