@@ -345,7 +345,7 @@ function build_sorter($key) {
 function f_MiseEnFormeTableau(array $tab){
     
     // Boucle sur les colonnes du fichier
-    for ($j=0; $j <count(array_keys($tab)) ; $j++) { 
+    for ($j=0; $j <count($tab[0]) ; $j++) { 
         // Boucle sur les lignes du fichier
         $intLongeur =0;
         for ($i=0; $i < count($tab); $i++) { 

@@ -2,8 +2,10 @@
 
 require("fonctionsSGBD.php");
 define("PREFIXE","SQL :> ");
+define("REP_SRC","=");
+define("REP_BDD","=");
 
-/*do{
+do{
 
     $login = readline(PREFIXE . "Saisir le login : ");
     if($login=="quit"){
@@ -13,7 +15,7 @@ define("PREFIXE","SQL :> ");
     if($mdp=="quit"){
         exit();
     }
-} while(f_testLoginMdp($login,$mdp)==false);*/
+} while(f_testLoginMdp($login,$mdp)==false);
 
 while(true){
 
