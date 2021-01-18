@@ -22,7 +22,7 @@ else {
          
 while ($paiment<$total) 
      { 
-    $paiment=readline("entrez paiment  ");
+    $paiment=readline("entrez paiment  ");-
      
         $total=$total-$paiment;
         echo " vous devez encore ";echo $total-$paiment;
