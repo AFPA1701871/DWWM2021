@@ -1,30 +1,36 @@
 <?php 
 
-require ("fonctionsSGBD.php");
-define ("SUFFIXE","SQL :> ");
+require("fonctionsSGBD.php");
+define("PREFIXE","SQL :> ");
 
-/*do {
+/*do{
 
-    $login = readline(SUFFIXE . "Saisir le login : ");
-    $mdp = readline(SUFFIXE . "Saisir le mot de passe : ");
+    $login = readline(PREFIXE . "Saisir le login : ");
+    if($login=="quit"){
+        exit();
+    }
+    $mdp = readline(PREFIXE . "Saisir le mot de passe : ");
+    if($mdp=="quit"){
+        exit();
+    }
+} while(f_testLoginMdp($login,$mdp)==false);*/
 
-} while(f_testLoginMdp($login,$mdp)==false && $login!="quit" && $mdp!="quit");
+while(true){
 
-    // Test si quit => on sort !!
-    echo "trouvé"."\n";
-*/
-do {
-    $boolSaisieCorrecte=true;
-    $saisie = readline(SUFFIXE);
-    
+    $saisie = readline(PREFIXE);
+    // Quitte le programme
+    if($saisie =="quit"){
+        exit();
+    }
+
     //Test si termine par ;
     if(substr($saisie,strlen($saisie)-1,1)!=";"){
         echo "Une requete se termine toujours par ;"."\n";
-        $boolSaisieCorrecte=false;
     }else{
 
         switch (f_extraireInstruction($saisie)) {
             case "SELECT ":
+
                 // extrait chaine entre select et FROM
                 $strInstruction = f_extraireInstruction($saisie);
                 // Raccourci la saisie
@@ -34,13 +40,11 @@ do {
                 if(strPos($saisie,"FROM ")===false){
                     // Il n'y a pas de FROM
                     echo "La requete ". $strInstruction ." doit contenir \"FROM \" !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
                 // Test si rien entre SELECT et FROM
                 if(strPos($saisie,"FROM ")=== 0){
-                    echo "La requete ne comporte aucun parametre d'affichage !!"."\n";
-                    $boolSaisieCorrecte=false;
+                    echo "La requete ne comporte aucun parametre d'affichage !!"."\n";  
                     break;
                 }
 
@@ -51,36 +55,95 @@ do {
                 // Decoupe la variable saisie pour obtenir les variables de la requetes
                 f_decoupageRequeteSelect($saisie,$strParametres,$strInstruction2,$strTable);
                 
-                $boolTrie=false;
-                // Test si Order by existe
-                 if(strPos($strTable,"Order by ")!=false){
-                     // si existe tester si ASC ou DESC existe a la fin
-                    if(substr($strTable,-3)!="ASC" && substr($strTable,-4)!="DESC"){
-                        echo "Le Order by doit absoument être couplé avec ASC ou DESC !!"."\n";
-                        $boolSaisieCorrecte=false;
-                        break;
+                $saisie=$strTable;
+
+
+
+                // SELECT FROM WHERE
+
+                $boolWhere=false;
+                // Test si SELECT FROM WHERE existe
+                 if(strPos($saisie," WHERE ")!=false){
+                     
+                     $boolWhere=true;
+                     // récupere la table
+                    $strTable=trim(substr($saisie,0,strPos($saisie," WHERE ")));
+                    $saisie=substr($saisie,strlen($strTable)+strlen(" WHERE "));
+                
+                    $boolTrie=false;
+                    // Test si SELECT FROM WHERE Order by
+                    if(strPos($saisie," Order by ")!=false){
+                        // si existe tester si ASC ou DESC existe a la fin
+                        if(substr($saisie,-3)!="ASC" && substr($saisie,-4)!="DESC"){
+                            echo "Le Order by doit absolument être couplé avec ASC ou DESC !!"."\n";
+                            break;
+                        }
+                        $boolTrie=true;
+
+                        // Recuperer ChampsWhere
+                        $strChampWhere=trim(substr($saisie,0,strPos($saisie," Order by ")));
+                        $tabChampsWhere=explode("=",$strChampWhere);
+
+                        $saisie=substr($saisie,strlen($strTable)+strlen(" Order by "));
+                        // Recuperer le parametreTrie
+                        if(substr($saisie,-4)==" ASC"){
+                            $strParametreTrie=substr($saisie,0,-4);
+                            $strTrie="ASC";
+                        }elseif(substr($saisie,-5)==" DESC"){
+                            $strParametreTrie=substr($saisie,0,-5);
+                            $strTrie="DESC";
+                        }
+                    }else{
+                        // Recuperer ChampsWhere
+                        $strChampWhere=trim(substr($saisie,0));
+                        $tabChampsWhere=explode("=",$strChampWhere);
                     }
 
-                    // ORDER BY
-                    $boolTrie=true;
-                    $strReq=$strTable;
-                    // Recuperer la table
-                    $strTable=trim(substr($strReq,0,strPos($strReq," Order by ")));
-                    $strReq=substr($strReq,strlen($strTable)+strlen(" Order by "));
-                    // Recuperer le parametreTrie
-                    if(substr($strReq,-4)==" ASC"){
-                        $strParametreTrie=substr($strReq,0,-4);
-                        $strTrie="ASC";
-                    }elseif(substr($strReq,-5)==" DESC"){
-                        $strParametreTrie=substr($strReq,0,-5);
-                        $strTrie="DESC";
+                    // Test si ChampsWhere existe
+                    $fp = fopen($strTable . ".dwwm","r");
+                    // stock la premiere ligne
+                    $tabEntete=explode(";",fgets($fp,4096));
+                    
+                    // Test de concordance entre nb concordance et nb parametre
+                    if (count($tabChampsWhere)/2!=f_testConcordance2tab($tabEntete,$tabChampsWhere)){
+                        echo "Le champ de trie WHERE n'existe pas dans la table ".$strTable."\n";
+                        fclose($fp);
+                        break;
                     }
+                    fclose($fp);
+
+                 }else{
+
+                     $boolTrie=false;
+                     // Test si Order by existe
+                     if(strPos($saisie," Order by ")!=false){
+                         // si existe tester si ASC ou DESC existe a la fin
+                         if(substr($saisie,-3)!="ASC" && substr($saisie,-4)!="DESC"){
+                             echo "Le Order by doit absoument être couplé avec ASC ou DESC !!"."\n";
+                             break;
+                            }
+                            
+                            // ORDER BY
+                            $boolTrie=true;
+
+                            // Recuperer la table
+                            $strTable=trim(substr($saisie,0,strPos($saisie," Order by ")));
+                            $saisie=substr($saisie,strlen($strTable)+strlen(" Order by "));
+                            // Recuperer le parametreTrie
+                            if(substr($saisie,-4)==" ASC"){
+                                $strParametreTrie=substr($saisie,0,-4);
+                                $strTrie="ASC";
+                            }elseif(substr($saisie,-5)==" DESC"){
+                                $strParametreTrie=substr($saisie,0,-5);
+                                $strTrie="DESC";
+                            }
+                    }
+                        
                 }
 
                 // test si table existe deja
                 if (file_exists($strTable.".dwwm")== false) {
                     echo "La table ".$strTable." n'éxiste pas !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
 
@@ -97,12 +160,12 @@ do {
                     // Test de concordance entre parametre et parametreTrie
                     if (count($tabParametre)!=f_testConcordance2tab($tabParametre,$tabEntete)){
                         echo "Un ou plusieurs paramètres n'existent pas dans la table ".$strTable."\n";
-                        $boolSaisieCorrecte=false;
                         fclose($fp);
                         break;
                     }
 
                 }
+
 
                 // Test si parametreTrie existe
                 if($boolTrie){
@@ -115,7 +178,6 @@ do {
                     // Test de concordance entre nb concordance et nb parametre
                     if (count($tabParametreTrie)!=f_testConcordance2tab($tabEntete,$tabParametreTrie)){
                         echo "Le parametre de trie n'existe pas dans la table ".$strTable."\n";
-                        $boolSaisieCorrecte=false;
                         fclose($fp);
                         break;
                     }
@@ -123,7 +185,7 @@ do {
 
                 }
 
-                // récupere le fichier et le stocke dans un tableau
+                // récupere la table et le stocke dans un tableau
                 $tabRequete=f_fichierTab($strTable);
 
                 // si order by on le trie en fonction du parametre
@@ -131,9 +193,14 @@ do {
                     $tabRequete=f_trierTable($tabRequete,$strParametreTrie,$strTrie);
                 }
 
-                // Filtre sur les entetes a afficher
-                $tabSelectFrom = f_selectFrom2($strParametres,$tabRequete);
-                
+                if($boolWhere){
+                    // Filtre sur les entetes a afficher
+                    $tabSelectFrom = f_selectFromWhere($strParametres,$tabRequete,explode("=",$strChampWhere));
+                }else{
+                    // Filtre sur les entetes a afficher
+                    $tabSelectFrom = f_selectFrom2($strParametres,$tabRequete);
+                }
+                var_dump($tabSelectFrom);
                 // Afficher le tableau
                 f_MiseEnFormeTableau($tabSelectFrom);
                 break;
@@ -142,7 +209,6 @@ do {
 
                 if(substr($saisie,strlen($saisie)-2)!=");"){
                     echo "Une requete INSERT INTO se termine toujours par );"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
 
@@ -155,12 +221,10 @@ do {
                 if(strPos($saisie,"VALUES(")===false OR strPos($saisie,")")===false){
                     // Il n'y a pas de (
                     echo "La requete ". $strInstruction ." doit contenir \"VALUES(....);\" !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }elseif(strPos($saisie,"VALUES(")=== 0){
                     // aucun parametre entre CREATE TABLE et (
                     echo "La requete ne comporte aucune TABLE pour l'ajout de valeurs !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
                     
@@ -174,7 +238,6 @@ do {
                 // Test saisie correct
                 if(substr($strParametres,0,1)!="'" OR substr($strParametres,-1,1)!="'"){// 1er '
                     echo "Saisie des valeurs incorrectes, il faut séparer les valeurs par des \' !!";
-                    $boolSaisieCorrecte=false;
                     break;            
                 }
 
@@ -183,7 +246,6 @@ do {
                 $strTable=trim($strTable);
                 if (file_exists($strTable.".dwwm")==false) {
                     echo "La table ".$strTable." n'existe pas!";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
 
@@ -199,7 +261,6 @@ do {
                     // Test de concordance entre nb concordance et nb parametre
                     if (count($tabParametre)!=count($tabEntete)){
                         echo "Nombre de valeurs  different du nombre de parametre de la table ".$strTable."\n";
-                        $boolSaisieCorrecte=false;
                         break;
                     }
 
@@ -212,7 +273,6 @@ do {
 
                 if(substr($saisie,strlen($saisie)-2)!=");"){
                     echo "Une requete CREATE TABLE se termine toujours par );"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
                 // extrait chaine entre select et FROM
@@ -224,12 +284,10 @@ do {
                 if(strPos($saisie,"(")===false OR strPos($saisie,")")===false){
                     // Il n'y a pas de (
                     echo "La requete ". $strInstruction ." doit contenir \"( \" !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }elseif(strPos($saisie,"(")=== 0){
                     // aucun parametre entre CREATE TABLE et (
                     echo "La requete ne comporte aucune TABLE a créer !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
                 
@@ -243,7 +301,6 @@ do {
                 
                 if (file_exists($strTable.".dwwm")) {
                     echo "La table ". $strTable." existe déjà!";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
 
@@ -257,121 +314,103 @@ do {
                 $strInstruction = f_extraireInstruction($saisie);
                 // Raccourci la saisie
                 $saisie = substr($saisie,strlen($strInstruction));
-
+            
                 // Test si SET est OK
                 if(strPos($saisie,"SET ")===false){
                     // Il n'y a pas de SET
                     echo "La requete ". $strInstruction ." doit contenir \"SET \" !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
                 // Test si rien entre UPDATE et SET
                 if(strPos($saisie,"SET ")=== 0){
                     echo "La requete ne comporte aucune table !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
                 // Le nom de la table
-                $strTable=substr($saisie,0,strPos($saisie,"SET "));
+                $strTable=substr($saisie,0,strPos($saisie," SET "));
                 $saisie=substr($saisie,strlen($strTable));
 
                 // Les parametres APRES SET 
                 $saisie=substr($saisie,strlen(" SET "),-1);
 
-
-                // Test si WHERE
+                
+                // Requete sans WHERE
                 if(strPos($saisie," WHERE ")=== false){
-                    // Pas de where
-                        //recuperer 'champ=rchamp' =>  autant de fois qu'il y en a
-                        $tabChamps=explode(",",$saisie);
-
+                    //recuperer 'champ=champ' =>  autant de fois qu'il y en a
+                    $tabChamps=explode(",",$saisie);
+                    $boolUpdateWhere=false;
                 }else{
                     // si WHERE
                      if(strPos($saisie," WHERE ")===0){
                          echo "La requete UPDATE ne comporte aucune valeur entre SET et WHERE !!"."\n";
-                        $boolSaisieCorrecte=false;
                         break;
                      } 
                         // recuperer champ=rchamp =>  autant de fois qu'il y en a
-                        $tabChamps=explode(",",substr($saisie,0,strpos($saisie," WHERE ")));// A TESTER
+                        $tabChamps=explode(",",substr($saisie,0,strpos($saisie," WHERE ")));
                         // recuperer apres WHERE
-                        $strChampsWhere = substr($saisie,strpos($saisie," WHERE ")+7); // A TESTER
-                } 
-
-                ///////////////////
-                ///////////////////
-                ///////////////////
-                ///////////////////
-                ///////////////////
-                ///////////////////
-                /////////////////// A TESTER
-
+                        $tabChampsWhere = explode("=",substr($saisie,strpos($saisie," WHERE ")+7));
+                        $boolUpdateWhere=true;
+                }
+                
                 // test si table existe
                 if (file_exists($strTable.".dwwm")== false) {
                     echo "La table ".$strTable." n'éxiste pas !!"."\n";
-                    $boolSaisieCorrecte=false;
                     break;
                 }
 
-                // Test en fonction des parametres
-                if($strParametres!="*"){
-                    // tableau des parametres saisies
-                    $tabParametre=explode(",",trim($strParametres));
-                    // Ouvrir le fichier
-                    $fp = fopen($strTable . ".dwwm","r");
-                    // stock la premiere ligne
-                    $tabEntete=explode(";",fgets($fp,4096));
-                    
-                    
-                    // Test de concordance entre parametre et parametreTrie
-                    if (count($tabParametre)!=f_testConcordance2tab($tabParametre,$tabEntete)){
-                        echo "Un ou plusieurs paramètres n'existent pas dans la table ".$strTable."\n";
-                        $boolSaisieCorrecte=false;
-                        fclose($fp);
-                        break;
-                    }
-
+                // Test les champs de la table
+                foreach($tabChamps as $val){
+                    // Recuperer le champTable (champTable=champ)
+                    $tabChampTable[] = explode("=",$val);
                 }
-
-                // Test si parametreTrie existe
-                if($boolTrie){
-                    // Ouvrir le fichier
-                    $fp = fopen($strTable . ".dwwm","r");
-                    // stock la premiere ligne
-                    $tabEntete=explode(";",fgets($fp,4096));
-                    $tabParametreTrie[0]=$strParametreTrie;
-                    
-                    // Test de concordance entre nb concordance et nb parametre
-                    if (count($tabParametreTrie)!=f_testConcordance2tab($tabEntete,$tabParametreTrie)){
-                        echo "Le parametre de trie n'existe pas dans la table ".$strTable."\n";
-                        $boolSaisieCorrecte=false;
-                        fclose($fp);
-                        break;
-                    }
+                
+                // colonne 0 le champ de la table
+                // colonne 1 le champ a modifier
+                for ($i=0; $i <count($tabChampTable) ; $i++) { 
+                    $tabParametre[]=$tabChampTable[$i][0];
+                }
+            
+                // Ouvrir la table
+                $fp = fopen($strTable . ".dwwm","r");
+                // stock l'entete
+                $tabEntete=explode(";",fgets($fp,4096));
+                
+                // Test de concordance entre les champs saisies et le nombre de concordance
+                if (count($tabParametre)!=f_testConcordance2tab($tabParametre,$tabEntete)){
+                    echo "Un ou plusieurs paramètres n'existent pas dans la table ".$strTable."\n";
                     fclose($fp);
-
+                    break;
                 }
+
+                if($boolUpdateWhere==true){
+                    // Test de concordance entre le champs Where et les entetes tables
+                    if(f_testConcordance2Tab($tabChampsWhere,$tabEntete)!=(count($tabChampsWhere)/2)){
+                        echo "Le champ après le WHERE n'existent pas dans la table ".$strTable."\n";
+                        fclose($fp);
+                        break;
+                    }  
+                }
+                fclose($fp);
 
                 // récupere le fichier et le stocke dans un tableau
                 $tabRequete=f_fichierTab($strTable);
 
-                // si order by on le trie en fonction du parametre
-                if($boolTrie==true){
-                    $tabRequete=f_trierTable($tabRequete,$strParametreTrie,$strTrie);
-                }
+                // Update des valeurs
+                $tabRequete=f_updateSetWhere($tabChampTable,$tabRequete,$strTable,$tabChampsWhere);
 
-                // Filtre sur les entetes a afficher
-                $tabSelectFrom = f_selectFrom2($strParametres,$tabRequete);
                 
-                // Afficher le tableau
-                f_MiseEnFormeTableau($tabSelectFrom);
+                break;
+
+
+
+                
                 break;
             default:
                 echo "Instruction inconnue "."\n";
-                $boolSaisieCorrecte=false;
+                
                 break;
         }
     }
-}while($saisie != "quit" OR $boolSaisieCorrecte==false);
+}
 
 ?> 

@@ -31,7 +31,7 @@ function f_extraireInstruction(string $instruction){
     // Test 7 premiers caracteres 'SELECT '
     }elseif(substr($instruction,0,7)==="SELECT "){
         return "SELECT ";
-    }elseif(substr($instruction,0,8)=="UPDATE "){
+    }elseif(substr($instruction,0,7)=="UPDATE "){
         return "UPDATE ";
     }else{
         return "ERROR";
@@ -102,6 +102,103 @@ function f_createTable(string $nomFichier,string $param){
     echo "La table  ". substr($nomFichier,0,(strlen($nomFichier)-5)). " a bien été créée "."\n";
 }
 
+function f_updateSet(array $tabParam,array &$tab,string $table){
+    
+    // Boucle sur mes parametres (champs d'entree)
+    for ($intParam=0; $intParam <count($tabParam) ; $intParam++) { 
+        $intColonneModifier=-1;
+        // Trouve le n° colonne correspondant a mon champ d'entree
+        for ($j=0; $j < count(array_keys($tab)); $j++) {
+            if($tab[0][$j]==$tabParam[$intParam][0]){
+                $intColonneModifier=$j;
+                break;
+            }
+        }
+        // Boucle sur les lignes du fichier
+        for ($i=0; $i <count($tab) ; $i++) { 
+            
+            // Chaque ligne autre que l'entete => on modifie la $tab[$i][$intColonneModifier] par $tabParam[$intParam][1]
+            if($i>0){
+                $tab[$i][$intColonneModifier]=$tabParam[$intParam][1];
+            }
+        }
+    }
+
+    // Retranscrire le tableau dans le fichier
+    // Ouvre le fichier
+    $fp = fopen($table.".dwwm","w");
+    // Vider le fichier
+    ftruncate($fp,0);
+    $i=0;
+    foreach ($tab as $ligne) {
+        if($i==0){
+            fwrite($fp,implode(";",$ligne));
+        }else{
+            fwrite($fp,"\n".implode(";",$ligne));
+        }
+        $i++;
+    }
+
+    fclose($fp);
+
+    return $tab;
+} 
+
+function f_updateSetWhere(array $tabParam,array &$tab,string $table,array $tabWhere){
+    
+    $intColonneWhere=-1;
+    for ($j=0; $j < count(array_keys($tab)); $j++) {
+        if($tab[0][$j]==$tabWhere[0]){
+            $intColonneWhere=$j;
+            break;
+        }
+    }  
+
+    // Boucle sur mes parametres (champs d'entree)
+    for ($intParam=0; $intParam <count($tabParam) ; $intParam++) { 
+        
+        // Trouve le n° colonne correspondant a mon champ d'entree
+        $intColonneModifier=-1;
+        for ($j=0; $j < count(array_keys($tab)); $j++) {
+            if($tab[0][$j]==$tabParam[$intParam][0]){
+                $intColonneModifier=$j;
+                break;
+            }
+        }
+
+        // Boucle sur les lignes du fichier
+        for ($i=0; $i <count($tab) ; $i++) { 
+            
+            // Chaque ligne autre que l'entete => on modifie la $tab[$i][$intColonneModifier] par $tabParam[$intParam][1]
+            if($i>0){
+                if($tab[$i][$intColonneWhere]==$tabWhere[1]){
+                    $tab[$i][$intColonneModifier]=$tabParam[$intParam][1];
+                }
+            }
+        }
+    }
+    
+
+    // Retranscrire le tableau dans le fichier
+    // Ouvre le fichier
+    $fp = fopen($table.".dwwm","w");
+    // Vider le fichier
+    ftruncate($fp,0);
+    $i=0;
+    foreach ($tab as $ligne) {
+        if($i==0){
+            fwrite($fp,implode(";",$ligne));
+        }else{
+            fwrite($fp,"\n".implode(";",$ligne));
+        }
+        $i++;
+    }
+
+    fclose($fp);
+
+    return $tab;
+}
+
 function f_selectFrom2(string $param,array $tab){
     
     $tabParametre=explode(",",$param);
@@ -131,6 +228,50 @@ function f_selectFrom2(string $param,array $tab){
                     //echo "null";
                 //}
             }
+                
+        }
+    }
+    return $tabSelectFrom;
+} 
+
+function f_selectFromWhere(string $param,array $tab,array $tabWhere){
+    
+    $intColonneWhere=-1;
+    for ($j=0; $j < count(array_keys($tab)); $j++) {
+        if($tab[0][$j]==$tabWhere[0]){
+            $intColonneWhere=$j;
+            break;
+        }
+    }  
+    $tabParametre=explode(",",$param);
+    $intLigneSelectFromWhere=-1;
+    // Boucle sur mes parametres
+    for ($intParam=0; $intParam <count($tabParametre) ; $intParam++) { 
+        // Boucle sur les lignes du fichier
+        for ($i=0; $i <count($tab) ; $i++) {
+
+            if($i==0 OR $tab[$i][$intColonneWhere]==$tabWhere[1]){
+                 $intLigneSelectFromWhere++;
+                // Boucle sur les colonnes du fichier
+                for ($j=0; $j < count(array_keys($tab)); $j++) { 
+
+                    // Enleve les retours lignes
+                    $tab[$i][$j]= str_replace("\n","",$tab[$i][$j]); 
+                    $tab[$i][$j] = str_replace("\r","",$tab[$i][$j]);
+                    if($tab[$i][$j]!=null){
+                        // si parametre * on filtre pas on ajoute tout
+                        if($tabParametre[$intParam]=="*"){
+                                $tabSelectFrom[$intLigneSelectFromWhere][$j]=$tab[$i][$j];
+                            }else{
+                                // ajoute uniquement si la colonne = parametre entre
+                                if($tab[0][$j]==$tabParametre[$intParam]){
+                                    $tabSelectFrom[$intLigneSelectFromWhere][$j]=$tab[$i][$j];
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
                 
         }
     }
@@ -208,15 +349,15 @@ function f_MiseEnFormeTableau(array $tab){
         // Boucle sur les lignes du fichier
         $intLongeur =0;
         for ($i=0; $i < count($tab); $i++) { 
+            
             // Si la len(colonne) > len(colonne+1)
-
             if(strlen($tab[$i][$j])>$intLongeur){
                 $intLongeur= strlen($tab[$i][$j]);
             }
         }
         $tabMEP[$j]=$intLongeur;
     }
-    
+
     // Premiere ligne requete
     echo " ";
     // Boucle sur les colonnes du fichier
