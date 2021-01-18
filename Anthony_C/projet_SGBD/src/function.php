@@ -71,7 +71,23 @@
     function insertInto($value){
         $fileName="..\BDD\\".substr($value,12,(strpos($value,"VALUES")-13)).".DWWM";
         if(file_exists($fileName)){
-            echo substr($value,12,(strpos($value,"VALUES")-13))." exist.\n";
+            $fp = fopen($fileName, "r");
+            $valueTab = explode(",",substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
+            $count=0;
+            while(!feof($fp)){
+                if ($count == 0){
+                    $nbColoneTab=explode(",", fgets($fp,4096));
+                }
+            }
+            fclose($fp);
+            if (count($valueTab) == count($nbColoneTab)){
+                $fp = fopen($fileName,"a");
+                fputs($fp,"\n");
+                fputs($fp,substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
+                fclose($fp);
+            }else{
+                echo "Invalid inputs, you need to enter ".count($nbColoneTab)."inputs after in the '()' séparated by ','.\n";
+            }
         }else{
             echo substr($value,12,(strpos($value,"VALUES")-13))." doesn't exist.\n";
         }
