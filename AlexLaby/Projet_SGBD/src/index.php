@@ -1,11 +1,27 @@
 <?php
 
-require('./service/Librairie_fonc.php');
+    require('./service/Librairie_fonc.php');
+    define("SQL","SQL :>");
 
-initConfig();
+    //Créer le fichier config
+    initConfig();
 
-$inputLogin=readline("Entrez votre identifiant : ");
-$inputPassword=readline("Entrez votre mot de passe : ");
-login($inputLogin,$inputPassword);
+    //Pour se log
+    do {
+        $inputLogin=readline("Entrez votre identifiant : ");
+        if($inputLogin== "quit"){
+            exit;
+        }
+        $inputPassword=readline("Entrez votre mot de passe : ");
+        if($inputPassword== "quit"){
+            exit;
+        }
+    } while (login($inputLogin,$inputPassword)==false);
+
+    //Après s'être logger
+    do{
+        $inputUser=readline(SQL);
+        quit($inputUser);
+    } while (call($function)==0);   
 
 ?>

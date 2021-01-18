@@ -47,11 +47,14 @@ function multiPurge($string,$charAPurgers){
     return $string;
 }
 
+//inverse une chaine de caractère par recurcivité
+//en entré, prend 1 chaine
+//en sortie, renvoit 1 chaine
 function inversionRecurcive($string){
-    if (strlen($string)==1){
+    if (strlen($string)==1){ //condition d'arret
         return $string;
     }else{
-        return inversionRecurcive(substr($string,1,(strlen($string)-1))).substr($string,0,1);
+        return inversionRecurcive(substr($string,1,(strlen($string)-1))).$string[0];
     }
 }
 ?>
