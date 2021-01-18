@@ -13,5 +13,5 @@
     do {
         $value = readline(SQL);
         quitApplication($value);
-    } while (testInputs($value) == 0);
+    } while (testInputs($value) == false);
 ?>
