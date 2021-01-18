@@ -2,20 +2,20 @@
 
 require("fonctionsSGBD.php");
 define("PREFIXE","SQL :> ");
-define("REP_SRC","=");
-define("REP_BDD","=");
+define("REP_BDD","../BDD/");
+define("EXTENSION_BDD",".dwwm");
 
-do{
+/*do{
 
-    $login = readline(PREFIXE . "Saisir le login : ");
+    $login = readline("Saisir le login : ");
     if($login=="quit"){
         exit();
     }
-    $mdp = readline(PREFIXE . "Saisir le mot de passe : ");
+    $mdp = readline("Saisir le mot de passe : ");
     if($mdp=="quit"){
         exit();
     }
-} while(f_testLoginMdp($login,$mdp)==false);
+} while(f_testLoginMdp($login,$mdp)==false);*/
 
 while(true){
 
@@ -39,7 +39,7 @@ while(true){
                 $saisie = substr($saisie,strlen($strInstruction));
 
                 // Test si FROM est OK
-                if(strPos($saisie,"FROM ")===false){
+                if(strPos($saisie,"FROM ")===false && strPos($saisie,"from ")===false){
                     // Il n'y a pas de FROM
                     echo "La requete ". $strInstruction ." doit contenir \"FROM \" !!"."\n";
                     break;
@@ -102,10 +102,10 @@ while(true){
                     }
 
                     // Test si ChampsWhere existe
-                    $fp = fopen($strTable . ".dwwm","r");
+                    $fp = fopen(REP_BDD.$strTable.EXTENSION_BDD,"r");
                     // stock la premiere ligne
                     $tabEntete=explode(";",fgets($fp,4096));
-                    
+
                     // Test de concordance entre nb concordance et nb parametre
                     if (count($tabChampsWhere)/2!=f_testConcordance2tab($tabEntete,$tabChampsWhere)){
                         echo "Le champ de trie WHERE n'existe pas dans la table ".$strTable."\n";
@@ -144,7 +144,7 @@ while(true){
                 }
 
                 // test si table existe deja
-                if (file_exists($strTable.".dwwm")== false) {
+                if (file_exists(REP_BDD.$strTable.EXTENSION_BDD)== false) {
                     echo "La table ".$strTable." n'éxiste pas !!"."\n";
                     break;
                 }
@@ -154,7 +154,7 @@ while(true){
                     // tableau des parametres saisies
                     $tabParametre=explode(",",trim($strParametres));
                     // Ouvrir le fichier
-                    $fp = fopen($strTable . ".dwwm","r");
+                    $fp = fopen(REP_BDD.$strTable.EXTENSION_BDD,"r");
                     // stock la premiere ligne
                     $tabEntete=explode(";",fgets($fp,4096));
                     
@@ -172,7 +172,7 @@ while(true){
                 // Test si parametreTrie existe
                 if($boolTrie){
                     // Ouvrir le fichier
-                    $fp = fopen($strTable . ".dwwm","r");
+                    $fp = fopen(REP_BDD.$strTable.EXTENSION_BDD,"r");
                     // stock la premiere ligne
                     $tabEntete=explode(";",fgets($fp,4096));
                     $tabParametreTrie[0]=$strParametreTrie;
@@ -188,7 +188,7 @@ while(true){
                 }
 
                 // récupere la table et le stocke dans un tableau
-                $tabRequete=f_fichierTab($strTable);
+                $tabRequete=f_fichierTab(REP_BDD.$strTable.EXTENSION_BDD);
 
                 // si order by on le trie en fonction du parametre
                 if($boolTrie==true){
@@ -202,7 +202,6 @@ while(true){
                     // Filtre sur les entetes a afficher
                     $tabSelectFrom = f_selectFrom2($strParametres,$tabRequete);
                 }
-                var_dump($tabSelectFrom);
                 // Afficher le tableau
                 f_MiseEnFormeTableau($tabSelectFrom);
                 break;
@@ -239,21 +238,21 @@ while(true){
 
                 // Test saisie correct
                 if(substr($strParametres,0,1)!="'" OR substr($strParametres,-1,1)!="'"){// 1er '
-                    echo "Saisie des valeurs incorrectes, il faut séparer les valeurs par des \' !!";
+                    echo "Saisie des valeurs incorrectes, il faut séparer les valeurs par des \' !!"."\n";
                     break;            
                 }
 
                 $strParametres=substr($strParametres,1,-1);
 
                 $strTable=trim($strTable);
-                if (file_exists($strTable.".dwwm")==false) {
-                    echo "La table ".$strTable." n'existe pas!";
+                if (file_exists(REP_BDD.$strTable.EXTENSION_BDD)==false) {
+                    echo "La table ".$strTable." n'existe pas!"."\n";
                     break;
                 }
 
                  // Test en fonction des parametres
                     // Ouvrir le fichier
-                    $fp = fopen($strTable . ".dwwm","r");
+                    $fp = fopen(REP_BDD.$strTable.EXTENSION_BDD,"r");
                     // stock la premiere ligne
                     $tabEntete=explode(";",fgets($fp,4096));
                     // tableau des parametres
@@ -268,7 +267,7 @@ while(true){
 
 
                 // Ajoute dans la table
-                f_insertInto(str_replace("','",";",$strParametres),$strTable);
+                f_insertInto(str_replace("','",";",$strParametres),REP_BDD.$strTable.EXTENSION_BDD);
                 break;
 
             case "CREATE TABLE ":
@@ -301,112 +300,162 @@ while(true){
                 $strParametres=substr($saisie,1,strpos($saisie,")")-1);
                 $strParametres=str_replace(",",";",$strParametres);
                 
-                if (file_exists($strTable.".dwwm")) {
-                    echo "La table ". $strTable." existe déjà!";
+                if (file_exists(REP_BDD.$strTable.EXTENSION_BDD)) {
+                    echo "La table ". $strTable." existe déjà!"."\n";
                     break;
                 }
 
-                f_createTable($strTable.".dwwm",$strParametres);
+                f_createTable(REP_BDD.$strTable.EXTENSION_BDD,$strParametres);
                
                 break;
 
-            case "UPDATE ":
+            case "DELETE FROM ":
 
-                // extrait chaine entre UPDATE et SET
+                // extrait chaine entre DELETE FROM
                 $strInstruction = f_extraireInstruction($saisie);
                 // Raccourci la saisie
                 $saisie = substr($saisie,strlen($strInstruction));
-            
-                // Test si SET est OK
-                if(strPos($saisie,"SET ")===false){
-                    // Il n'y a pas de SET
-                    echo "La requete ". $strInstruction ." doit contenir \"SET \" !!"."\n";
-                    break;
-                }
-                // Test si rien entre UPDATE et SET
-                if(strPos($saisie,"SET ")=== 0){
-                    echo "La requete ne comporte aucune table !!"."\n";
-                    break;
-                }
-                // Le nom de la table
-                $strTable=substr($saisie,0,strPos($saisie," SET "));
-                $saisie=substr($saisie,strlen($strTable));
-
-                // Les parametres APRES SET 
-                $saisie=substr($saisie,strlen(" SET "),-1);
-
                 
-                // Requete sans WHERE
-                if(strPos($saisie," WHERE ")=== false){
-                    //recuperer 'champ=champ' =>  autant de fois qu'il y en a
-                    $tabChamps=explode(",",$saisie);
-                    $boolUpdateWhere=false;
+                // Test si pas de WHERE
+                if(strPos($saisie," WHERE ")===false){
+                    // Il n'y a pas de WHERE
+                    $boolWhere=false;
+
+                    // Le nom de la table
+                    $strTable=substr($saisie,0,-1);
+
                 }else{
-                    // si WHERE
-                     if(strPos($saisie," WHERE ")===0){
-                         echo "La requete UPDATE ne comporte aucune valeur entre SET et WHERE !!"."\n";
-                        break;
-                     } 
-                        // recuperer champ=rchamp =>  autant de fois qu'il y en a
-                        $tabChamps=explode(",",substr($saisie,0,strpos($saisie," WHERE ")));
-                        // recuperer apres WHERE
-                        $tabChampsWhere = explode("=",substr($saisie,strpos($saisie," WHERE ")+7));
-                        $boolUpdateWhere=true;
+
+                    if(strPos($saisie," WHERE ")===0){
+                        echo "La requete DELETE ne comporte aucune table !!"."\n";
+                       break;
+                    } 
+                    $boolWhere=true;
+
+                    // Le nom de la table
+                    $strTable=substr($saisie,0,strPos($saisie," WHERE "));
+                    $saisie=substr($saisie,strlen($strTable)+strlen(" WHERE "));
+
+                    // Condition WHERE
+                    $strCondition=substr($saisie,0,-1);
                 }
+
                 
                 // test si table existe
-                if (file_exists($strTable.".dwwm")== false) {
+                if (file_exists(REP_BDD.$strTable.EXTENSION_BDD)== false){
                     echo "La table ".$strTable." n'éxiste pas !!"."\n";
                     break;
                 }
 
-                // Test les champs de la table
-                foreach($tabChamps as $val){
-                    // Recuperer le champTable (champTable=champ)
-                    $tabChampTable[] = explode("=",$val);
-                }
-                
-                // colonne 0 le champ de la table
-                // colonne 1 le champ a modifier
-                for ($i=0; $i <count($tabChampTable) ; $i++) { 
-                    $tabParametre[]=$tabChampTable[$i][0];
-                }
-            
-                // Ouvrir la table
-                $fp = fopen($strTable . ".dwwm","r");
-                // stock l'entete
-                $tabEntete=explode(";",fgets($fp,4096));
-                
-                // Test de concordance entre les champs saisies et le nombre de concordance
-                if (count($tabParametre)!=f_testConcordance2tab($tabParametre,$tabEntete)){
-                    echo "Un ou plusieurs paramètres n'existent pas dans la table ".$strTable."\n";
-                    fclose($fp);
-                    break;
-                }
-
-                if($boolUpdateWhere==true){
+                if($boolWhere){
+                    // Teste la condition WHERE
+                    $tabCondition[] = explode("=",$strCondition);
+                    // colonne 0 le champ de la table
+                    // colonne 1 le champ a modifier
+                    for ($i=0; $i <count($tabCondition[0]) ; $i++){ 
+                        $tabParametre[$i]=$tabCondition[0][$i];
+                    }
+               
+                    // Ouvrir la table
+                    $fp = fopen(REP_BDD.$strTable.EXTENSION_BDD,"r");
+                    // stock l'entete
+                    $tabEntete=explode(";",fgets($fp,4096));
+                   
                     // Test de concordance entre le champs Where et les entetes tables
-                    if(f_testConcordance2Tab($tabChampsWhere,$tabEntete)!=(count($tabChampsWhere)/2)){
-                        echo "Le champ après le WHERE n'existent pas dans la table ".$strTable."\n";
+                    if (count($tabParametre)/2!=f_testConcordance2tab($tabEntete,$tabParametre)){
+                        echo "Le champ de la table ".$strTable ." après le WHERE n'existent pas."."\n";
                         fclose($fp);
                         break;
                     }  
+                    fclose($fp);
                 }
-                fclose($fp);
 
-                // récupere le fichier et le stocke dans un tableau
-                $tabRequete=f_fichierTab($strTable);
+                if($boolWhere){
+                    // récupere le fichier et le stocke dans un tableau
+                    $tabRequete=f_fichierTab(REP_BDD.$strTable.EXTENSION_BDD);
 
-                // Update des valeurs
-                $tabRequete=f_updateSetWhere($tabChampTable,$tabRequete,$strTable,$tabChampsWhere);
+                    $intLigneRequete=count($tabRequete);
 
+                    // Supprime uniquement les lignes concernées
+                    $tabRequete=f_deleteFrom(REP_BDD.$strTable.EXTENSION_BDD ,$tabRequete,$tabCondition);
+                    if (count($tabRequete)!=$intLigneRequete){
+                        echo "Aucune ligne n'a été supprimée."."\n";
+                    }else{
+                        echo $intLigneRequete-count($tabRequete)." ligne(s) supprimée(s)."."\n";
+                    }
+                    
+
+                    //f_MiseEnFormeTableau($tabRequete);
+                }else{
+                    // Supprime la table
+                    $tabRequete=[];
+                    $tabCondition=[];
+                    $tabRequete=f_deleteFrom(REP_BDD.$strTable.EXTENSION_BDD,$tabRequete,$tabCondition);
+                }
                 
                 break;
 
+            case "DROP TABLE ":
 
+                 // extrait chaine entre DELETE FROM
+                 $strInstruction = f_extraireInstruction($saisie);
+                 // Raccourci la saisie
+                 $saisie = substr($saisie,strlen($strInstruction));
 
+                if(substr($saisie,strlen($saisie)-1)!=";"){
+                    echo "Une requete DROP TABLE se termine toujours par ;"."\n";
+                    break;
+                }
+                                
+                // Le nom de la table
+                $strTable=substr($saisie,strlen("DROP TABLE "),-1);
+                echo $strTable;
+                if (file_exists(REP_BDD.$strTable.EXTENSION_BDD)) {
+                    echo "La table ". $strTable." existe déjà!"."\n";
+                    break;
+                }
+
+                f_dropTable(REP_BDD.$strTable.EXTENSION_BDD);
                 
                 break;
+                case "CREATE TABLE ":
+
+                    if(substr($saisie,strlen($saisie)-2)!=");"){
+                        echo "Une requete CREATE TABLE se termine toujours par );"."\n";
+                        break;
+                    }
+                    // extrait chaine entre select et FROM
+                    $strInstruction = f_extraireInstruction($saisie);
+                    // Raccourci la saisie
+                    $saisie = substr($saisie,strlen($strInstruction));
+        
+                    // Test si CREATE TABLE contient ( ou )
+                    if(strPos($saisie,"(")===false OR strPos($saisie,")")===false){
+                        // Il n'y a pas de (
+                        echo "La requete ". $strInstruction ." doit contenir \"( \" !!"."\n";
+                        break;
+                    }elseif(strPos($saisie,"(")=== 0){
+                        // aucun parametre entre CREATE TABLE et (
+                        echo "La requete ne comporte aucune TABLE a créer !!"."\n";
+                        break;
+                    }
+                    
+                    // Le nom de la table
+                    $strTable=substr($saisie,0,strPos($saisie,"("));
+                    $saisie=substr($saisie,strlen($strTable));
+    
+                    // Les parametres
+                    $strParametres=substr($saisie,1,strpos($saisie,")")-1);
+                    $strParametres=str_replace(",",";",$strParametres);
+                    
+                    if (file_exists(REP_BDD.$strTable.EXTENSION_BDD)) {
+                        echo "La table ". $strTable." existe déjà!"."\n";
+                        break;
+                    }
+    
+                    f_createTable(REP_BDD.$strTable.EXTENSION_BDD,$strParametres);
+                    
+                    break;        
             default:
                 echo "Instruction inconnue "."\n";
                 
