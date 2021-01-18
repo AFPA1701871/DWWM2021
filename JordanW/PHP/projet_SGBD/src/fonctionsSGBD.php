@@ -3,7 +3,7 @@
 function f_testLoginMdp(string $log,string $mdp){
     
     //Ouvrir le fichier config.ini
-    $fp = fopen("config.ini", "r");
+    $fp = fopen(REP_BDD."config.ini", "r");
     
     $tabLigne=[];
     $bool=false;
@@ -21,7 +21,7 @@ function f_testLoginMdp(string $log,string $mdp){
 }
 
 function f_extraireInstruction(string $instruction){
-    
+    $instruction=strtoupper($instruction);
     // Test 12 premiers caracteres 'CREATE TABLE '
     if(substr($instruction,0,13)==="CREATE TABLE "){
         return "CREATE TABLE ";
@@ -33,6 +33,10 @@ function f_extraireInstruction(string $instruction){
         return "SELECT ";
     }elseif(substr($instruction,0,7)=="UPDATE "){
         return "UPDATE ";
+    }elseif(substr($instruction,0,12)=="DELETE FROM "){
+        return "DELETE FROM ";
+    }elseif(substr($instruction,0,11)=="DROP TABLE "){
+        return "DROP TABLE ";
     }else{
         return "ERROR";
     }
@@ -75,7 +79,9 @@ function f_testConcordance2Tab(array $tab1,array $tab2){
     $i=0;
     foreach($tab1 as $par){
         foreach($tab2 as $entete){
-            if(trim($par)==trim($entete)){
+            $par=preg_replace("#\n|\t|\r#","",$par);
+            $entete=preg_replace("#\n|\t|\r#","",$entete);
+            if($par==$entete){
                 $i++;
             }
         }
@@ -85,21 +91,20 @@ function f_testConcordance2Tab(array $tab1,array $tab2){
 
 function f_insertInto(string $param,string $table){
      // Ouvre un fichier pour lire un contenu existant
-    $contenu= file_get_contents($table.".dwwm");
+    $contenu= file_get_contents($table);
     // Ajoute la ligne d'entete
     $contenu .= "\n".$param;
     // Écrit le résultat dans le fichier
-    file_put_contents($table.".dwwm", $contenu);
+    file_put_contents($table, $contenu);
 
-    echo "Les valeurs ont été enregistrées dans la table ".$table."\n";
+    echo "Les valeurs ont été enregistrées dans la table ".pathinfo($table, PATHINFO_FILENAME)."\n";
 }
 
 function f_createTable(string $nomFichier,string $param){
 
     // Ouvre et insere l'entete
     file_put_contents($nomFichier, $param);
-    
-    echo "La table  ". substr($nomFichier,0,(strlen($nomFichier)-5)). " a bien été créée "."\n";
+    echo "La table  ". pathinfo($nomFichier, PATHINFO_FILENAME). " a bien été créée "."\n";
 }
 
 function f_updateSet(array $tabParam,array &$tab,string $table){
@@ -108,7 +113,7 @@ function f_updateSet(array $tabParam,array &$tab,string $table){
     for ($intParam=0; $intParam <count($tabParam) ; $intParam++) { 
         $intColonneModifier=-1;
         // Trouve le n° colonne correspondant a mon champ d'entree
-        for ($j=0; $j < count(array_keys($tab)); $j++) {
+        for ($j=0; $j < count($tab[0]); $j++) {
             if($tab[0][$j]==$tabParam[$intParam][0]){
                 $intColonneModifier=$j;
                 break;
@@ -126,7 +131,7 @@ function f_updateSet(array $tabParam,array &$tab,string $table){
 
     // Retranscrire le tableau dans le fichier
     // Ouvre le fichier
-    $fp = fopen($table.".dwwm","w");
+    $fp = fopen($table,"w");
     // Vider le fichier
     ftruncate($fp,0);
     $i=0;
@@ -147,7 +152,7 @@ function f_updateSet(array $tabParam,array &$tab,string $table){
 function f_updateSetWhere(array $tabParam,array &$tab,string $table,array $tabWhere){
     
     $intColonneWhere=-1;
-    for ($j=0; $j < count(array_keys($tab)); $j++) {
+    for ($j=0; $j < count($tab[0]); $j++) {
         if($tab[0][$j]==$tabWhere[0]){
             $intColonneWhere=$j;
             break;
@@ -159,7 +164,7 @@ function f_updateSetWhere(array $tabParam,array &$tab,string $table,array $tabWh
         
         // Trouve le n° colonne correspondant a mon champ d'entree
         $intColonneModifier=-1;
-        for ($j=0; $j < count(array_keys($tab)); $j++) {
+        for ($j=0; $j < count($tab[0]); $j++) {
             if($tab[0][$j]==$tabParam[$intParam][0]){
                 $intColonneModifier=$j;
                 break;
@@ -181,7 +186,7 @@ function f_updateSetWhere(array $tabParam,array &$tab,string $table,array $tabWh
 
     // Retranscrire le tableau dans le fichier
     // Ouvre le fichier
-    $fp = fopen($table.".dwwm","w");
+    $fp = fopen($table,"w");
     // Vider le fichier
     ftruncate($fp,0);
     $i=0;
@@ -199,6 +204,71 @@ function f_updateSetWhere(array $tabParam,array &$tab,string $table,array $tabWh
     return $tab;
 }
 
+function f_deleteFrom(string $table,array &$tab,array $tabcondition){
+    if(empty($tab)){
+                    
+        // Boucle sur les lignes du fichier
+        for ($i=0; $i <count($tab) ; $i++) { 
+            
+            // Chaque ligne autre que l'entete => on supprime
+            if($i>0){
+                unset($tab[$i]);
+                $tab=array_values($tab);
+            }
+        }
+
+        echo "La table ".pathinfo($table, PATHINFO_FILENAME)." a été vidée."."\n";
+    }else{
+        
+        // Recherche n° colonne de la condition dans entete
+        $intColonneWhere=-1;
+        for ($j=0; $j < count($tab[0]); $j++) {
+            if($tab[0][$j]==$tabcondition[0][$j]){
+                $intColonneWhere=$j;
+                break;
+            }
+        }  
+
+        // Boucle sur les lignes du fichier
+        for ($i=0; $i <count($tab) ; $i++) { 
+            
+            // Chaque ligne autre que l'entete => on recherche la condition
+            if($i>0){
+                if($tab[$i][$intColonneWhere]==$tabcondition[0][1]){
+                    unset($tab[$i]);
+                    $tab=array_values($tab);
+                }
+            }
+        }
+        
+        
+
+        // Retranscrire le tableau dans le fichier
+        // Ouvre le fichier
+        $fp = fopen($table,"w");
+        // Vider le fichier
+        ftruncate($fp,0);
+        $i=0;
+        foreach ($tab as $ligne) {
+            if($i==0){
+                fwrite($fp,implode(";",$ligne));
+            }else{
+                fwrite($fp,"\n".implode(";",$ligne));
+            }
+            $i++;
+        }
+
+        fclose($fp);
+    }
+    return $tab;
+
+}
+
+function f_dropTable(string $table){
+    unlink($table);
+    echo "La table ".pathinfo($table, PATHINFO_FILENAME)." a été supprimée."."\n";
+}
+
 function f_selectFrom2(string $param,array $tab){
     
     $tabParametre=explode(",",$param);
@@ -208,7 +278,8 @@ function f_selectFrom2(string $param,array $tab){
         // Boucle sur les lignes du fichier
         for ($i=0; $i <count($tab) ; $i++) { 
             // Boucle sur les colonnes du fichier
-            for ($j=0; $j < count(array_keys($tab)); $j++) { 
+            //for ($j=0; $j < count(array_keys($tab)); $j++) { 
+            for ($j=0; $j < count($tab[0]); $j++) { 
 
                 // Enleve les retours lignes
                 $tab[$i][$j]= str_replace("\n","",$tab[$i][$j]); 
@@ -237,7 +308,7 @@ function f_selectFrom2(string $param,array $tab){
 function f_selectFromWhere(string $param,array $tab,array $tabWhere){
     
     $intColonneWhere=-1;
-    for ($j=0; $j < count(array_keys($tab)); $j++) {
+    for ($j=0; $j < count($tab[0]); $j++) {
         if($tab[0][$j]==$tabWhere[0]){
             $intColonneWhere=$j;
             break;
@@ -253,7 +324,7 @@ function f_selectFromWhere(string $param,array $tab,array $tabWhere){
             if($i==0 OR $tab[$i][$intColonneWhere]==$tabWhere[1]){
                  $intLigneSelectFromWhere++;
                 // Boucle sur les colonnes du fichier
-                for ($j=0; $j < count(array_keys($tab)); $j++) { 
+                for ($j=0; $j < count($tab[0]); $j++) { 
 
                     // Enleve les retours lignes
                     $tab[$i][$j]= str_replace("\n","",$tab[$i][$j]); 
@@ -280,7 +351,7 @@ function f_selectFromWhere(string $param,array $tab,array $tabWhere){
 
 function f_fichierTab(string $table){
     // apres avoir bouclé, reaffecter proprement dans un tableau
-    $fp=fopen($table.".dwwm","r");
+    $fp=fopen($table,"r");
     
     $i=0;
     // Boucle sur le fichier
@@ -293,7 +364,7 @@ function f_fichierTab(string $table){
         // Boucle sur les lignes du fichier
         for ($i=0; $i <count($tab) ; $i++) { 
             // Boucle sur les colonnes du fichier
-            for ($j=0; $j < count(array_keys($tab)); $j++) { 
+            for ($j=0; $j < count($tab[0]); $j++) { 
                 
                 // Enleve les retours lignes
                 $tab[$i][$j]= str_replace("\n","",$tab[$i][$j]); 
@@ -312,7 +383,7 @@ function f_trierTable(array &$tab,string $paramTrie,string $typeTrie){
     $tabEntete=[];
     $intColonneTrier=null;
     // Boucle sur les colonnes du fichier
-    for ($j=0; $j < count(array_keys($tab)); $j++) {
+    for ($j=0; $j < count($tab[0]); $j++) {
         if ($tab[0][$j]!=null){
             $tabEntete[0][$j]=$tab[0][$j];
         }
