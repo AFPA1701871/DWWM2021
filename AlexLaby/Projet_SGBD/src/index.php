@@ -22,6 +22,9 @@
     do{
         $inputUser=readline(SQL);
         quit($inputUser);
-    } while (call($function)==0);   
+    } while (call($inputUser)==false); 
+    
+    //Créer une table
+    createTable();
 
 ?>
