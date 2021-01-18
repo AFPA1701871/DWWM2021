@@ -41,6 +41,8 @@
             $listeChamps=substr($listeChamps,1); // supprimer la "(" au début de $listeChamps
             $posParanthese2=strrpos($listeChamps,")"); // donne la position de la dernière parenthese
             $listeChamps=substr($listeChamps,0,$posParanthese2); // supprimer la ")" à la fin de $listeChamps
+            $listeChamps.=";"; // ajoute un ";" a la fin de la ligne de la table
+            $listeChamps=str_replace("'", "", $listeChamps); // supprimer les "'" dans $listeChamps
 
             $fp=fopen("./BDD/$nomTable.dwwm", "w"); // crée une table nommée $nomTable dans la base de données
             fputs($fp, "$listeChamps\n"); //insère la liste des champs dans la table précédemment créée
@@ -55,6 +57,8 @@
             $valeursAEntrer=substr($valeursAEntrer,1); // supprimer la "(" au début de $valeursAEntrer
             $posParanthese2=strrpos($valeursAEntrer,")"); // donne la position de la dernière parenthese
             $valeursAEntrer=substr($valeursAEntrer,0,$posParanthese2); // supprimer la ")" à la fin de $valeursAEntrer
+            $valeursAEntrer.=";"; // ajoute un ";" a la fin de la ligne de la table
+            $valeursAEntrer=str_replace("'", "", $valeursAEntrer); // supprimer les "'" dans $listeChamps// supprimer les "'" dans $valeursAEntrer
 
             $fp=fopen("./BDD/$nomTable.dwwm", "a"); // ouvre la table nommée $nomTable dans la base de données
             fputs($fp, "$valeursAEntrer\n"); //insère les valeurs dans la table précédemment créée

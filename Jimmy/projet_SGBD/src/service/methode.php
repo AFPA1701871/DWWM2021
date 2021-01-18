@@ -1,31 +1,84 @@
 <?php
    function help($repUser){
-        echo "1.create table (création de table)                      2.insert into table (insertion de données dans une table)"."\n"."3.select * from (Affichage de données)                  3.quit (Pour quitter)"."\n";
+        echo "1.create table nomTable(titreColonne1, titreColonne2,titreColonne3,tite); (création de table) \n
+2.insert into table (insertion de données dans une table)\n
+3.SELECT * FROM nomTable; \n
+4.quit (Pour quitter)\n";
     }return;
-/******************************************************************************************************************* */
+/*****************************************CREATE_TABLE********************************************************** */
    function create_table($repUser){
-        $nomTable = readline("Ecrire le nom de la table souhaitez : ");
-        $nbColonne= readline('Combien de colonne voulez vous crée : ');
+    $nomfile= $repUser[2].".dwwm";
+    $boolean = file_exists("../BDD/".$nomfile);
+    if($boolean == false){
+        $f = fopen("../BDD/".$nomfile,"x+");
+            for($i=3;$i<count($repUser);$i++){
+                fputs($f,$repUser[$i]);
+                if($i<>count($repUser)-1){
+                fputs($f,";");
+                }
+            }
+        fclose($f);
+    }else{
+        echo"Erreur : Se fichier existe deja \n";
+    }
+    
+    }return;
+/****************************************INSERT_INTO************************************************************ */
+   function insert ($repUser){
+    $nomfile = $repUser[2].".dwwm";
+    $boolean = file_exists("../BDD/".$nomfile);
+    $f = fopen("../BDD/".$nomfile,"r") ;
+    $ligne = explode(";",fgets($f,4096));
+    $f = fopen("../BDD/".$nomfile,"a") ;
 
-        for ($i=1; $i < $nbColonne+1; $i++) { 
-            $titreColonne = readline("Ecrire le titre de la colonne ".$i."\n");
-            $Colonne[$i]= $titreColonne;
-           
+    if((count($repUser)-4)==count($ligne)){
+            if($boolean){
+                fputs($f,"\r\n");
+                for ($i=4; $i<count($repUser) ; $i++) { 
+                    fputs($f,$repUser[$i]);
+                    if($i!=count($repUser)-1){
+                        fputs($f,";");
+                    } 
+                } 
+                fclose($f); 
+            }else{
+                echo "Se fichier n'existe pas \n";
+            }
+    }else{
+        echo "Nombre de colonne incorrect\n\r";
+    }
+
+}
+/****************************************SELECT_FROM************************************************************ */
+function select($repUser){
+    $nomfile = $repUser[3].".dwwm";
+    if(!file_exists("../BDD/".$nomfile)){
+        echo "Se fichier n'existe pas\n";
+    }else{
+        $f = fopen("../BDD/".$nomfile,"r") ;
+        while(!feof($f)){
+            $ligne = explode(";",fgets($f,4096));
+            for ($i = 0; $i < count($ligne);$i++){
+                $ligne= str_replace("\n","",$ligne);
+                $ligne = str_replace("\r","",$ligne);
+                $ligne = str_replace("\t","",$ligne);
+                echo $ligne[$i]." ";
+            }
+            echo "\n";
         }
-        $confirmationUser=readline("Confirmez vous que vous avez bien ecris la commande : CREATE TABLE ".$nomTable."(".$Colonne[1].",".$Colonne[2].",".$Colonne[3].");  (O/N)");
-       
-
-        if($confirmationUser=="O"){
-            $nomfile= $nomTable.".dwwwm";
-            $f = fopen($nomfile,"x+");
-            fputs($f,$Colonne[1].";".$Colonne[2].";".$Colonne[3]);
-            fclose($f);
+    }
+}
+/***************************************VERIFICATION*********************************************************** */  
+    function verifLenght($repUser){
+        $boolean = true;
+        for ($i=0; $i < count($repUser) ; $i++) {
+            if(strlen($repUser[$i])>25){
+                $boolean = false;
+                echo "Erreurs nombre de caracteres superieur a 25 ! \n";
+                break;
+            }
             
         }
-    }return;
-/***************************************************************************************************************** */
-   function insert ($repUser){
-    
-   
-   }return;
+        return $boolean;
+    }
 ?>
