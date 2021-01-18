@@ -31,20 +31,35 @@
 
         echo "help pour plus d'information"."\n"."quit pour quitter"."\n";
     
-        while($repUser != "quit"){
+        do{
             $repUser = readline("SQL :>"); //Affichage console des requete sql
-            if ($repUser == "help"){ //Ouverture menu help
+            $repUser = strtolower($repUser);
+            $repUser = str_replace("(","",$repUser);
+            $repUser = str_replace(")","",$repUser);
+            $repUser = str_replace(";","",$repUser);
+            $repUser = str_replace(",","",$repUser);
+            $repUser =  explode(" ",$repUser);
+
+            if ($repUser[0] == "help"){ //Ouverture menu help
             help($repUser);  
 
-            }elseif($repUser =="create table"){ //Creation de la table + creation fichier
-                create_table($repUser);
+            }elseif($repUser[0] =="create" && $repUser[1]== "table"){ //Creation de la table + creation fichier
+                if(verifLenght($repUser)){
+                    
+                    create_table($repUser);
+                }
 
-
-            }elseif($repUser == "insert into"){
+            }elseif($repUser[0] == "insert" && $repUser[1] =="into"){
                 insert($repUser);
+
+            }elseif($repUser[0] == "select" && $repUser[1] =="*" && $repUser[2]=="from"){
+                select($repUser);
+                
+            }elseif ($repUser[0] != "quit") {
+                echo "Commande incorrect !\n ";
             }
         
-        }
+        }while($repUser[0]!= "quit");
                
             
 
