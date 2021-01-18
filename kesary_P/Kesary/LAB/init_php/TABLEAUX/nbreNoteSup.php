@@ -15,11 +15,12 @@ $nbreSup = 0;
 //Une boucle pour entrer les valeurs dans le tableau | Vérification si le notes ne sont pas négatifs
 //Calcul de la somme des valeurs du tableau pour déterminer la moyenne
 for ($i=0; $i < $tailleTab; $i++) { 
-    $tab[$i] = readline("Entrez une note dans le tableau :  \n");
-    $somme = $somme + $tab[$i];
-    while ($tab[$i] < 0) {
-        $tab[$i] = readline("Recommencez : \n");
-        $somme = $somme + $tab[$i];
+    do{
+        $tab[$i] = readline("Entrez une note dans le tableau :  \n");    
+    }
+    
+   while (($tab[$i] < 0) || ($tab[$i] > 20)) ;{
+        $somme = $somme + $tab[$i];   
     }
 }
 echo "Voici le tableau des notes : \n";
@@ -46,8 +47,6 @@ for ($i=0; $i < $tailleTab; $i++) {
 }
 echo "\n";
 echo "Il y a  " . $nbreSup . " note(s) au dessus de la moyenne \n";
-
-
 ?>
 
 
