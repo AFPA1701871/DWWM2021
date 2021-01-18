@@ -1,0 +1,45 @@
+DÉBUT
+    monTableau=[]
+    notes=0
+    nbrNotes=0
+    requete"Écrivez le nombre d'élèves : ",nbr
+    tantque nbr<=0 ou nbr//1<>nbr faire
+    requete"Faux ! Écrivez un nombre eniter et positif : ",nbr
+    fintantque
+    pour i=1 jusqu'à nbr faire
+        requete "Écrivez une note : ",monTableau[i]
+        notes= notes+monTableau[i]
+    finpour    
+        moyenne=notes/nbr
+    pour i=1 jusqu'à nbr faire
+        si monTableau[i]>moyenne alors
+        nbrNotes=nbrNotes+1
+        finsi
+    finpour
+    ecrire "Les notes de la classe sont : ",monTableau 
+    ecrire "La moyenne de la classe est : ",moyenne
+    ecrire "Le nombre des notes supérieur à la moyenne est : ",nbrNotes 
+FIN
+
+
+\\ Tableau - Big Position
+
+DÉBUT
+    monTableau=[]
+    big=0
+    requete"Écrivez un nombre : ",nbr
+    tantque nbr<=0 ou nbr//1<>nbr faire
+    requete"Faux ! Écrivez un nombre eniter et positif : ",nbr
+    fintantque
+    pour i=1 jusqu'à nbr faire
+        requete "Écrivez une valeur : ",monTableau[i]
+        si monTableau[i]>big alors
+        big=monTableau[i]         
+        laposition=i
+        finsi
+    finpour
+
+    ecrire monTableau 
+    ecrire "La plus grande valeur était : ",big
+    ecrire "Il a été saisi en position numéro ",laposition
+FIN

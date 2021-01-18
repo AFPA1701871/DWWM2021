@@ -31,23 +31,65 @@
     function testInputs($value){
         $valueTab = explode(" ",$value);
         switch ($value){
+            case "":
+                echo "Error invalid inputs.\n";
+                break;
             case $valueTab[0] == "CREATE" and $valueTab[1] == "TABLE" and substr($value,-1,1) == ";":
-                $execute = 1;
+                createTable($value);
                 break;
             case $valueTab[0] == "INSERT" and $valueTab[1] == "INTO" and substr($valueTab[3],0,6) == "VALUES" and substr($value,-1,1) == ";":
-                $execute = 2;
+                insertInto($value);
                 break;
             case $valueTab[0] == "SELECT" and $valueTab[2] == "FROM" and substr($value,-1,1) == ";":
-                    if($valueTab[1] == "*"){
-                        $execute = 3;
-                    }else{
-                        $execute = 4;
-                    }
+                if($valueTab[1] == "*"){
+                    selectAllFrom();
+                }else{
+                    selectValueFrom();
+                }
                 break;
             default:
-                $execute = 0;
-                echo "Error invalid inputs please try again. Don't forget the ';' at the end.\n";    
-                return $execute;
+                echo "Error invalid inputs please try again. Don't forget the ';' at the end.\n";
+        } 
+        $stop = false;
+        return $stop;
+    }
+
+    //function create.
+    function createTable($value){
+        $newFileName="..\BDD\\".substr($value,13,(strpos($value,"(")-13)).".DWWM";
+        if(file_exists($newFileName)){
+            echo substr($value,13,(strpos($value,"(")-13))." already exist.\n";
+        }else{
+            $fp = fopen($newFileName,"w");
+            fputs($fp, substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
+            fclose($fp);
+            echo substr($value,13,(strpos($value,"(")-13))." is created.\n";
+        }
+    }
+
+    //function Insert into.
+    function insertInto($value){
+        $fileName="..\BDD\\".substr($value,12,(strpos($value,"VALUES")-13)).".DWWM";
+        if(file_exists($fileName)){
+            $fp = fopen($fileName, "r");
+            $valueTab = explode(",",substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
+            $count=0;
+            while(!feof($fp)){
+                if ($count == 0){
+                    $nbColoneTab=explode(",", fgets($fp,4096));
+                }
+            }
+            fclose($fp);
+            if (count($valueTab) == count($nbColoneTab)){
+                $fp = fopen($fileName,"a");
+                fputs($fp,"\n");
+                fputs($fp,substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
+                fclose($fp);
+            }else{
+                echo "Invalid inputs, you need to enter ".count($nbColoneTab)."inputs after in the '()' séparated by ','.\n";
+            }
+        }else{
+            echo substr($value,12,(strpos($value,"VALUES")-13))." doesn't exist.\n";
         }
     }
 ?>
