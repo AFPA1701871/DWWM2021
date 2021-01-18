@@ -1,6 +1,10 @@
 <?php
     $age=readline("saisir l'age de l'enfant: ");
-    if($age>6){
+
+    while($age!=is_numeric($age)){
+        $age=readline("saisir une valeur valide: ");
+    }
+    if($age>=6){
     
     switch ($age) {
         case 6:

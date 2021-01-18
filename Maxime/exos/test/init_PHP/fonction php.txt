@@ -1,0 +1,2 @@
+- strlen : compte la taille d'une chaine
+- substr : retourne une chaine

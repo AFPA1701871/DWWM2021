@@ -5,4 +5,4 @@
     for($i=1;$i<=$nombre;$i++){
         $resultat=$resultat*$i;             
     }
-    echo"$resultat";
+    echo$resultat.' '."est la factorielle de".' '.$nombre;
