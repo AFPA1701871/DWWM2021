@@ -79,7 +79,7 @@
     }
     //Fonction pour créer un fichier
     function createTable($inputUser){
-        $nomFichier="..\BDD\\".substr($inputUser,13,(strpos($inputUser,"(")-13)).".dwmm";
+        $nomFichier="../BDD/".substr($inputUser,13,(strpos($inputUser,"(")-13)).".dwwm";
         if(file_exists($nomFichier)){
             echo "Ce fichier existe déjà .\n";
         }else{
@@ -101,6 +101,29 @@
         }
     }
     //Fonction pour insérer des données
-    
+    function insertInto($inputUser){
+        $nomFichier="../BDD/".substr($inputUser,12,(strpos(strtoupper($inputUser),"VALUES")-13)).".dwwm";
+        if(file_exists($nomFichier)){
+            $fp = fopen($nomFichier, "r");
+            $valueTab = explode(",",substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+            $count=0;
+            while(!feof($fp)){
+                if ($count == 0){
+                    $nbColoneTab=explode(",", fgets($fp,4096));
+                }
+            }
+            fclose($fp);
+            if (count($valueTab) == count($nbColoneTab)){
+                $fp = fopen($nomFichier,"a");
+                fputs($fp,"\n");
+                fputs($fp,substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+                fclose($fp);
+            }else{
+                echo "Erreur de syntaxe, vous devez entrer ".count($nbColoneTab)." valeurs dans les '()' séparé par des ','.\n";
+            }
+        }else{
+            echo "Ce fichier n'existe pas.\n";
+        }
+    }
 
 ?>
