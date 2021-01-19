@@ -28,8 +28,12 @@ function verifSaisie($saisie){
     switch ($saisie){
         case ($tabSaisie[0]=="CREATE" and $tabSaisie[1]=="TABLE"):
             echo "CREATE TABLE ok";
+            break;
+        case ($tabSaisie[0]=="INSERT" and $tabSaisie[1]=="INTO"):
+            echo "INSERT INTO ok";
+            break;
+        case ($tabSaisie[0]=="SELECT" and $tabSaisie[2]=="FROM")
             
-
 
     }
 
