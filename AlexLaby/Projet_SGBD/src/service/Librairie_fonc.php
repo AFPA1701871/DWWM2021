@@ -36,37 +36,57 @@
             exit;
         }
     }
-    //Fonction pour créer la table (le fichier)
-    function createTable($inputUser){
-        $boolean=true;
-        // Va permettre de savoir si le fichier existe, si il existe on demande à l'user un autre nom et mon boolean est faux.
-        if (file_exists("../BDD/".$inputUser[2].".dwwm")){ 
-            echo "Le fichier existe déjà, trouvez un autre nom.\n"; 
-            $boolean=false;
+    //Fonction pour accèder aux différentes fonctions SQL en gérant les erreurs de syntaxe de l'utilisateur
+    function call($inputUser){
+        //Converti mon string en tableau pour effectuer des vérifs de caractères
+        $tabCall = explode(" ",$inputUser);
+        //Permet d'accepter plusieurs syntaxes pour les commandes (ex: Create TABLE ou create table)
+        $tabCall[0]=strtoupper($tabCall[0]);
+        if (strtoupper($tabCall[1]) == "TABLE" or strtoupper($tabCall[1]) == "INTO"){
+            $tabCall[1]=strtoupper($tabCall[1]);
         }
-        // Va permettre de voir si les colonnes sont trop longues ou non, si elles le sont on demande à l'user de les faires moins longues et mon boolean est faux.
-        for ($i=3;$i<count($inputUser);$i++){
-            if (strlen($inputUser[$i])>25){
-                echo "Nom de colonne trop long. Créez votre fichier avec des colonnes moins longues\n";
-                $boolean=false;
-            }
+        if (strtoupper($tabCall[2]) == "FROM"){
+            $tabCall[2]=strtoupper($tabCall[2]);
         }
-        print_r($inputUser);
-        // Si l'user à respecté tous les blocages, le boolean reste vrai, on l'autorise à créer un fichier
-        if($boolean==true){
-            $fichier = fopen("../BDD/".$inputUser[2].".dwwm","w");  
-            for ($i=3;$i<count($inputUser);$i++){
-                fputs($fichier,$inputUser[$i]);
-                if ($i!=count($inputUser)-1){
-                        fputs($fichier,";");
-                }      
-            }
-            fclose($fichier);
-        }   
+        if (strtoupper(substr($tabCall[3],0,(strpos($tabCall[3],"(")))) == "VALUES"){
+            $tabCall[3]=strtoupper(substr($tabCall[3],0,(strpos($tabCall[3],"(")))).substr($tabCall[3],strpos($tabCall[3],"("),(strpos($tabCall[3],";")-strlen($tabCall[3])));
+        }
+        print_r($tabCall);
+        //Switch pour gerer les différents "menus"
+        switch ($inputUser){
+            case $tabCall[0]== "" :
+                break;
+            case $tabCall[0] == "CREATE" and $tabCall[1] == "TABLE" and substr($inputUser,-1,1) == ";":
+                createTable($inputUser);
+                break;
+            case $tabCall[0] == "INSERT" and $tabCall[1] == "INTO" and substr($tabCall[3],0,6) == "VALUES" and substr($inputUser,-1,1) == ";":
+                insertInto($inputUser);
+                break;
+            case $tabCall[0] == "SELECT" and $tabCall[1] == "*" and  $tabCall[2]== "FROM" and substr($inputUser,-1,1) == ";":
+                selectEtoileFrom($inputUser);
+                break;
+            case $tabCall[0]== "select" and $tabCall[1]== "from" :
+                selectFrom($inputUser);
+                break;
+            default:
+                echo "Erreur de syntaxe.\n"; 
+        } 
+        $stop = false;
+        return $stop;
     }
-    //Fonction pour insérer une nouvelle ligne dans le fichier
-    function insertInto($inputUser){
-
+    //Fonction pour créer un fichier
+    function createTable($inputUser){
+        $nomFichier="..\BDD\\".substr($inputUser,13,(strpos($inputUser,"(")-13)).".dwmm";
+        if(file_exists($nomFichier)){
+            echo substr($inputUser,13,(strpos($inputUser,"(")-13))." existe déjà. Trouvez un autre nom\n";
+        }else{
+            //if ($bool = true){
+            $fp = fopen($nomFichier,"w");
+            fputs($fp, substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+            fclose($fp);
+            echo substr($inputUser,13,(strpos($inputUser,"(")-13))." vient d'être créé.\n";
+            //}
+        }
     }
 
 ?>
