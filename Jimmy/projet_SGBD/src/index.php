@@ -34,12 +34,13 @@
         do{
             $repUser = readline("SQL :>"); //Affichage console des requete sql
             $repUser = strtolower($repUser);
-            $repUser = str_replace("(","",$repUser);
+            $repUser = str_replace("("," ",$repUser);
             $repUser = str_replace(")","",$repUser);
             $repUser = str_replace(";","",$repUser);
-            $repUser = str_replace(",","",$repUser);
+            $repUser = str_replace(", "," ",$repUser);
+            $repUser = str_replace(","," ",$repUser);
             $repUser =  explode(" ",$repUser);
-
+            
             if ($repUser[0] == "help"){ //Ouverture menu help
             help($repUser);  
 
@@ -54,6 +55,9 @@
 
             }elseif($repUser[0] == "select" && $repUser[1] =="*" && $repUser[2]=="from"){
                 select($repUser);
+            
+            }elseif($repUser[0] == "select" && $repUser[2] =="from"){
+                selectColonne($repUser);
                 
             }elseif ($repUser[0] != "quit") {
                 echo "Commande incorrect !\n ";
