@@ -1,5 +1,57 @@
 <?php
 
+<<<<<<< HEAD
+function login($string){
+    $fp = fopen("../BDD/config.ini","r");
+        $auth = false;
+        while(!feof($fp)){
+            //pour prendre ligne apres ligne
+            $ligne = fgets($fp,50);        
+            //pour couper la ligne en donnée unitaire dans un tableau
+            $tabLine = explode(";",$ligne);   
+            //concatener les données pour recreer une identification d'un user
+            $ligne = $tabLine[0].";".$tabLine[1]; 
+            if($string == $ligne){
+                $auth = true;
+            }   
+            // echo $user." ".$ligne." ".$auth;   
+            // var_dump($user);
+            // var_dump($ligne);      
+        }
+        if(!$auth){
+            echo "Identification incorrecte.\n";
+        }       
+        fclose($fp);
+        return $auth;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // analyse de la saisie et recupération des variables de traitement
 
 function analyse($commande){
@@ -35,16 +87,31 @@ function analyse($commande){
         $nomFichier = $tabCommande[3];
     } else{
         $erreurSyntaxe = true;
+=======
+function authentification($string){
+    $auth = false;
+    $fp = fopen("../BDD/config.ini","r");
+    while(!feof($fp)){
+        //pour prendre ligne apres ligne
+        $ligne = fgets($fp,50);        
+        //pour couper la ligne en donnée unitaire dans un tableau
+        // $tabLine = explode(";",$ligne);   
+        //concatener les données pour recreer une identification d'un user
+        // $ligne = $tabLine[0].";".$tabLine[1]; 
+
+        if($string == $ligne){
+            $auth = true;
+            break;
+        }   
+        // echo $string." ".$ligne." ".$auth;   
+        // var_dump($string);
+        // var_dump($ligne);    
+        // $var = readline('quest');  
+>>>>>>> bba43cd120d18552ac90c373cf5ae7e488682370
     }
-
-    // if ($enteteFichier!=""){
-    //     $donneesTraitement = [$instruction, $nomFichier, $enteteFichier];
-    // }else {
-    //     $donneesTraitement = [$instruction, $nomFichier] ;
-    // }
-
-
-
+    fclose($fp);
+   
+    return $auth;
 
 }
 
