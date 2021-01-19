@@ -1,4 +1,6 @@
 <?php
+    require('./src/services/fonctionAffichageTable.php');
+
     // création du login et du password par défaut
     $fp = fopen("./BDD/config.ini", "w");
     fputs($fp, "login;password\n");
@@ -31,7 +33,7 @@
     // requetes
     do {
         $requeteSQL=readline("SQL :> ");
-
+        // cas où la requête est une création de table
         if (substr($requeteSQL,0,13)=="CREATE TABLE ") {
             $donneesTable=substr($requeteSQL,13); // donne la valeur de la requete moins "CREATE TABLE "
             $posParanthese=strpos($donneesTable,"("); // donne la position de la première parenthese
@@ -48,6 +50,7 @@
             fputs($fp, "$listeChamps\n"); //insère la liste des champs dans la table précédemment créée
             fclose($fp); // clos la requête
         }
+        // cas où la requête est une insertion en fin de table
         elseif (substr($requeteSQL,0,12)=="INSERT INTO ") {
             $contenuRequete=substr($requeteSQL,12); // donne la valeur de la requete moins "INSERT INTO "
             $posValues=strpos($contenuRequete," VALUES"); // donne la position du mot " VALUES"
@@ -64,9 +67,19 @@
             fputs($fp, "$valeursAEntrer\n"); //insère les valeurs dans la table précédemment créée
             fclose($fp); // clos la requête
         }
+        // cas où la requête est un affichage de toutes les données de la table
+        elseif (substr($requeteSQL,0,14)=="SELECT * FROM ") {
+            affichageTableFull("personne");
+        }
+        // cas où la requête est un affichage d'un champ des données de la table
+        elseif (substr($requeteSQL,0,7)=="SELECT ") {
+            affichageTableUnChamp("personne","Email");
+        }
+        // cas où la requête est une sortie du programme
         elseif ($requeteSQL=="quit") {
             echo "au revoir";
         }
+        // cas où la requête est incorrecte
         else {
             echo "requête incorrecte\n";
         }
