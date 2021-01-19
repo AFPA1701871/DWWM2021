@@ -29,29 +29,29 @@
 
     //function test all the inputs of the user.
     function testInputs($value){
-        $valueTab = explode(" ",$value);
-        switch ($value){
-            case "":
-                echo "Error invalid inputs.\n";
-                break;
-            case $valueTab[0] == "CREATE" and $valueTab[1] == "TABLE" and substr($value,-1,1) == ";":
-                createTable($value);
-                break;
-            case $valueTab[0] == "INSERT" and $valueTab[1] == "INTO" and substr($valueTab[3],0,6) == "VALUES" and substr($value,-1,1) == ";":
-                insertInto($value);
-                break;
-            case $valueTab[0] == "SELECT" and $valueTab[2] == "FROM" and substr($value,-1,1) == ";":
-                if($valueTab[1] == "*"){
-                    selectAllFrom();
-                }else{
-                    selectValueFrom();
-                }
-                break;
-            default:
-                echo "Error invalid inputs please try again. Don't forget the ';' at the end.\n";
-        } 
-        $stop = false;
-        return $stop;
+            $valueTab = explode(" ",$value);
+            switch ($value){
+                case "":
+                    echo "Error invalid inputs.\n";
+                    break;
+                case strtoupper($valueTab[0]) == "CREATE" and strtoupper($valueTab[1]) == "TABLE" and substr($value,-1,1) == ";" and strpos($valueTab[2],"(") >= 1 and strpos($valueTab[2],")") >=1:
+                    createTable($value);
+                    break;
+                case strtoupper($valueTab[0]) == "INSERT" and strtoupper($valueTab[1]) == "INTO" and strtoupper(substr($valueTab[3],0,6)) == "VALUES" and substr($value,-1,1) == ";" and strpos($valueTab[2],"(") >= 1 and strpos($valueTab[2],")") >=1:
+                    insertInto($value);
+                    break;
+                case strtoupper($valueTab[0]) == "SELECT" and strtoupper($valueTab[2]) == "FROM" and substr($value,-1,1) == ";" and strpos($valueTab[2],"(") < 1 and strpos($valueTab[2],")") < 1:
+                    if($valueTab[1] == "*"){
+                        selectAllFrom();
+                    }else{
+                        selectValueFrom();
+                    }
+                    break;
+                default:
+                    echo "Error invalid inputs please try again. Don't forget the ';' at the end.\n";
+            }    
+            $stop = false;
+            return $stop;
     }
 
     //function create.
@@ -60,10 +60,21 @@
         if(file_exists($newFileName)){
             echo substr($value,13,(strpos($value,"(")-13))." already exist.\n";
         }else{
+            $testCharTab=explode(",",substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
+            $bool = true;
+            foreach ($testCharTab as $test){
+                if (strlen($test) >= 25){
+                    $bool = false;
+                }
+            }
+            if ($bool == true){
             $fp = fopen($newFileName,"w");
             fputs($fp, substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
             fclose($fp);
             echo substr($value,13,(strpos($value,"(")-13))." is created.\n";
+            }else{
+                echo "Too many characters in a column.\n";
+            }
         }
     }
 

@@ -10,12 +10,6 @@
         fputs($fp,$varIDrep);
         fclose($fp);
     }
-    //Fonction pour quitter la console 
-    function quit($inputUser){
-        if($inputUser=="quit"){
-            exit;
-        }
-    }
     //Fonction pour se logger et accéder à la suite
     function login(string $inputLogin, string $inputPassword){
         $fp = fopen("../BDD/config.ini", "r");
@@ -36,54 +30,52 @@
             }
         return $boolean;
     }
-    //Fonction permettant d'appeler les autres fonctions SQL 
+    //Fonction pour quitter la console 
+    function quit($inputUser){
+        if($inputUser=="quit"){
+            exit;
+        }
+    }
+    //Fonction pour accèder aux différentes fonctions SQL en gérant les erreurs de syntaxe de l'utilisateur
     function call($inputUser){
-        $tab =  explode(" ",$inputUser);
+        //Converti mon string en tableau pour effectuer des vérifs de caractères
+        $tabCall = explode(" ",$inputUser);
+        //Switch pour gerer les différents "menus" et gérer la casse
         switch ($inputUser){
             case "" :
-                echo "Erreur de syntaxe";
                 break;
-            case $tab[0]== "create" and $tab[1]== "table" and substr($inputUser,-1,1) == ";":
-                    createTable($inputUser);
-                    break;
-            case $tab[0]== "insert" and $tab[1]== "into" and substr($tab[3],0,6)== "values" and substr($inputUser,-1,1) == ";":
+            case strtoupper($tabCall[0]) == "CREATE" and strtoupper($tabCall[1]) == "TABLE" and substr($inputUser,-1,1) == ";":
+                createTable($inputUser);
+                break;
+            case strtoupper($tabCall[0]) == "INSERT" and strtoupper($tabCall[1]) == "INTO" and strtoupper(substr($tabCall[3],0,6)) == "VALUES" and substr($inputUser,-1,1) == ";":
                 insertInto($inputUser);
                 break;
-            case $tab[0]== "select" and $tab[1]== "*" and $tab[2]=="from" and substr($inputUser,-1,1) == ";":
+            case strtoupper($tabCall[0]) == "SELECT" and $tabCall[1] == "*" and  strtoupper($tabCall[2])== "FROM" and substr($inputUser,-1,1) == ";":
                 selectEtoileFrom($inputUser);
                 break;
-            case $tab[0]== "select" and $tab[1]== "from" and substr($inputUser,-1,1) == ";":
+            case strtoupper($tabCall[0])== "SELECT" and strtoupper($tabCall[2])== "FROM" :
                 selectFrom($inputUser);
                 break;
             default:
-                $boolean=false;
-                echo "Erreur de syntaxe";
-            return $boolean;
+                echo "Erreur de syntaxe.\n"; 
+        } 
+        $stop = false;
+        return $stop;
+    }
+    //Fonction pour créer un fichier
+    function createTable($inputUser){
+        $nomFichier="..\BDD\\".substr($inputUser,13,(strpos($inputUser,"(")-13)).".dwmm";
+        if(file_exists($nomFichier)){
+            echo "Ce fichier existe déjà .\n";
+        }else{
+            //if ($bool = true){
+            $fp = fopen($nomFichier,"w");
+            fputs($fp, substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+            fclose($fp);
+            echo substr($inputUser,13,(strpos($inputUser,"(")-13))." vient d'être créé.\n";
+            //}
         }
     }
-    //Fonction pour créer la table (le fichier)
-    function createTable($inputUser){
-        $filename="../BDD//".substr($inputUser,13,(strpos($inputUser,"(")-13)).".DWWM";
-        if(file_exists($filename)){
-            echo "Le fichier existe déjà, trouvez un autre nom. \n";
-        }else{
-            if(longueurCarac($inputUser)==true){
-            $fp = fopen($filename, "w");
-            fputs($fp, substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
-            }
-            fclose($fp);
-        }
-        }
-    //Fonction qui permet de vérifier si une colonne dépasse 25 caractères
-    function longueurCarac($inputUser){
-        $boolean = true;
-            if(strlen($inputUser)>25){
-                $boolean = false;
-                echo "Création impossible, nombre de caractères supérieurs à 25. \n";
-            } 
-            return $boolean;  
-        }
-        
 
 
 ?>
