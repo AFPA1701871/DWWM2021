@@ -16,3 +16,10 @@ POUR k jusqu'à count k
 Si c'est fini
 
 + / - * strlen($motPlusLong[0]) + 2 (pour les deux côtés)
+
+indice from 2 ou +
+
+DEMAIN MATIN
+correction ligne 227
+véfication de la saisie ( parenthèses, virgules... )
+comme ça plus simple pour mettre plusieurs valeurs au SELECT champs1, champs2 FROM tableau
