@@ -68,6 +68,25 @@ function select($repUser){
         }
     }
 }
+
+function selectColonne($repUser){
+    $nomfile = $repUser[1].".dwwm";
+    if(!file_exists("../BDD/".$nomfile)){
+        echo "Se fichier n'existe pas\n";
+    }else{
+        $f = fopen("../BDD/".$nomfile,"r") ;
+        $j = 0;
+        while(!feof($f)){
+            $ligne = explode(";",fgets($f,4096));
+            for ($i = 0; $i < count($ligne);$i++){
+                $tableau[$j][$i] = $ligne[$i];
+               
+            }
+            $j++;
+            
+        }
+    }   
+}
 /***************************************VERIFICATION*********************************************************** */  
     function verifLenght($repUser){
         $boolean = true;
@@ -81,4 +100,5 @@ function select($repUser){
         }
         return $boolean;
     }
+
 ?>
