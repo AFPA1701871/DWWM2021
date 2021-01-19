@@ -18,13 +18,11 @@
         }
     } while (login($inputLogin,$inputPassword)==false);
 
-    //Après s'être logger
+    //Après s'être logger pour avoir accès aux différentes fonctions SQL
     do{
         $inputUser=readline(SQL);
         quit($inputUser);
-    } while (call($inputUser)==false); 
-    
-    //Créer une table
-    createTable();
+    }while (call($inputUser)==false); 
+
 
 ?>

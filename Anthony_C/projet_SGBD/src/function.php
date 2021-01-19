@@ -30,6 +30,17 @@
     //function test all the inputs of the user.
     function testInputs($value){
         $valueTab = explode(" ",$value);
+        $valueTab[0]=strtoupper($valueTab[0]);
+        if (strtoupper($valueTab[1]) == "TABLE" or strtoupper($valueTab[1]) == "INTO"){
+            $valueTab[1]=strtoupper($valueTab[1]);
+        }
+        if (strtoupper($valueTab[2]) == "FROM"){
+            $valueTab[2]=strtoupper($valueTab[2]);
+        }
+        if (strtoupper(substr($valueTab[3],0,(strpos($valueTab[3],"(")))) == "VALUES"){
+            $valueTab[3]=strtoupper(substr($valueTab[3],0,(strpos($valueTab[3],"(")))).substr($valueTab[3],strpos($valueTab[3],"("),(strpos($valueTab[3],";")-strlen($valueTab[3])));
+        }
+        print_r($valueTab);
         switch ($value){
             case "":
                 echo "Error invalid inputs.\n";
@@ -60,10 +71,13 @@
         if(file_exists($newFileName)){
             echo substr($value,13,(strpos($value,"(")-13))." already exist.\n";
         }else{
+
+            //if ($bool = true){
             $fp = fopen($newFileName,"w");
             fputs($fp, substr($value,strpos($value,"(")+1,(strpos($value,")")-strlen($value))));
             fclose($fp);
             echo substr($value,13,(strpos($value,"(")-13))." is created.\n";
+            //}
         }
     }
 
