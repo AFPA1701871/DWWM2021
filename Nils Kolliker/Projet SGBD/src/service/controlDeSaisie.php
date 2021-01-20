@@ -78,7 +78,7 @@ function ligneDeCommandeValide($string){
 //retourne un booleen
 function moinsDe25($tabString){
     foreach ($tabString as $string){
-        if (strlen($string)>25){
+        if (iconv_strlen($string)>25){
             echo "erreur : overflow, longueur maximal des valeurs des tables = 25\n";
             return false;
         }
@@ -91,7 +91,7 @@ function moinsDe25($tabString){
 //retourne un booleen 
 function nonNul($tabString){
     foreach ($tabString as $string){
-        if (strlen($string)==0){
+        if (iconv_strlen($string)==0){
             echo "erreur : une valeur de la table est vide\n";
             return false;
         }
@@ -179,4 +179,39 @@ function cEstDansLEntete($tableauDim1,$tableauDim2){
     return true;
 }
 
+//cerche le premier caractère d'un string qui n'est pas présent dans un autre string (whitelist)
+//prend en entré 2 string
+//retourne un char (ou false si il a pas trouvé)
+function intrue($string,$whitelist){
+    for ($i=0;$i<iconv_strlen($string);$i++){
+        if (strpos($whitelist,$string[$i])===false){
+            return $string[$i];
+        }
+    }
+    return false;
+}
+
+//vérifie que les caractère d'un string sont corecte pour des noms de fichier ou de champ
+//prend en entré 1 string
+//retourne un booleen
+function whiteListUltime($string){
+    $char=(intrue($string,";-_azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890"));
+    if ($char!==false){
+        echo "erreur: vous ne pouvez pas utiliser '$char' pour un nom de fichier ou d'entete\n";
+        return false;
+    }
+    return true;
+}
+
+//vérifie que les caractère d'un string sont corecte pour des valeurs
+//prend en entré 1 string
+//retourne un booleen
+function whiteList($string){
+    $char=(intrue($string,"@ éàèùâêîôû.;-_azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890"));
+    if ($char!==false){
+        echo "erreur: vous ne pouvez pas utiliser '$char' pour vos valeurs\n";
+        return false;
+    }
+    return true;
+}
 ?>

@@ -22,7 +22,7 @@ function jolieLigne($tableau){
     echo "+";
     for ($j=0;$j<count($tableau[0]);$j++){
         echo "-";
-        for ($i=0;$i<strlen($tableau[0][$j]);$i++){
+        for ($i=0;$i<iconv_strlen($tableau[0][$j]);$i++){
             echo"-";
         }
         echo "-+";

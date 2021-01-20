@@ -22,7 +22,7 @@ function couperSelonLeCaractère($string,$char){
 //prend en entré le string total et les 2 bornes (sous forme de string egalement)
 //retourne un string
 function entreLesDeux($string,$borne1,$borne2){
-    $indiceborne1=strpos(strtoupper($string),$borne1)+strlen($borne1);
+    $indiceborne1=strpos(strtoupper($string),$borne1)+iconv_strlen($borne1);
     $indiceborne2=strpos(strtoupper($string),$borne2);
     return substr($string,$indiceborne1,$indiceborne2-$indiceborne1);
 }
@@ -39,12 +39,12 @@ function convertisseurUserBdd($string){
 //retourne un tableau de dim 2
 function egaliseurDeTaille($tableau){
     for ($j=0;$j<count($tableau[0]);$j++){
-        $theBig=strlen($tableau[0][$j]);
+        $theBig=iconv_strlen($tableau[0][$j]);
         for ($i=1;$i<count($tableau);$i++){
-            ($theBig<strlen($tableau[$i][$j]))?$theBig=strlen($tableau[$i][$j]):null;
+            ($theBig<iconv_strlen($tableau[$i][$j]))?$theBig=iconv_strlen($tableau[$i][$j]):null;
         }
         for ($i=0;$i<count($tableau);$i++){
-            while(strlen($tableau[$i][$j])<$theBig){
+            while(iconv_strlen($tableau[$i][$j])<$theBig){
                 $tableau[$i][$j]=$tableau[$i][$j]." ";
             }
         }

@@ -29,7 +29,7 @@ while(strtolower($entrerUtilisateur)!=QUIT){                    //le corps
             $nomDuFichier=entreLesDeux($entrerUtilisateur,"CREATE TABLE ","(");
             $tableUtilisateur=completeChemin($nomDuFichier.EXTENSION);
             $valsUtilisateur=convertisseurUserBdd(entreLesDeux($entrerUtilisateur,"(",")"));
-            if(!tableVide($nomDuFichier)&&fichierDoitExister($tableUtilisateur,false)&&moinsDe25(couperSelonLeCaractère($valsUtilisateur,";"))&&nonNul(couperSelonLeCaractère($valsUtilisateur,";"))&&sansDoublon($valsUtilisateur)){
+            if(!tableVide($nomDuFichier)&&whiteListUltime($nomDuFichier)&&fichierDoitExister($tableUtilisateur,false)&&moinsDe25(couperSelonLeCaractère($valsUtilisateur,";"))&&nonNul(couperSelonLeCaractère($valsUtilisateur,";"))&&whiteListUltime($valsUtilisateur)&&sansDoublon($valsUtilisateur)){
                 $fp=fopen($tableUtilisateur,"w");
                 fputs($fp,$valsUtilisateur);
                 fclose($fp);
@@ -40,7 +40,7 @@ while(strtolower($entrerUtilisateur)!=QUIT){                    //le corps
             $tableUtilisateur=completeChemin($nomDuFichier.EXTENSION);
             if (presenceDesChevrons(entreLesDeux($entrerUtilisateur," VALUES(",")"))){
                 $valsUtilisateur=convertisseurUserBdd(str_replace("'","",entreLesDeux($entrerUtilisateur," VALUES(",")")));
-                if(fichierDoitExister($tableUtilisateur,true)&&moinsDe25(couperSelonLeCaractère($valsUtilisateur,";"))&&nonNul(couperSelonLeCaractère($valsUtilisateur,";"))){
+                if(fichierDoitExister($tableUtilisateur,true)&&moinsDe25(couperSelonLeCaractère($valsUtilisateur,";"))&&nonNul(couperSelonLeCaractère($valsUtilisateur,";"))&&whiteList($valsUtilisateur)){
                     $fp = fopen($tableUtilisateur, "r");
                     $champ = fgets($fp,4096); 
                     fclose($fp);
@@ -88,10 +88,6 @@ while(strtolower($entrerUtilisateur)!=QUIT){                    //le corps
                     }
                     $sousTableTab=egaliseurDeTaille($sousTableTab);
                     joliTableau($sousTableTab);
-
-
-
-
                     unset($sousTableTab);
                 }
                 unset($tableTab);
