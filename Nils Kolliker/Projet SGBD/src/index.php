@@ -4,12 +4,10 @@ define("QUIT","quit");
 define("EXTENSION",".dwwm");
 require('../src/service/controlDeSaisie.php');
 require('../src/service/modifieursDeChaine.php');
-
+require('../src/service/affichage.php');
 do{                                                                       //authentification
     $userAccount[0]=readline("nom utilisateur :");
     $userAccount[1]=readline("mot de passe :");
-    $userAccount[0]=jAimePasLesEspaces($userAccount[0]);
-    $userAccount[1]=jAimePasLesEspaces($userAccount[1]);
     $isLoged=esCeDansLaTable($userAccount,completeChemin("config.ini"));
     if($isLoged){
         echo "vous etes connecté.\n";
@@ -17,33 +15,128 @@ do{                                                                       //auth
     }else{
         echo "erreur: mot de passe incorrecte\nvoulez vous quitter ? si oui, entrez '".QUIT."'\n";
         $entrerUtilisateur=readline(INDICATEUR_CONSOLE);
-        $entrerUtilisateur=jAimePasLesEspaces($entrerUtilisateur);
     }
-}while($isLoged==false&&$entrerUtilisateur!=QUIT);   //si "quit", on passe l'identification mais on rentre pas dans le corps
+}while($isLoged==false&&strtolower($entrerUtilisateur)!=QUIT);   //si "quit", on passe l'identification mais on rentre pas dans le corps
 
-while($entrerUtilisateur!=QUIT){                    //le corps
+while(strtolower($entrerUtilisateur)!=QUIT){                    //le corps
     $entrerUtilisateur=readline(INDICATEUR_CONSOLE);
-    $entrerUtilisateur=jAimePasLesEspaces($entrerUtilisateur);
     $typeDeCommande=ligneDeCommandeValide($entrerUtilisateur);
-    if ($typeDeCommande=="createTable"){          /* switch                   *************************************************** CREATE TABLE ****************************************************** */
-        $tableUtilisateur=completeChemin(entreLesDeux($entrerUtilisateur,"CREATETABLE","(").EXTENSION);
-        $valsUtilisateur=convertisseurUserBdd(entreLesDeux($entrerUtilisateur,"(",")"));
-        if(entreLesDeux($entrerUtilisateur,"CREATETABLE","(")==""){   /*exterioriser tout ça */
-            echo "erreur : le nom de la table est vide\n";
-        }else if (file_exists($tableUtilisateur)){
-            echo "erreur : table déjà existante\n";
-        }else if (!moinsDe25(couperSelonLeCaractère($valsUtilisateur,";"))){
-            echo "erreur : overflow, longueur maximal des cases des tables = 25\n";
-        }else if(!nonNul(couperSelonLeCaractère($valsUtilisateur,";"))){
-            echo "erreur : entete vide\n";
-        }else if (couperSelonLeCaractère($valsUtilisateur,";")!=array_unique(couperSelonLeCaractère($valsUtilisateur,";"))){
-            echo "erreur : doublon dans les entetes\n";
-        }else{
-            $fp=fopen($tableUtilisateur,"w");
-            fputs($fp,$valsUtilisateur);
-            fclose($fp);
-        }
-    }//rajouter du }else if{ ici pour rajouter de la ligne de commande
+    switch ($typeDeCommande){
+        case "help" :             /*************************************************** HELP*************************************************************** */
+            echo "CREATE TABLE nomTable(titreColonne1,titreColonne2,titreColonne3);\nINSERT INTO nomTable VALUES('valeur1','valeur2');\nSELECT * FROM nomTable;\nSELECT nom_du_champ FROM nomTable;\nSELECT * FROM nomTable ORDER BY nom_du_champ ASC;\nSELECT * FROM nomTable ORDER BY nom_du_champ DESC;\nquit\n";
+        break;
+        case "createTable" :      /*************************************************** CREATE TABLE ****************************************************** */
+            $nomDuFichier=entreLesDeux($entrerUtilisateur,"CREATE TABLE ","(");
+            $tableUtilisateur=completeChemin($nomDuFichier.EXTENSION);
+            $valsUtilisateur=convertisseurUserBdd(entreLesDeux($entrerUtilisateur,"(",")"));
+            if(!tableVide($nomDuFichier)&&whiteListUltime($nomDuFichier)&&fichierDoitExister($tableUtilisateur,false)&&moinsDe25(couperSelonLeCaractère($valsUtilisateur,";"))&&nonNul(couperSelonLeCaractère($valsUtilisateur,";"))&&whiteListUltime($valsUtilisateur)&&sansDoublon($valsUtilisateur)){
+                $fp=fopen($tableUtilisateur,"w");
+                fputs($fp,$valsUtilisateur);
+                fclose($fp);
+            }
+        break;
+        case "insertInto" :       /*************************************************** INSERT INTO ******************************************************* */
+            $nomDuFichier=entreLesDeux($entrerUtilisateur,"INSERT INTO "," VALUES(");
+            $tableUtilisateur=completeChemin($nomDuFichier.EXTENSION);
+            if (presenceDesChevrons(entreLesDeux($entrerUtilisateur," VALUES(",")"))){
+                $valsUtilisateur=convertisseurUserBdd(str_replace("'","",entreLesDeux($entrerUtilisateur," VALUES(",")")));
+                if(fichierDoitExister($tableUtilisateur,true)&&moinsDe25(couperSelonLeCaractère($valsUtilisateur,";"))&&nonNul(couperSelonLeCaractère($valsUtilisateur,";"))&&whiteList($valsUtilisateur)){
+                    $fp = fopen($tableUtilisateur, "r");
+                    $champ = fgets($fp,4096); 
+                    fclose($fp);
+                    if (memeNombreDePointVirgule($champ,$valsUtilisateur)){
+                        $fp=fopen($tableUtilisateur,"a");
+                        fputs($fp,"\r\n".$valsUtilisateur);
+                        fclose($fp);
+                    }
+                }
+            }
+        break;
+        case "selectFrom" :       /************************************************** SELECTFROM ********************************************************* */
+            $nomDuFichier=entreLesDeux($entrerUtilisateur,"SELECT * FROM ",";");
+            $tableUtilisateur=completeChemin($nomDuFichier.EXTENSION);
+            if (fichierDoitExister($tableUtilisateur,true)){
+                $fp = fopen($tableUtilisateur, "r");
+                for($i=0;!feof($fp);$i++){
+                    $ligne=fgets($fp,4096);
+                        $tableTab[$i]=couperSelonLeCaractère($ligne,";");
+                }
+                fclose($fp);
+                $tableTab=egaliseurDeTaille($tableTab);
+                joliTableau($tableTab);
+                unset($tableTab);
+            }
+        break;
+        case "select" :
+            $nomDuFichier=entreLesDeux($entrerUtilisateur," FROM ",";");
+            $tableUtilisateur=completeChemin($nomDuFichier.EXTENSION);
+            $valsUtilisateur=convertisseurUserBdd(entreLesDeux($entrerUtilisateur,"SELECT "," FROM "));
+            $tabNomDesChamps=couperSelonLeCaractère($valsUtilisateur,";");
+            if (fichierDoitExister($tableUtilisateur,true)){
+                $fp = fopen($tableUtilisateur, "r");
+                for($i=0;!feof($fp);$i++){
+                    $ligne=fgets($fp,4096);
+                        $tableTab[$i]=couperSelonLeCaractère($ligne,";");
+                }
+                fclose($fp);
+                if (cEstDansLEntete($tabNomDesChamps,$tableTab)){
+                    
+                    for($j=0;$j<count($tabNomDesChamps);$j++){
+                        for($i=0;$i<count($tableTab);$i++){
+                            $sousTableTab[$i][$j]=$tableTab[$i][array_search($tabNomDesChamps[$j],$tableTab[0])];
+                        }
+                    }
+                    $sousTableTab=egaliseurDeTaille($sousTableTab);
+                    joliTableau($sousTableTab);
+                    unset($sousTableTab);
+                }
+                unset($tableTab);
+            }
+            unset($tabNomDesChamps);
+        break;
+        case "orderBy" :
+            $nomDuFichier=entreLesDeux($entrerUtilisateur,"SELECT * FROM "," ORDER BY ");
+            $tableUtilisateur=completeChemin($nomDuFichier.EXTENSION);
+            if(strpos(strtoupper($entrerUtilisateur)," ASC;")!==false){
+                $valsUtilisateur=entreLesDeux($entrerUtilisateur," ORDER BY "," ASC;");
+                $typeDeTrie=true;
+            }else{
+                $valsUtilisateur=entreLesDeux($entrerUtilisateur," ORDER BY "," DESC;");
+                $typeDeTrie=false;
+            }
+            if (fichierDoitExister($tableUtilisateur,true)){
+                $fp = fopen($tableUtilisateur, "r");
+                for($i=0;!feof($fp);$i++){
+                    $ligne=fgets($fp,4096);
+                        $tableTab[$i]=couperSelonLeCaractère($ligne,";");
+                }
+                fclose($fp);
+                if (cEstDansLEntete(array($valsUtilisateur),$tableTab)){
+                    $colonneDeTrie=array_search($valsUtilisateur,$tableTab[0]);
+                    for ($i=1;$i<count($tableTab);$i++){
+                        for($j=$i+1;$j<count($tableTab);$j++){
+                            if ($typeDeTrie){
+                                if($tableTab[$i][$colonneDeTrie]>$tableTab[$j][$colonneDeTrie]){
+                                    $temp=$tableTab[$i];
+                                    $tableTab[$i]=$tableTab[$j];
+                                    $tableTab[$j]=$temp;
+                                }
+                            }else{
+                                if($tableTab[$i][$colonneDeTrie]<$tableTab[$j][$colonneDeTrie]){
+                                    $temp=$tableTab[$i];
+                                    $tableTab[$i]=$tableTab[$j];
+                                    $tableTab[$j]=$temp;
+                                }
+                            }
+                        }
+                    }
+                    $tableTab=egaliseurDeTaille($tableTab);
+                    joliTableau($tableTab);
+                }
+                unset($tableTab);
+            }
+        break;
+    }//rajouter du case juste au dessus pour rajouter de la ligne de commande
 
 }
 
