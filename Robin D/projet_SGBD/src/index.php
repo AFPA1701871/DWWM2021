@@ -68,12 +68,36 @@
                 
             }
             // cas où la requête est un affichage de toutes les données de la table
-            elseif (substr($requeteMinuscule,0,14)=="select * from") {
-                selectAll($requeteSQL);
+            elseif (substr($requeteMinuscule,0,14)=="select * from ") {
+                
+                $contenuRequete=substr($requeteSQL,14); // donne la valeur de la requete moins "SELECT * FROM "
+                $posPointVirgule=strpos($contenuRequete,";"); // donne la position du mot ";"
+                $nomTable=substr($contenuRequete,0,$posPointVirgule); // donne le nom de la table à modifier
+                
+                if ( file_exists("./BDD/$nomTable.dwwm")==false ) {
+                    echo "erreur, le fichier $nomTable.dwwm n'éxiste pas \n";
+                }
+                else {
+                    selectAll($requeteSQL);
+                }
+                
             }
             // cas où la requête est un affichage d'un champ des données de la table
             elseif (substr($requeteMinuscule,0,7)=="select ") {
-                selectNomsChamps($requeteSQL);
+
+                $contenuRequete=substr($requeteSQL,7); // donne la valeur de la requete moins "SELECT "
+                $posFrom=strpos($contenuRequete," FROM"); // donne la position du mot " FROM"
+                $nomsChamps=substr($contenuRequete,0,$posFrom); // donne une chaine contenant les noms des champs que l'on veut afficher
+                $nomTable=substr($contenuRequete,$posFrom+6); // donne le nom de la table depuis laquelle on veut afficher des champs
+                $nomTable=str_replace(";", "", $nomTable); // retire le ";" à la fin du nom de la table depuis laquelle on veut afficher des champs
+
+                if ( file_exists("./BDD/$nomTable.dwwm")==false ) {
+                    echo "erreur, le fichier $nomTable.dwwm n'éxiste pas \n";
+                }
+                else {
+                    selectNomsChamps($requeteSQL);
+                }
+
             }
             // cas où la requête est une sortie du programme
             elseif ($requeteMinuscule=="quit;") {
