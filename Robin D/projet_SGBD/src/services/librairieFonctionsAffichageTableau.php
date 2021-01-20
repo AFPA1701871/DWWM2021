@@ -1,7 +1,7 @@
 <?php
     //fonction permettant de retourner un tableau à deux dimensions à partir des données d'une table
     function tableEnTableau2Dims($nomTable) {
-        // lecture de la table et enregistrement de ses lignes dans un tableau
+        // lecture de la table et enregistrement de ses lignes dans un tablea
         $fp=fopen("./BDD/$nomTable.dwwm", "r");
         $ligne=array();
         $i=0;
@@ -58,19 +58,5 @@
             }
         }
         return $line;
-    }
-
-    // fonction pour mettre dans un tableau chaque ligne du tableau à afficher
-    function LignesTable($lignes,$valeurEncodees) {
-        $k=-1;
-        for ($i=0; $i < count($lignes); $i++){ 
-            $k+=1;
-            $LigneAffichage[$k]="";
-            for ($j=0; $j < count($lignes[0]) ; $j++) { 
-                $LigneAffichage[$k].=$valeurEncodees[$i][$j];
-            }
-            $LigneAffichage[$k].="|";
-        }
-        return $LigneAffichage;
     }
 ?>
