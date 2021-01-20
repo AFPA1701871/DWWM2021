@@ -1,14 +1,16 @@
 <?php
 $aPayer=0;
 do{
+    do{
     $prixArticle=readline("prix de l'article? (0=fin) ");
+    }while($prixArticle!=strval(intval($prixArticle)));
     $aPayer=$aPayer+$prixArticle;
 }while($prixArticle!=0);
 
 echo "cout total: ".$aPayer;
 do{
     $prixPayer=readline("E. Combien vous payez? ");
-}while($prixPayer<$aPayer);
+}while($prixPayer<$aPayer or $prixPayer!=strval(intval($prixPayer)));
 
 $aRendre=$prixPayer-$aPayer;
 $pieceDeUn=$aRendre%5;
