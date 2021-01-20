@@ -1,7 +1,6 @@
 <?php
 
     require('./service/fonctions.php');
-    define("SQL","SQL :>");
 
     // identification
     do {
@@ -25,5 +24,27 @@
             echo "identifiants incorrects \n";
         }
     } while ($log==false);
+
+    //création de la table
+    $nomTable=readline("entrez le nom de la table : ");
+    $table="create table if not exists `$nomTable`(";
+    $nbCol=0;
+    do{
+        $nbCol=readline("combien de colonne souhaitez vous ? ");
+    }while($nbCol<1);  
+
+    for($i=0;$i=$nbCol;$i++){
+        $nomCol=readline("rentrez le nom de la colonne suivante : ");
+        
+        do{
+            echo "ERREUR : deux colonnes avec le même nom !!";
+            $nomCol=readline("rentrez un nom de colonne valide : ");
+        }while($nomCol[$i]=$nomCol[$i+1]);
+
+        $table.="`$nomCol`";
+    }
+    $table.=")";
+
+    
 
 ?>

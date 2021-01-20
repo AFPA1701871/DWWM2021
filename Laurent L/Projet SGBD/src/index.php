@@ -1,7 +1,10 @@
 <?php
     //variables
-    require("service/verifications.php");
-    $auth = false;
+    require('service/verifications.php');
+    define("CHEMIN","../BDD/");
+    define("EXTENSION", ".dwwm");
+    $auth = $quit = false;
+
 
 
     //authentification
@@ -9,36 +12,39 @@
         $login = readline("Login    : ");
         $password = readline("Password : ");
         $user = $login.";".$password;
-        $fp = fopen("../BDD/config.ini","r");
-        while(!feof($fp)){
-            //pour prendre ligne apres ligne
-            $ligne = fgets($fp,50);        
-            //pour couper la ligne en donnée unitaire dans un tableau
-            $tabLine = explode(";",$ligne);   
-            //concatener les données pour recreer une identification d'un user
-            $ligne = $tabLine[0].";".$tabLine[1]; 
-            if($user == $ligne){
-                $auth = true;
-            }   
-            // echo $user." ".$ligne." ".$auth;   
-            // var_dump($user);
-            // var_dump($ligne);      
-        }
+        $auth = authentification($user);
         if(!$auth){
             echo "Identification incorrecte.\n";
         }       
-        fclose($fp);
+        
     }
-    
-       
-       
-    
-    $commande = readline("SQL :>");
-
-
-    
+    do{
+        $commande = readline("SQL :>");
+        quit($commande);
+        verifSaisie($commande);
+    }while ($quit==false)
     
 
+    
+    
+    
+   
+    
+        
+
+
+    //traitement des demandes
+
+    // switch($instruction){
+    //     case "CREATETABLE": echo "ok create";
+    //         break;
+    //     case "INSERTINTOVALUES": echo "ok insert";
+    //         break;
+    //     case "SELECT*FROM" : echo "ok select";
+    //         break;
+    //     default  ;
+
+    // }
 
 
 ?>
