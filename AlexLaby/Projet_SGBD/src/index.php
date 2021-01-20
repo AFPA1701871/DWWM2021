@@ -7,7 +7,7 @@
     initConfig();
 
     //Pour se log
-    /*do {
+    do {
         $inputLogin=readline("Entrez votre identifiant : ");
         if($inputLogin== "quit"){
             exit;
@@ -16,7 +16,7 @@
         if($inputPassword== "quit"){
             exit;
         }
-    } while (login($inputLogin,$inputPassword)==false);*/
+    } while (login($inputLogin,$inputPassword)==false);
 
     //Après s'être logger pour avoir accès aux différentes fonctions SQL
     echo "taper help pour connaître les différentes fonctions. \n";
