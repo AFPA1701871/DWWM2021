@@ -3,7 +3,8 @@
         echo "1.create table nomTable(titreColonne1, titreColonne2,titreColonne3,tite); (création de table) \n
 2.insert into table (insertion de données dans une table)\n
 3.SELECT * FROM nomTable; (Affiche tout le fichier en tableau) \n
-4.SELECT nom_du_champ from nom_de_la_table;
+4.SELECT nom_du_champ from nom_de_la_table; (Affiche la colonne entrer )\n
+5.SELECT noms1,noms2 from nomTable (Affiche plusieurs colonne entrer)\n
 4.quit (Pour quitter)\n";
 }
 /*****************************************CREATE_TABLE********************************************************** */
