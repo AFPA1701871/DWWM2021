@@ -64,7 +64,7 @@
             case strtoupper($tabCall[0]) == "INSERT" and strtoupper($tabCall[1]) == "INTO" and strtoupper(substr($tabCall[3],0,6)) == "VALUES" and substr($inputUser,-1,1) == ";" and strpos($tabCall[3],"(") >= 1 and strpos($tabCall[3],")") >=1:
                 insertInto($inputUser);
                 break;
-            case strtoupper($tabCall[0]) == "SELECT" and strtoupper($tabCall[2]) == "FROM" and substr($inputUser,-1,1) == ";" and strpos($tabCall[2],"(") < 1 and strpos($tabCall[2],")") < 1:
+            case strtoupper($tabCall[0]) == "SELECT" and strtoupper($tabCall[2]) == "FROM" and substr($inputUser,-1,1) == ";" and strpos($tabCall[3],"(") < 1 and strpos($tabCall[3],")") < 1:
                 if($tabCall[1] == "*"){
                     selectEtoileFrom($inputUser);
                 }else{
@@ -83,6 +83,7 @@
         if(file_exists($nomFichier)){
             echo "Ce fichier existe déjà .\n";
         }else{
+            //on va tester le nombre de caractères
             $testCharTab=explode(",",substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
             $boolean = true;
             foreach ($testCharTab as $test){
@@ -90,19 +91,29 @@
                     $boolean = false;
                 }
             }
+            //on va tester que la colonne x et la colonne y sont différentes
+            for($i=0;$i<count($testCharTab)-1;$i++){
+                for($j=$i+1;$j<count($testCharTab);$j++){
+                    if($testCharTab[$i]==$testCharTab[$j]){
+                        $boolean=false;
+                    }
+                }
+            }
+            //si les deux conditions sont respectées, le programme autorise l'user à créer un fichier et écrire dedans
             if ($boolean == true){
             $fp = fopen($nomFichier,"w");
             fputs($fp, substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
             fclose($fp);
             echo substr($inputUser,13,(strpos($inputUser,"(")-13))." est créé.\n";
             }else{
-                echo "Trop de caractères dans une colonne, 25 max.\n";
+                echo "Mêmes données entrées dans les colonnes.\n"."Rappel : vos valeurs dans les colonnes ne doivents pas dépasser 25 caractères.\n";
             }
         }
     }
     //Fonction pour insérer des données
     function insertInto($inputUser){
         $nomFichier="../BDD/".substr($inputUser,12,(strpos(strtoupper($inputUser),"VALUES")-13)).".dwwm";
+        //Vérifie que le fichier existe et vérifie où mettre les données et le nombre de colonne grâce à un tableau
         if(file_exists($nomFichier)){
             $fp = fopen($nomFichier, "r");
             $valueTab = explode(",",substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
@@ -113,17 +124,42 @@
                 }
             }
             fclose($fp);
-            if (count($valueTab) == count($nbColoneTab)){
+            //compte les caractères
+            $boolean = true;
+            foreach ($valueTab as $test){
+                if (strlen($test) >= 25){
+                    $boolean = false;
+                }
+            }
+            //si les conditions sont respectées, on autorise l'utilisateur à écrire dans le fichier déjà créé, sinon message d'erreur
+            if (count($valueTab) == count($nbColoneTab) and $boolean==true){
                 $fp = fopen($nomFichier,"a");
                 fputs($fp,"\n");
                 fputs($fp,substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
                 fclose($fp);
             }else{
-                echo "Erreur de syntaxe, vous devez entrer ".count($nbColoneTab)." valeurs dans les '()' séparé par des ','.\n";
+                echo "Erreur de syntaxe, vous devez entrer ".count($nbColoneTab)." valeurs dans les '()' séparé par des ','.\n"."Rappel : vos valeurs dans les colonnes ne doivents pas dépasser 25 caractères.\n";
             }
         }else{
             echo "Ce fichier n'existe pas.\n";
         }
+    }
+    //Permet d'afficher son fichier sous forme de tableau
+    function selectEtoileFrom($inputUser){
+        //Vérifier si le fichier existe
+        $nomFichier="../BDD/".substr($inputUser,14,(strpos($inputUser,";"))-14).".dwwm";
+        //Si le fichier existe, on va afficher le tableau. Sinon message d'erreur.
+        if(file_exists($nomFichier)){
+            $fp = fopen($nomFichier, "r");
+            $compteur=0;
+            while(!feof($fp)){
+                $tabAffichage=explode(",",fgets($fp,4096));
+                $compteur++;
+            }
+        }else{
+            echo "Ce fichier n'existe pas.\n";
+        }
+
     }
 
 ?>

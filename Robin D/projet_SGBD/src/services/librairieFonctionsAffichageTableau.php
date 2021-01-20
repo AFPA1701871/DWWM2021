@@ -59,18 +59,4 @@
         }
         return $line;
     }
-
-    // fonction pour mettre dans un tableau chaque ligne du tableau à afficher
-    function LignesTable($lignes,$valeurEncodees) {
-        $k=-1;
-        for ($i=0; $i < count($lignes); $i++){ 
-            $k+=1;
-            $LigneAffichage[$k]="";
-            for ($j=0; $j < count($lignes[0]) ; $j++) { 
-                $LigneAffichage[$k].=$valeurEncodees[$i][$j];
-            }
-            $LigneAffichage[$k].="|";
-        }
-        return $LigneAffichage;
-    }
 ?>

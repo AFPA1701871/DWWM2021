@@ -97,7 +97,7 @@
 
     }
 
-    function select($commande){
+    function selectTout($commande){
 
         if (!file_exists("../BDD/".$commande[3].".dwwm")){
             echo "Fichier inexistant.\n";
@@ -111,6 +111,9 @@
         while (!feof($fichier)){
 
             $ligne = explode(";",fgets($fichier, 4096)); //On charge une ligne
+            $ligne = str_replace("\n","",$ligne); //On supprime les retours-chariot,
+            $ligne = str_replace("\r","",$ligne); //les nouvelles lignes,
+            $ligne = str_replace("\t","",$ligne); //et les tabulations.
             $sommeLongueur = 0;
             $motPlusLong = 0;
             
@@ -132,8 +135,14 @@
             $j++;
 
         }
+
+        $nbLignes = 0;
+
+        foreach ($tableau as $valeur){
+            $nbLignes++;
+        }
         
-        for ($k=0;$k<count($tableau[$k]);$k++){
+        for ($k=0;$k<$nbLignes;$k++){ // Affichage du tableau
 
             for ($i=0;$i<$longueur;$i++){ //Lignes entre les valeurs (+ et -)
 
@@ -146,35 +155,98 @@
 
             echo "\n";
 
-            for ($i=0;$i<count($tableau[$k]);$i++){ // | Valeur suivi des espaces jusqu'à ateindre l'espace que prend le mot plus long
+            for ($i=0;$i<count($tableau[0]);$i++){ // | Valeur suivi des espaces jusqu'à ateindre l'espace que prend le mot plus long
 
-                echo "| " . $tableau[$k][$i];
+                echo "| " . $tableau[$k][$i] . " ";
 
-                for ($j=0;$j<($motsPlusLongs[$i]-(strlen($tableau[$k][$i])));$j++){
-                    echo " ";
+                if (strlen($tableau[$k][$i])!=$motsPlusLongs[$i]){
+                    for ($j=0;$j<($motsPlusLongs[$i]-(strlen($tableau[$k][$i])));$j++){
+                        echo " ";
+                    }
                 }
 
             }
+            echo "|\n";
+        } 
         
-        }
-        
+        for ($i=0;$i<$longueur;$i++){ // Dernière ligne (+ et -)
 
-        /*while (!feof($fichier)){
-            
-            $ligne = explode(";",fgets($fichier, 4096));
-
-            for ($i=0;$i<count($ligne);$i++){
-                
-                $ligne = str_replace("\n","",$ligne); //On supprime les retours-chariot,
-                $ligne = str_replace("\r","",$ligne); //les nouvelles lignes,
-                $ligne = str_replace("\t","",$ligne); //et les tabulations.
-                echo $ligne[$i] . " ";
-
+            if ($i==0 or $i==$longueur-1){
+                echo "+";
+            } else {
+                echo "-";
             }
+        }
 
-            echo "\n";
-        }*/
+        echo "\n";
 
     }
 
+    function select($commande){
+
+        if (!file_exists("../BDD/".$commande[3].".dwwm")){
+            echo "Fichier inexistant.\n";
+            return;
+        }
+
+        $fichier = fopen("../BDD/".$commande[3].".dwwm","r");
+
+        $motPlusLong = 0;
+        $j = 0;
+
+        while (!feof($fichier)){
+
+            $ligne = explode(";",fgets($fichier, 4096)); //On charge une ligne
+            $ligne = str_replace("\n","",$ligne); //On supprime les retours-chariot,
+            $ligne = str_replace("\r","",$ligne); //les nouvelles lignes,
+            $ligne = str_replace("\t","",$ligne); //et les tabulations.
+
+            for ($i=0;$i<count($ligne);$i++){
+
+                $tableau[$j][$i] = $ligne[$i]; //On remplit un tableau en deux dimensions
+
+                if (strlen($ligne[$i])>$motPlusLong){ //Calcul du mot le plus long pour chaque colonne
+                    $motPlusLong = strlen($ligne[$i]); //On met les longueurs dans un tableau
+                }
+
+            }
+
+            $j++;
+
+        }
+/* remplacé par $j
+        $nbLignes = 0;
+
+        foreach ($tableau as $valeur){
+            $nbLignes++;
+        } */
+
+        $numColonne = 0;
+
+        for ($i=0;$i<$j;$i++){ //remplacé $nbLignes par $j
+            if ($tableau[0][$i]==$commande[1]){
+                break;
+            } else {
+                $numColonne++;
+            }
+        }
+
+        if ($numColonne<count($tableau)){
+        $colonne = array_column($tableau, $numColonne);
+        } else {
+            echo "Nom de champ invalide.\n";
+            fclose($fichier);
+            return;
+        }
+
+        for ($i=0;$i<count($colonne);$i++){
+            echo $colonne[$i] . "\n";
+        }
+
+        fclose($fichier);
+    }
+
+    function selectTri($commande){
+        echo "banane";
+    }
 ?>
