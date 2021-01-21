@@ -80,10 +80,10 @@
             for ($k=0; $k < count($tabNomsChamps); $k++) { 
                 if ($lignes[0][$j]==$tabNomsChamps[$k]) {
                     $posiChamp[$k]=$j;
+
                 }
             }
         } // détermine la position de $tabNomsChamps[$k] dans la table
-
 
         $ligneSeparatrice="+";
         for ($k=0; $k < count($posiChamp) ; $k++) { 
