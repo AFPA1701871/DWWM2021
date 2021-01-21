@@ -71,7 +71,7 @@
                         }
 
                                             //INSERT INTO
-                    }elseif(strlower($repUser[0]) == "insert" && strlower($repUser[1]) =="into" && strlower($repUser[3])== "values"){                                
+                    }elseif($repUser[0] == "insert" && $repUser[1] =="into" && $repUser[3]== "values"){                                
                         $temp=substr($repUser1,strpos($repUser1,"("),-2); //Recuperer les champ apres "("
                         if(substr($repUser1,-2)==");"){ //Si caractere de fin = );
                             $temp = explode(",",$temp); //Crée un tableau de champs(' val 1)
@@ -95,12 +95,12 @@
                         }
                         
                                 //SELECT * from
-                    }elseif(strlower($repUser[0]) == "select" && strlower($repUser[1]) =="*" && strlower($repUser[2])=="from"){
+                    }elseif($repUser[0] == "select" && $repUser[1] =="*" && $repUser[2]=="from"){
                         $repUser[3] = substr($repUser[3],0,-1);
                         select($repUser);
 
                                 //SELECT noms FROM nomstable
-                    }elseif(strlower($repUser[0]) == "select" && strlower($repUser[2]) =="from"){
+                    }elseif($repUser[0]== "select" && $repUser[2] =="from"){
                         selectColonne($repUser);
 
                     }elseif (strpos($repUser[0],"quit")===false) {
