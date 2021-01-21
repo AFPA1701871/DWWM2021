@@ -163,10 +163,8 @@
             //loop on the tab and get the longuest values from each column.
             for ($i=0;$i<count($showTab[0])-1;$i++){  //$i = line
                 $high="";
-                for ($j=0;$j<count($showTab)-1;$j++){  //$j = column
-                    if (iconv_strlen($showTab[$j][$i])<iconv_strlen($showTab[$j+1][$i])){
-                        $high=$showTab[$j+1][$i];
-                    }else if(iconv_strlen($showTab[$j][$i])>iconv_strlen($showTab[$j+1][$i])){
+                for ($j=0;$j<count($showTab);$j++){  //$j = column
+                    if (iconv_strlen($showTab[$j][$i])>strlen($high)){
                         $high=$showTab[$j][$i];
                     }
                 }
@@ -200,21 +198,22 @@
                 for($j=0;$j<(count($showTab[$i]));$j++){
                         $var.=$showTab[$i][$j];
                 }
-                if($i==0 or $i==1 or $i==count($showTab)-1){
-                    if($i==count($showTab)-1){
-                        echo $var."\n";
-                        echo $frame."\n";
-                    }else if($i==1){
+                if(count($showTab)==1){
+                    echo $frame."\n";
+                    echo $var."\n";
+                }else{
+                    if($i==0 ){
                         echo $frame."\n";
                         echo $var;
-                    }else{
                         echo $frame."\n";
+                    }else if($i==count($showTab)-1){
+                        echo $var."\n";
+                    }else{
                         echo $var;
                     }
-                }else{
-                    echo $var;
-                } 
+                }
             }
+            echo $frame."\n";
         }else{
             echo substr($value,14,strpos($value,";")-14)." doesn't exist.\n";
         }
