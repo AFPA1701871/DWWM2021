@@ -50,15 +50,15 @@
         }
         if($boolean==true){
             $fp = fopen("winners.txt","r");
-            $count=0;
+            $count=1;
             while (!feof($fp)){
-                $showTab[$count]=explode(" ",fgets($fp, 4096));
+                $showTab[$count]=(fgets($fp, 4096));
                 $count++;
             }
             fclose($fp);
-            if($count<0){
-                for($i=0;$i<count($showTab);$i++){
-                    echo $count. $showTab;
+            if($count>0){
+                for($i=1;$i<count($showTab);$i++){
+                    echo $i ." -> ". $showTab[$i];
                 }  
             }
         }
