@@ -3,8 +3,8 @@
 
     $lastName=readline("Entrez votre nom: ");
     $firstName=readline("Entrez votre prénom: ");
-    $player1=$firstName.";".$lastName;
-    $player2="Jordi;Nateur";
+    $player1=$firstName." ".$lastName;
+    $player2="Jordi Nateur";
     echo "le joueur 1 est: ".$player1."\n";
     echo "le joueur 2 est: ".$player2."\n";
 
@@ -15,12 +15,8 @@
         } while ($answerPlayer1!=0 and $answerPlayer1!=1 and $answerPlayer1!=2);
 
         $answerPlayer2=random_int(0,2);
-        echo $answerPlayer1."\n";
-        echo $answerPlayer2."\n";
 
         $tableSign=array("pierre","feuille","ciseaux");
-
-        print_r($tableSign);
 
         switch ($answerPlayer1) {
             case 0:
@@ -50,7 +46,6 @@
         echo "votre adversaire joue ".$signPlayer2."\n";
 
         $stringToCheck=$signPlayer1.$signPlayer2;
-        echo $stringToCheck."\n";
 
         if ($stringToCheck=="pierrefeuille" or $stringToCheck=="feuilleciseaux" or $stringToCheck=="ciseauxpierre") {
             $winner=$player2;
@@ -65,7 +60,7 @@
         if ($winner==$player1) {
             echo "GAGNE\n";
             // instructions pour entrer le joueur1 dans le fichier
-            $fp=fopen("./chifoumi/BDD/ranking.dwwm", "a");
+            $fp=fopen("../chifoumi/BDD/ranking.dwwm", "a");
             fputs($fp, "$player1\n");
             fclose($fp);
         }
@@ -81,22 +76,29 @@
         } while ($retry!="O" and $retry!="N");
     } while ($retry=="O");
 
-    $fp=fopen("./chifoumi/BDD/ranking.dwwm", "r");
-    $ligne=array();
-    $i=0;
-    while (!feof($fp)) {
-        $ligne[$i]=fgets($fp, 4096);
-        $ligne[$i]=trim($ligne[$i]);
-        $i+=1;
-    }
-    array_pop($ligne);
-    array_shift($ligne);
-    print_r($ligne);
-    fclose($fp);
 
-    echo "La liste des gagnants est :\n";
-    for ($i=0; $i < count($ligne) ; $i++) { 
-        echo $ligne[$i]."\n";
-    }
+    do {
+        $showRank=readline("voulez-vous afficher la liste des gagnants? (O/N) ");
+    } while ($showRank!="O" and $showRank!="N");
+    
 
+    if ($showRank=="O") {
+        $fp=fopen("../chifoumi/BDD/ranking.dwwm", "r");
+        $ligne=array();
+        $i=0;
+        while (!feof($fp)) {
+            $ligne[$i]=fgets($fp, 4096);
+            $ligne[$i]=trim($ligne[$i]);
+            $i+=1;
+        }
+        array_pop($ligne);
+        array_shift($ligne);
+        print_r($ligne);
+        fclose($fp);
+
+        echo "La liste des gagnants est :\n";
+        for ($i=0; $i < count($ligne) ; $i++) { 
+            echo $ligne[$i]."\n";
+        }
+    }
 ?>
