@@ -1,18 +1,27 @@
 <?php
 
+    function f_decoupageDelete(string &$saisie,string &$table,string &$condition){
+        // Le nom de la table
+        $table=substr($saisie,0,striPos($saisie," WHERE "));
+        $saisie=substr($saisie,strlen($table)+strlen(" WHERE "));
+
+        // Condition WHERE
+        $condition=substr($saisie,0,-1);
+    }
+
     function f_deleteFrom(string $table,array &$tab,array $tabcondition){
-        if(empty($tab)){
-                        
+        
+        $table=REP_BDD.trim($table).EXTENSION_BDD;
+
+        if(empty($tab)){      
             // Boucle sur les lignes du fichier
             for ($i=0; $i <count($tab) ; $i++) { 
-                
                 // Chaque ligne autre que l'entete => on supprime
                 if($i>0){
                     unset($tab[$i]);
                     $tab=array_values($tab);
                 }
             }
-
             echo "La table ".pathinfo($table, PATHINFO_FILENAME)." a été vidée."."\n";
         }else{
             
@@ -61,6 +70,7 @@
     }
 
     function f_dropTable(string $table){
+        $table=REP_BDD.trim($table).EXTENSION_BDD;
         unlink($table);
         echo "La table ".pathinfo($table, PATHINFO_FILENAME)." a été supprimée."."\n";
     }
