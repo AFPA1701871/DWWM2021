@@ -3,7 +3,7 @@
 require("./service/quitter.php");
 require("./service/connexion.php");
 require("./service/choixUser.php");
-/*
+
 do{
     $saisieLogin = readline("Entrez votre login :");
     if ($saisieLogin == "quit") {
@@ -18,24 +18,25 @@ do{
         echo "Connexion réussie : \n";
     else
         echo "Impossible de se connecter, veuillez recommencer svp \n";
-}while($connexion == false);*/
+}while($connexion == false);
 
-$commande = readline("SQL :> ");
+//$commande = readline("SQL :> ");
+//choix($commande);
+$boolQuit = true;
 
-choix($commande);
+do {
+    $commande = readline("SQL :> ");
+    quitterProg($commande);
+    choix($commande);
+} while ($boolQuit==true);
+
+//$commande = readline("SQL :> ");
+//Vérification si plus de 25 caractères
+
+ 
 
 
-/*
-$commandeTab = explode(" ", $commande);
-switch ($commandeTab[0])
-case "Create":
-    //créer toto avec entete (aeojaekn, ehaioyha, touze)
-    break;
-case "Insert" :
-    // fopen "../BDD/".$commandeTab[1]
 
-
-/*
 
 
 ?>

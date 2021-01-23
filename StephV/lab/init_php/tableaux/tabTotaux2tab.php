@@ -7,7 +7,7 @@ for ($i=0;$i<=7;$i++){
 $tableAB[]=$tableA[$i]+$tableB[$i];
 }
 echo "Les sommes des 2 tableaux sont \n";
-foreach ($tableAB as &$element){
+foreach ($tableAB as $element){
     echo "$element\n";
 }
 ?>
