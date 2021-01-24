@@ -1,20 +1,22 @@
 <?php
-$size=readline("Saisir le nombre de valeur du tableau ");
+$nb=readline("Saisir le nombre de valeurs du tableau ");
+$posi=0;
+$neg=0;
 
-for ($i=0;$i<=$size;$i++){
+for ($i=0;$i<$nb;$i++){
     $tab[$i]=readline("Saisissez un nombre ");
-   
-    if ($tab[$i]=0){
-        echo "Saisir une autre valeur";
-    }
-    
-    if ($tab[$i]>0){
-        $posi=$posi+1;
-    }    
-    if ($tab[$i]<0){
-        $neg=$neg+1;
-    }    
+       
 }
-echo "Le nombre de valeurs positives est : $posi";
-echo "Le nombre de valeurs négatives est : $neg";
+
+print_r ($tab);
+if ($tab[$i]>0){
+    $posi=$posi+1;
+}
+else {
+    $neg=$neg+1;
+}
+
+    
+echo "Le nombre de valeurs positives est : ".$posi."\n";
+echo "Le nombre de valeurs négatives est : ".$neg;
 ?>

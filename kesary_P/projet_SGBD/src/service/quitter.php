@@ -5,4 +5,9 @@ function quitter($saisie){
         fclose($fichier);
     }
 }
+function quitterProg($commande){
+    if($commande=="quit"){
+        exit;
+    }
+}
 ?>
