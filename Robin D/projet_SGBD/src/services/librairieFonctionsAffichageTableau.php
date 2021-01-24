@@ -1,7 +1,7 @@
 <?php
     //fonction permettant de retourner un tableau à deux dimensions à partir des données d'une table
     function tableEnTableau2Dims($nomTable) {
-        // lecture de la table et enregistrement de ses lignes dans un tableau
+        // lecture de la table et enregistrement de ses lignes dans un tablea
         $fp=fopen("./BDD/$nomTable.dwwm", "r");
         $ligne=array();
         $i=0;

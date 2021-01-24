@@ -36,7 +36,7 @@
         $tabCall = explode(" ",$inputUser);
         //Switch pour gerer les différents "menus" et gérer la casse
         switch ($inputUser){
-            case "help":
+            case strtoupper($tabCall[0])== "HELP":
                 echo 
                 "Les syntaxes ne sont pas sensibles à la casse.\n 
                 Syntaxe pour créer une table :\r 
@@ -54,7 +54,7 @@
                 DESC : Ordre décroissant \n 
                 Écrire quit pour quitter \n";
                 break;
-            case "quit":
+            case strtoupper($tabCall[0]) =="QUIT":
                 exit;
             case "" :
                 break;
@@ -84,10 +84,10 @@
             echo "Ce fichier existe déjà .\n";
         }else{
             //on va tester le nombre de caractères
-            $testCharTab=explode(",",substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+            $testCharTab=explode(",",substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-iconv_strlen($inputUser))));
             $boolean = true;
             foreach ($testCharTab as $test){
-                if (strlen($test) >= 25){
+                if (iconv_strlen($test) >= 25){
                     $boolean = false;
                 }
             }
@@ -102,7 +102,8 @@
             //si les deux conditions sont respectées, le programme autorise l'user à créer un fichier et écrire dedans
             if ($boolean == true){
             $fp = fopen($nomFichier,"w");
-            fputs($fp, substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+            $inputUser=str_replace(",",";",$inputUser);
+            fputs($fp, substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-iconv_strlen($inputUser))).";");
             fclose($fp);
             echo substr($inputUser,13,(strpos($inputUser,"(")-13))." est créé.\n";
             }else{
@@ -116,29 +117,31 @@
         //Vérifie que le fichier existe et vérifie où mettre les données et le nombre de colonne grâce à un tableau
         if(file_exists($nomFichier)){
             $fp = fopen($nomFichier, "r");
-            $valueTab = explode(",",substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+            $valueTab = explode(",",substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-iconv_strlen($inputUser))));
             $count=0;
             while(!feof($fp)){
                 if ($count == 0){
-                    $nbColoneTab=explode(",", fgets($fp,4096));
+                    $nbColoneTab=explode(";", fgets($fp,4096));
                 }
             }
             fclose($fp);
             //compte les caractères
             $boolean = true;
             foreach ($valueTab as $test){
-                if (strlen($test) >= 25){
+                if (iconv_strlen($test) >= 25){
                     $boolean = false;
                 }
             }
             //si les conditions sont respectées, on autorise l'utilisateur à écrire dans le fichier déjà créé, sinon message d'erreur
-            if (count($valueTab) == count($nbColoneTab) and $boolean==true){
+            if (count($valueTab)+1 == count($nbColoneTab) and $boolean==true){
                 $fp = fopen($nomFichier,"a");
                 fputs($fp,"\n");
-                fputs($fp,substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-strlen($inputUser))));
+                $inputUser=str_replace(",",";",$inputUser);
+                $inputUser=str_replace("'","",$inputUser);
+                fputs($fp,substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-iconv_strlen($inputUser))).";");
                 fclose($fp);
             }else{
-                echo "Erreur de syntaxe, vous devez entrer ".count($nbColoneTab)." valeurs dans les '()' séparé par des ','.\n"."Rappel : vos valeurs dans les colonnes ne doivents pas dépasser 25 caractères.\n";
+                echo "Erreur de syntaxe, vous avez entré ".count($nbColoneTab)." valeurs dans les '()' séparé par des ','.\n"."Rappel : vos valeurs dans les colonnes ne doivents pas dépasser 25 caractères.\n";
             }
         }else{
             echo "Ce fichier n'existe pas.\n";
@@ -146,20 +149,72 @@
     }
     //Permet d'afficher son fichier sous forme de tableau
     function selectEtoileFrom($inputUser){
-        //Vérifier si le fichier existe
-        $nomFichier="../BDD/".substr($inputUser,14,(strpos($inputUser,";"))-14).".dwwm";
-        //Si le fichier existe, on va afficher le tableau. Sinon message d'erreur.
-        if(file_exists($nomFichier)){
-            $fp = fopen($nomFichier, "r");
-            $compteur=0;
-            while(!feof($fp)){
-                $tabAffichage=explode(",",fgets($fp,4096));
-                $compteur++;
+        //Voir si le fichier existe
+        $newFileName="..\BDD\\".substr($inputUser,14,strpos($inputUser,";")-14).".dwwm";
+        if(file_exists($newFileName)){
+            //Si oui on ouvre et on lit pour afficher le tableau
+            $fp = fopen("..\BDD\\".substr($inputUser,14,strpos($inputUser,";")-14).".dwwm","r");
+            $count=0;
+            $cadre="+";
+            while (!feof($fp)){
+                $showTab[$count]=explode(";", fgets($fp, 4096));
+                $count++;
+            }
+            fclose($fp);
+            //Chercher à savoir qui est le plus grand pour caler le tableau dessus
+            for ($i=0;$i<count($showTab[0])-1;$i++){  //$i == ligne
+                $plusGrand="";
+                for ($j=0;$j<count($showTab);$j++){  //$j == colonne
+                    if (iconv_strlen($showTab[$j][$i])>strlen($plusGrand)){
+                        $plusGrand=$showTab[$j][$i];
+                    }
+                }
+                //Une fois qu'on le sait, gérer les espaces et les batons pour affichage de ligne
+                for ($j=0;$j<count($showTab);$j++){
+                    while(iconv_strlen($showTab[$j][$i])<=iconv_strlen($plusGrand)){
+                        $showTab[$j][$i].=" ";
+                    }
+                    $showTab[$j][$i].="|";
+                    $stock=$showTab[$j][$i];
+                    if ($i==0){
+                        $showTab[$j][$i]="| ".$showTab[$j][$i];
+                    }else{
+                        $showTab[$j][$i]=" ".$showTab[$j][$i];
+                    }
+                }
+                //Gérer les affichages de colonne
+                for ($k=0;$k<iconv_strlen($stock)+2;$k++){
+                    if($k==iconv_strlen($stock)){
+                        $cadre.="+";
+                    }else if($k<iconv_strlen($stock)){
+                        $cadre.="-";
+                    }
+                }
+            }
+            //Affichage final
+            for($i=0;$i<count($showTab);$i++){
+                $var="";
+                for($j=0;$j<(count($showTab[$i]));$j++){
+                        $var.=$showTab[$i][$j];
+                }
+                if(count($showTab)==1){
+                    echo $cadre."\n";
+                    echo $var ."\n";
+                }else{
+                    if($i==0){
+                        echo $cadre."\n";
+                        echo $var;
+                        echo $cadre."\n";
+                    }elseif($i==count($showTab)-1){
+                        echo $var ."\n";
+                    }else{
+                        echo $var;
+                    }
+                }
             }
         }else{
-            echo "Ce fichier n'existe pas.\n";
+            echo "Le fichier n'existe pas"."\n";
         }
-
     }
 
 ?>
