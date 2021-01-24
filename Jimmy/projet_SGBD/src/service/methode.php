@@ -1,6 +1,6 @@
 <?php
    function help($repUser){
-        echo "1.create table nomTable(titreColonne1, titreColonne2,titreColonne3,tite); (création de table) \n
+    echo "1.create table nomTable(titreColonne1, titreColonne2,titreColonne3,tite); (création de table) \n
 2.insert into table (insertion de données dans une table)\n
 3.SELECT * FROM nomTable; (Affiche tout le fichier en tableau) \n
 4.SELECT nom_du_champ from nom_de_la_table; (Affiche la colonne entrer )\n
@@ -79,8 +79,9 @@ function select($repUser){
 }
 
 function selectColonne($repUser){
+    $repUser = str_replace(";","",$repUser);
     $nomfile = $repUser[3].".dwwm";
-    if(!file_exists("../BDD/".$nomfile)){ //TEst si le fichier existe
+    if(!file_exists("../BDD/".$nomfile)){           //Test si le fichier existe
         echo "Se fichier n'existe pas\n";
     }else{
         $f = fopen("../BDD/".$nomfile,"r") ; //Si existe alors on louvre
