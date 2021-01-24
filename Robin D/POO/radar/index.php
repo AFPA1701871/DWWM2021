@@ -5,10 +5,12 @@
     }
     spl_autoload_register("chargementClasse");
 
-    // demande à l'utilisateur de fixer une limitation de vitesse
+    // demande à l'utilisateur de fixer une limitation de vitesse et l'affecte à la vitesse minimum de flash du radar
     do {
         $speedLimit=readline("entrez la limite de vitesse!: ");
     } while ($speedLimit<50 or $speedLimit>130);
+    $radar= new Radar;
+    $radar->set_speedMinForFlash($speedLimit);
 
     // demande à l'utilisateur de définir le nombre de voitures participantes
     do {
@@ -39,8 +41,8 @@
     }
 
     for ($i=0; $i < $nbCar ; $i++) { 
-        $tableCars[$i]->setSpeed(random_int(1,25));
-        $tableCars[$i]->getSpeed();
+        $tableCars[$i]->increaseSpeed(random_int(1,25));
+        $tableCars[$i]->giveSpeed();
         // c'est ici qu'il faut faire le passage au radar
     }
 ?>

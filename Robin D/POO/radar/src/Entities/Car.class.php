@@ -19,10 +19,27 @@
             $this->_color=$color;
         }
         public function setSpeed($speed) {
-            $this->_speed+=$speed;
+            $this->_speed=$speed;
         }
 
         public function getSpeed() {
+            return $this->_speed;
+        }
+
+        /*
+        public function _construct($brand,$model,$registration,$color) {
+            $this->setBrand($brand);
+            $this->setModel($model);
+            $this->setRegistration($registration);
+            $this->setColor($color);
+        }
+        */
+
+        public function increaseSpeed($speed) {
+            $this->_speed+=$speed;
+        }
+
+        public function giveSpeed() {
             echo "la vitesse de la $this->_brand $this->_model de couleur $this->_color immatriculée $this->_registration est $this->_speed km/h !\n";
         }
 
