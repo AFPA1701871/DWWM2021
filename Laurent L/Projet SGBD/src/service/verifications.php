@@ -50,23 +50,26 @@ function quit($string){
 
 //fonction renvoyant un booléen selon la taille du nom de fichier
 function tailleFichier($string){
+    $bool =true;
     if (strlen($string)>25){
-        return false;
+    $bool = false;        
     }
+    return $bool;
 }
 
-//fonction renvoyant un booléen selon la taille de chaque variable
+//fonction renvoyant une valeur selon la taille de chaque variable
 //crée ou ajoutée par l'utilisateur.
 function tailleChamps($string){
     $string = substr($string,0,-1);
     $champsUnitaire = explode(";",$string);
-    print_r($champsUnitaire);
-    foreach($champsUnitaire as $element){
-        if(iconv_strlen($element)>=25){
-            return false;
+    $compteur = 0;
+    for($i=0; $i<count($champsUnitaire);$i++){
+        if(strlen($champsUnitaire[$i])>=25){
+            $compteur++;
         }
-    }
-    
+    } 
+    return $compteur;
+
 }
 
 //creation chemin
@@ -81,18 +84,13 @@ function create($string){
     $nomEtChamps = explode("(",$tabSaisie[2]);
     $nomFichier = $nomEtChamps[0];
     $champsFichier = $nomEtChamps[1];
-    echo $champsFichier."\n";
     $champsFichier = substr($champsFichier,0,-2); // supression des 2 dernier caracteres );
-    echo $champsFichier."\n";
     $champsFichier = str_replace(",",";",$champsFichier).";";
-    echo $champsFichier."\n";
-    $taillechamps = tailleChamps($champsFichier);
-    echo "taille champs $taillechamps";
+    $tailleChamps = tailleChamps($champsFichier);
     $tailleFichier = tailleFichier($nomFichier);
-    echo "taille fichier $tailleFichier";
     if (file_exists(chemin($nomFichier))){
         echo "Le fichier existe déjà. Veuillez en créer un autre sous un nom différent.\n";
-    }else if(!$taillechamps or !$tailleFichier){
+    }else if( $tailleChamps>0 or $tailleFichier==false){   //!$taillechamps or
         echo "La taille du nom de fichier ou un des champs est supérieure à 25 caractères.\n";
     }else {
         $fp = fopen(chemin($nomFichier),"w");
@@ -110,7 +108,7 @@ function insert($string){
     //verif de la présence des " ' " autour de chaque champ
     for($i=0;$i<count($champsFichier);$i++){
         if(strpos(substr($champsFichier[$i] ,0),"'")!=0 and strpos(substr($champsFichier[$i],-1),"'")!=(strlen($champsFichier[$i])-1)){
-            echo "Erreur(s) de saisie des variables.\n";
+            $erreur = 1;
         }else {
             $champsFichier[$i] = substr($champsFichier[$i],1,-1);
         }
@@ -120,7 +118,7 @@ function insert($string){
     //verif de la taille des différents champ et retourne un booléen
     $taillechamps = tailleChamps($champsFichier);
 
-    if ($taillechamps){                      
+    if ($taillechamps<1 and $erreur <1){                      
         if (file_exists(chemin($nomFichier))){                 
             $fp = fopen(chemin($nomFichier),"r");
             $ligne = fgets($fp,4096);               // recup nombre de champ dans fichier destination.
@@ -132,13 +130,13 @@ function insert($string){
                 fputs($fp, $champsFichier);
                 fclose($fp);
             }else {
-                echo "Votre nombre de variables ne coincide pas avec le fichier de destination."; 
+                echo "Votre nombre de variables ne coincide pas avec le fichier de destination.\n"; 
             }   
         }else {
-            echo "Le fichier destination n'existe pas.";
+            echo "Le fichier destination n'existe pas.\n";
         }
     }else { 
-        echo "Les variables dépassent 25 caractères."; 
+        echo "Erreur(s) de saisie des variables.\n"; 
     }
 }
 
