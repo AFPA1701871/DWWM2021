@@ -6,32 +6,48 @@
         private $_color;
         private $_speed=0;
 
-        public function setBrand($brand) {
+        public function set_Brand($brand) {
             $this->_brand=$brand;
         }
-        public function setModel($model) {
+        public function set_Model($model) {
             $this->_model=$model;
         }
-        public function setRegistration($registration) {
+        public function set_Registration($registration) {
             $this->_registration=$registration;
         }
-        public function setColor($color) {
+        public function set_Color($color) {
             $this->_color=$color;
         }
-        public function setSpeed($speed) {
+        public function set_Speed($speed) {
             $this->_speed=$speed;
         }
 
-        public function getSpeed() {
+        public function get_Speed() {
             return $this->_speed;
+        }
+
+        public function get_Brand() {
+            return $this->_brand;
+        }
+
+        public function get_Model() {
+            return $this->_model;
+        }
+
+        public function get_Registration() {
+            return $this->_registration;
+        }
+
+        public function get_Color() {
+            return $this->_color;
         }
 
         
         public function __construct($brand,$model,$registration,$color) {
-            $this->setBrand($brand);
-            $this->setModel($model);
-            $this->setRegistration($registration);
-            $this->setColor($color);
+            $this->set_Brand($brand);
+            $this->set_Model($model);
+            $this->set_Registration($registration);
+            $this->set_Color($color);
         }
         
         public function start() {

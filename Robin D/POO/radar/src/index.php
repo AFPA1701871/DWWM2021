@@ -8,7 +8,7 @@
     // demande à l'utilisateur de fixer une limitation de vitesse et l'affecte à la vitesse minimum de flash du radar
     do {
         $speedLimit=readline("entrez la limite de vitesse!: ");
-    } while ($speedLimit<50 or $speedLimit>130);
+    } while ($speedLimit<30 or $speedLimit>130);
     $radar= new Radar;
     $radar->set_speedMinForFlash($speedLimit);
 
@@ -27,21 +27,26 @@
         $tableCars[$i]= new Car($brand,$model,$registration,$color);
     }
 
-    //à supprimer, affiche le contenu de $tableCars
-    print_r($tableCars);
-
     // boucle pour faire démarrer les voitures
     for ($i=0; $i < $nbCar ; $i++) { 
-        $tableCars[$i]->setSpeed(10);
+        $tableCars[$i]->set_speed(0);
         $tableCars[$i]->start();
     }
 
+    // boucle pour faire accelérer les voitures, flasher la première qui dépassera la limitation de vitesse et créer un PV en fonction
     do {
         for ($i=0; $i < $nbCar ; $i++) { 
             $tableCars[$i]->increaseSpeed(random_int(1,25));
-            // c'est ici qu'il faut faire le passage au radar
-            $radar->readSpeed( $tableCars[$i]->getSpeed() );
-            $radarFlashedACar=$radar->getRadarFlashedACar();
+
+            $radar->readSpeed( $tableCars[$i]->get_speed() );
+            $radarFlashedACar=$radar->get_radarFlashedACar();
+            if ($radarFlashedACar==true) {
+                echo "la voiture flashée est la ".$tableCars[$i]->get_brand()." ".$tableCars[$i]->get_model()." de couleur ".$tableCars[$i]->get_color()." immatriculée ".$tableCars[$i]->get_registration().".\n";
+
+                $fine= new Fine;
+                $fine->calculateFine( $speedLimit, $tableCars[$i]->get_speed() );
+                break;
+            }
         }
     } while ($radarFlashedACar==false);
     
