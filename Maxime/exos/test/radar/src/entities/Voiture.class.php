@@ -21,13 +21,11 @@
         public function setVitesse($vitesse){
             $this->_vitesse+=$vitesse;
         }
-
         public function getVitesse(){
-            echo "la vitesse de la $this->_marque $this->_modele de couleur $this->_couleur immatriculée $this->_immat est $this->_vitesse km/h !\n";
+            echo "la vitesse de la $this->_marque $this->_modele $this->_couleur immatriculée : $this->_immat est $this->_vitesse km/h !\n";
         }
-
         public function start(){
-            echo "la $this->_marque $this->_modele de couleur $this->_couleur immatriculée $this->_immat démarre et roule à $this->_vitesse km/h !\n";
+            echo "la $this->_marque $this->_modele $this->_couleur immatriculée : $this->_immat démarre et roule à $this->_vitesse km/h !\n";
         }
     }
 ?>

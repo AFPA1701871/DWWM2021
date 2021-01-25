@@ -1,0 +1,2 @@
+test;foireux;produit1;1;produit2;2;10
+test;foireux;produit1;1;produit2;2;10
