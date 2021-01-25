@@ -1,0 +1,6 @@
+login;password
+<<<<<<< HEAD
+admin\n;admin
+=======
+a;a
+>>>>>>> 151313deee5c777547fc398825cb87ef6ae35fd3
