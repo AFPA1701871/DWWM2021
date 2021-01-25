@@ -1,2 +1,4 @@
 - strlen : compte la taille d'une chaine
 - substr : retourne une chaine
+- ord : ASCII (premier octet)
+- chr : inverse ASCII

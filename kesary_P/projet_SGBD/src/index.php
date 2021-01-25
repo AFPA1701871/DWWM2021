@@ -20,27 +20,23 @@ do{
         echo "Impossible de se connecter, veuillez recommencer svp \n";
 }while($connexion == false);
 
-$commande = readline("SQL :> ");
-echo choixUser($commande);
-/*
-$commandeTab = explode(" ", $commande);
-switch ($commandeTab[0])
-case "Create":
-    //créer toto avec entete (aeojaekn, ehaioyha, touze)
-    break;
-case "Insert" :
-    // fopen "../BDD/".$commandeTab[1]
+//$commande = readline("SQL :> ");
+//choix($commande);
+$boolQuit = true;
+
+do {
+    $commande = readline("SQL :> ");
+    quitterProg($commande);
+    choix($commande);
+} while ($boolQuit==true);
+
+//$commande = readline("SQL :> ");
+//Vérification si plus de 25 caractères
+
+ 
 
 
-/*
-//seConnecter($saisieLogin,$saisiePass);
-if ((seConnecter($saisieLogin,$saisiePass)) == true){
-    echo "Connexion réussie";
-    $saisie = readline("SQL:>");
-    
-}else{
-    s
 
-}*/
+
 
 ?>
