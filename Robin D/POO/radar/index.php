@@ -24,25 +24,25 @@
         $model=readline("entrez le modèle de la voiture n°$j: ");
         $registration=readline("entrez l'immatriculation de la voiture n°$j: ");
         $color=readline("entrez la couleur de la voiture n°$j: ");
-        $tableCars[$i]= new Car;
-        $tableCars[$i]->setBrand($brand);
-        $tableCars[$i]->setModel($model);
-        $tableCars[$i]->setRegistration($registration);
-        $tableCars[$i]->setColor($color);
+        $tableCars[$i]= new Car($brand,$model,$registration,$color);
     }
 
     //à supprimer, affiche le contenu de $tableCars
     print_r($tableCars);
 
-    // boucle pour faire démarrer les voiture
+    // boucle pour faire démarrer les voitures
     for ($i=0; $i < $nbCar ; $i++) { 
         $tableCars[$i]->setSpeed(10);
         $tableCars[$i]->start();
     }
 
-    for ($i=0; $i < $nbCar ; $i++) { 
-        $tableCars[$i]->increaseSpeed(random_int(1,25));
-        $tableCars[$i]->giveSpeed();
-        // c'est ici qu'il faut faire le passage au radar
-    }
+    do {
+        for ($i=0; $i < $nbCar ; $i++) { 
+            $tableCars[$i]->increaseSpeed(random_int(1,25));
+            // c'est ici qu'il faut faire le passage au radar
+            $radar->readSpeed( $tableCars[$i]->getSpeed() );
+            $radarFlashedACar=$radar->getRadarFlashedACar();
+        }
+    } while ($radarFlashedACar==false);
+    
 ?>
