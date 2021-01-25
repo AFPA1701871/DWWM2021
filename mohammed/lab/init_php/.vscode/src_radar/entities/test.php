@@ -31,6 +31,7 @@ do {                                             // nombre de voiture +=2
               $vitesse =  $voiture[$i] ->get_vitesse();
               $vitesseF=$vitesse+$acceleration;
               $vitesseF=$voiture[$i]->set_vitesse($vitesse);
+              echo $voiture[$i] ->get_vitesse();
             echo " la voiture $i vien d'accelerer de  $acceleration "."\n";
              echo " la voiture $i roule maintenant a $vitesseF \n";
              readline();}
