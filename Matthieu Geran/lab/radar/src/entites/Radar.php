@@ -2,12 +2,21 @@
 
     class Radar{
 
-        private $immatriculation;
-        private $vitesse;
+        private $limiteVitesse;
 
-        public function flash($immatriculation,$vitesse){
-
+        public function setLimiteVitesse($limite){
+            $this->_limiteVitesse = $limite;
         }
+
+        public function getLimiteVitesse(){
+            return $this->_limiteVitesse;
+        }
+
+        /*public function flash($nomVoiture){
+            if (Voiture::getVitesseExt($nomVoiture) > $this->getLimiteVitesse()){
+                echo "Trop vite !";
+            }
+        }*/
         
         
     }
