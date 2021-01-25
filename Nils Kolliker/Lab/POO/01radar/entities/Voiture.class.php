@@ -25,7 +25,9 @@ class Voiture{
         $this ->_couleur=$couleur;
     }
     public function accelerer(){
-        $this ->_vitesse = $this ->_vitesse + rand (1,25);
+        $rand=random_int(1,25);
+        $this ->_vitesse = $this ->_vitesse + $rand;
+        echo "la voiture ".$this->_marque.", modèle ".$this->_modele.", de couleur ".$this->_couleur.", immatriculée ".$this->_immatriculation." vient d’accélérer de ".$rand."km/h et roule maintenant à ".$this ->_vitesse."km/h\n";
     }
     public function getMarque(){
         return $this->_marque;

@@ -1,0 +1,4 @@
+user;password
+admin;admin
+hous;hous
+nom;mdp
