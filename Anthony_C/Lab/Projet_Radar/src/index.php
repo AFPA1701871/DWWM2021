@@ -32,7 +32,7 @@
         for ($i=1;$i<=$nbCar;$i++){
             ${"car".$i}->accelerate($i);
             $speed = ${"car".$i}->get_speed();
-            $typePv = $radar->flasher($i,$speed);
+            $typePv = $radar->flasher($speed);
             if ($typePv >=0 and $typePv <=2){
                 echo ${"car".$i}->toString();
                 $pv = new Pv();

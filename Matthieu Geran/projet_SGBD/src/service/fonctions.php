@@ -1,8 +1,8 @@
 <?php
-$fichier = fopen("../BDD/config.ini", "r");
+
     function connexion($login,$password){
         
-        
+        $fichier = fopen("../BDD/config.ini", "r");
         $identifiants=array($login,$password);
         $compteur = 0;
 
