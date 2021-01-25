@@ -4,17 +4,17 @@
         private $_lastName;
 
 
-        public function set_FirstName($firstName) {
-            $this->_firstName=$name;
+        public function set_firstName($firstName) {
+            $this->_firstName=$firstName;
         }
 
-        public function set_LastName($lastName) {
+        public function set_lastName($lastName) {
             $this->_lastName=$lastName;
         }
 
         public function __construct($firstName, $lastName) {
-            $this->set_FirstName($firstName);
-            $this->set_LastName($lastName);
+            $this->set_firstName($firstName);
+            $this->set_lastName($lastName);
         }
     }
 ?>
