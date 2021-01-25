@@ -1,0 +1,4 @@
+libelle;description;prix unitaire;
+Nvidia RTX3090;carte graphique;2 099.95;
+Brother HL-L8360CDW;imprimante laser;499.96;
+Razer Cynosa Chroma;clavier gaming;61.96;
