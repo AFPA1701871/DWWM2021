@@ -79,8 +79,9 @@ function select($repUser){
 }
 
 function selectColonne($repUser){
+    $repUser = str_replace(";","",$repUser);
     $nomfile = $repUser[3].".dwwm";
-    if(!file_exists("../BDD/".$nomfile)){ //TEst si le fichier existe
+    if(!file_exists("../BDD/".$nomfile)){           //Test si le fichier existe
         echo "Se fichier n'existe pas\n";
     }else{
         $f = fopen("../BDD/".$nomfile,"r") ; //Si existe alors on louvre

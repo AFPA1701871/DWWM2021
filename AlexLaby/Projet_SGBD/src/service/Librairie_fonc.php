@@ -36,7 +36,7 @@
         $tabCall = explode(" ",$inputUser);
         //Switch pour gerer les différents "menus" et gérer la casse
         switch ($inputUser){
-            case "help":
+            case strtoupper($tabCall[0])== "HELP":
                 echo 
                 "Les syntaxes ne sont pas sensibles à la casse.\n 
                 Syntaxe pour créer une table :\r 
@@ -54,7 +54,7 @@
                 DESC : Ordre décroissant \n 
                 Écrire quit pour quitter \n";
                 break;
-            case "quit":
+            case strtoupper($tabCall[0]) =="QUIT":
                 exit;
             case "" :
                 break;
@@ -141,7 +141,7 @@
                 fputs($fp,substr($inputUser,strpos($inputUser,"(")+1,(strpos($inputUser,")")-iconv_strlen($inputUser))).";");
                 fclose($fp);
             }else{
-                echo "Erreur de syntaxe, vous devez entrer ".count($nbColoneTab)." valeurs dans les '()' séparé par des ','.\n"."Rappel : vos valeurs dans les colonnes ne doivents pas dépasser 25 caractères.\n";
+                echo "Erreur de syntaxe, vous avez entré ".count($nbColoneTab)." valeurs dans les '()' séparé par des ','.\n"."Rappel : vos valeurs dans les colonnes ne doivents pas dépasser 25 caractères.\n";
             }
         }else{
             echo "Ce fichier n'existe pas.\n";
@@ -164,10 +164,8 @@
             //Chercher à savoir qui est le plus grand pour caler le tableau dessus
             for ($i=0;$i<count($showTab[0])-1;$i++){  //$i == ligne
                 $plusGrand="";
-                for ($j=0;$j<count($showTab)-1;$j++){  //$j == colonne
-                    if (iconv_strlen($showTab[$j][$i])<iconv_strlen($showTab[$j+1][$i])){
-                        $plusGrand=$showTab[$j+1][$i];
-                    }else if(iconv_strlen($showTab[$j][$i])>iconv_strlen($showTab[$j+1][$i])){
+                for ($j=0;$j<count($showTab);$j++){  //$j == colonne
+                    if (iconv_strlen($showTab[$j][$i])>strlen($plusGrand)){
                         $plusGrand=$showTab[$j][$i];
                     }
                 }
@@ -199,20 +197,20 @@
                 for($j=0;$j<(count($showTab[$i]));$j++){
                         $var.=$showTab[$i][$j];
                 }
-                if($i==0 or $i==1 or $i==count($showTab)-1){
-                    if($i==count($showTab)-1){
-                        echo $var."\n";
-                        echo $cadre."\n";
-                    }else if($i==1){
+                if(count($showTab)==1){
+                    echo $cadre."\n";
+                    echo $var ."\n";
+                }else{
+                    if($i==0){
                         echo $cadre."\n";
                         echo $var;
-                    }else{
                         echo $cadre."\n";
+                    }elseif($i==count($showTab)-1){
+                        echo $var ."\n";
+                    }else{
                         echo $var;
                     }
-                }else{
-                    echo $var;
-                } 
+                }
             }
         }else{
             echo "Le fichier n'existe pas"."\n";

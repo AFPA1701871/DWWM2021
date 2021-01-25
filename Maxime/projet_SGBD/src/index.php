@@ -1,6 +1,6 @@
 <?php
 
-    require('\services\fonctions.php');
+    require('.\services\fonctions.php');
     define("SQL","SQL :>");
     define("QUIT","quit");
 
@@ -28,7 +28,7 @@
         $table=explode(" ",$table);
 
         //Créer la table et le fichier
-        if (substr(strloxer($table,0,13))=="create table "){
+        if (substr(strlower($table,0,13))=="create table "){
             $donnee=substr($table,13);                                      //valeur de la requete moins "CREATE TABLE "
             $posParant=strpos($donnee,"(");                                 //position de la première parenthese
             $nomT=substr($donnee,0,$posParant);                             //nom de la table créé
@@ -41,7 +41,7 @@
         }
 
         //insertion d'une ligne dans la table
-        else if(substr(strloxer($table,0,12))=="insert into "){   
+        else if(substr(strlower($table,0,12))=="insert into "){   
             $input=substr($table,12);                                       //valeur de la requete moins "INSERT INTO "
             $posVal=strpos($input," VALUES");                               //position du mot " VALUES"
             $nomT=substr($input,0,$posVal);                                 //nom de la table modif
@@ -54,12 +54,12 @@
         }
 
         //select from 1
-        else if(substr(strloxer($table,0,14))=="select * from"){
+        else if(substr(strlower($table,0,14))=="select * from"){
             select($table);
         }
 
         // select from 2
-        else if(substr(strloxer($table,0,7))=="select "){
+        else if(substr(strlower($table,0,7))=="select "){
             selectNom($table);
         }
 
