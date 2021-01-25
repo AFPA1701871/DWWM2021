@@ -15,7 +15,7 @@
             $this->_limitation = $limitation;
         }
 
-        public function flasher($i,int $speed){
+        public function flasher(int $speed){
             if ($speed<=$this->_limitation+10 and $speed > $this->_limitation){
                 return $pv = 0;
             }else if ($this->_limitation+10<$speed and $speed <= $this->_limitation+20){
