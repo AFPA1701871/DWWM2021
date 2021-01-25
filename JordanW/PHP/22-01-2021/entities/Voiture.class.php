@@ -27,7 +27,6 @@
             $this-> setImmatriculation($immatriculation);
             $this-> setNombrePoint($nombrePoint);
             self::$_tabVoiture[]=$immatriculation;
-            var_dump(self::$_tabVoiture);
         }
         
         public static function testImmatriculation(string $immatriculation){
@@ -69,6 +68,10 @@
 
         public function setVitesse(int $acceleration){
             $this-> _vitesse+=$acceleration;
+        }
+
+        public function initVitesse(int $vitesse){
+            $this-> _vitesse=$vitesse;
         }
 
         public function getVitesse(){
