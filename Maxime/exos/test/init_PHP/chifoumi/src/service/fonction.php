@@ -49,16 +49,16 @@
 
     //résultat
     function resultat($joueur,$ordi,$resultUt,$resultBot){
-        $result=$resultUt.$resultBot;
+        $result="$resultUt,$resultBot";
         $victoire="";
         //comparateur de résultat
-        if($result=="PIERRECISEAUX" or $result=="FEUILLEPIERRE" or $result=="CISEAUXFEUILLE"){
+        if($result=="PIERRE,CISEAUX" or $result=="FEUILLE,PIERRE" or $result=="CISEAUX,FEUILLE"){
             $victoire=$joueur;
         }
-        else if($result=="PIERREFEUILLE" or $result=="FEUILLECISEAUX" or $result=="CISEAUXPIERRE"){
+        else if($result=="PIERRE,FEUILLE" or $result=="FEUILLE,CISEAUX" or $result=="CISEAUX,PIERRE"){
             $victoire=$ordi;
         }
-        else if($result=="PIERREPIERRE" or $resultUt=="FEUILLEFEUILLE" or $result=="CISEAUXCISEAUX"){
+        else if($result=="PIERRE,PIERRE" or $result=="FEUILLE,FEUILLE" or $result=="CISEAUX,CISEAUX"){
             $victoire="auncun";
         }
 
@@ -73,13 +73,18 @@
         else if($victoire==$ordi){
             echo "vous avez perdu !!!\n";
         }
-        else if($victoire="aucun"){
+        else if($victoire=="aucun"){
             echo "égalité !!!\n";
         }
     }
 
     function liste(){
         $fp=fopen("../src/winner.txt", "r");
-        
+        $texte=file($fp);
+        for($i=0;$i=2;$i++){
+            foreach($texte as $noms){
+                echo $noms;
+            }
+        }
     }
 ?>
