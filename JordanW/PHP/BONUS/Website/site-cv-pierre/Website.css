@@ -1,0 +1,152 @@
+@function str-repeat($string, $times) {
+  $result: "";
+
+  @for $i from 1 through $times {
+    $result: $result + $string;
+  }
+
+  @return $result;
+}
+
+@mixin css-lock(
+  $min-size: 1,
+  $max-size: 1.4,
+  $min-width: 20,
+  $max-width: 100,
+  $property: font-size,
+  $unit: rem
+) {
+  #{$property}: calc(
+    #{$min-size}#{$unit} + (#{$max-size} - #{$min-size}) * ((
+            100vw - #{$min-width}#{$unit}
+          ) / (#{$max-width} - #{$min-width}))
+  );
+
+  @media (max-width: #{$min-width}#{$unit}) {
+    #{$property}: #{$min-size}#{$unit};
+  }
+
+  @media (min-width: #{$max-width}#{$unit}) {
+    #{$property}: #{$max-size}#{$unit};
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #36286c;
+  color: #8f81c2;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  text-size-adjust: none;
+
+  @include css-lock(1.2, 3, 70, 100);
+}
+
+::selection {
+  background: #8f81c2;
+  background: rgba(143, 129, 194, 0.996);
+  color: #36286c;
+}
+
+.code-block {
+  margin: 0;
+  padding: 1em;
+}
+
+.code {
+  font-family: "Fira Mono", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
+    monospace;
+  text-align: left;
+  white-space: pre-wrap;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: break-word;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+  counter-reset: lines;
+}
+
+.code-line::before,
+.code-line::after,
+.code-space::before {
+  user-select: none;
+}
+
+.code-line {
+  counter-increment: lines;
+  display: inline-table;
+  padding-left: 3ch;
+  position: relative;
+}
+
+.code-line::before {
+  content: counter(lines) str-repeat("\a●", 10);
+  display: inline-block;
+  opacity: 0.5;
+  position: absolute;
+  width: 3ch;
+  top: 0;
+  bottom: 0;
+  left: -1ch;
+  overflow: hidden;
+  text-align: right;
+}
+
+.code-line::after {
+  content: "¬";
+  opacity: 0.25;
+}
+
+.code-space {
+  display: table-cell;
+  opacity: 0.25;
+  position: relative;
+  vertical-align: top;
+  white-space: pre;
+}
+
+.code-space::before {
+  content: str-repeat(·, 10);
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  white-space: nowrap;
+}
+
+.code-key {
+  color: #f13e54;
+}
+
+.code-key-alt {
+  color: #fa9765;
+}
+
+.code-value {
+  color: #40dd5a;
+}
+
+.code-link {
+  color: #2cdceb;
+  text-decoration: none;
+}
+
+.code-link:hover {
+  text-decoration: underline;
+}
