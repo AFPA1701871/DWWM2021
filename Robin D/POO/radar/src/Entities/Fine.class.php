@@ -11,7 +11,7 @@
             $this->_pointsLess=$pointsLess;
         }
 
-        public function get_Amount() {
+        public function get_amount() {
             return $this->_amount;
         }
 

@@ -29,7 +29,7 @@
 
     // boucle pour faire démarrer les voitures
     for ($i=0; $i < $nbCar ; $i++) { 
-        $tableCars[$i]->set_Speed(0);
+        $tableCars[$i]->set_speed(0);
         $tableCars[$i]->start();
     }
 
@@ -38,13 +38,13 @@
         for ($i=0; $i < $nbCar ; $i++) { 
             $tableCars[$i]->increaseSpeed(random_int(1,25));
 
-            $radar->readSpeed( $tableCars[$i]->get_Speed() );
-            $radarFlashedACar=$radar->get_RadarFlashedACar();
+            $radar->readSpeed( $tableCars[$i]->get_speed() );
+            $radarFlashedACar=$radar->get_radarFlashedACar();
             if ($radarFlashedACar==true) {
-                echo "la voiture flashée est la ".$tableCars[$i]->get_Brand()." ".$tableCars[$i]->get_Model()." de couleur ".$tableCars[$i]->get_Color()." immatriculée ".$tableCars[$i]->get_Registration().".\n";
+                echo "la voiture flashée est la ".$tableCars[$i]->get_brand()." ".$tableCars[$i]->get_model()." de couleur ".$tableCars[$i]->get_color()." immatriculée ".$tableCars[$i]->get_registration().".\n";
 
                 $fine= new Fine;
-                $fine->calculateFine( $speedLimit, $tableCars[$i]->get_Speed() );
+                $fine->calculateFine( $speedLimit, $tableCars[$i]->get_speed() );
                 break;
             }
         }

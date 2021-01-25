@@ -12,7 +12,7 @@
             return $this->_speedMinForFlash;
         }
     
-        public function get_RadarFlashedACar() {
+        public function get_radarFlashedACar() {
             return $this->_radarFlashedACar;
         }
 
