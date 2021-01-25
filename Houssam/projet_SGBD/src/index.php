@@ -1,30 +1,27 @@
 <?php
-    require './lib/connexion.php';
-    require './lib/utile.php';
-    define("BDD","..\BDD");
-    define("SQL","SQL :>\n");
-    define("QUIT","quit");
-    define("EXTENSION",".dwwm");
 
-    echo "\n ***  Veillez vous-connecter  *** \n \n";
+    require('./Lib/fonctions.php');
+    define("SQL","SQL :>");
 
-    //Se connecter
+    do {
+        $login=readline("Identifiant : ");
+        if($login==true){
+            echo "Login Ok \n";
+        }
+        elseif($login== "quit"){
+            exit;
+        }
+        $password=readline("Mot de passe : ");
+        if($password== true){
+            echo "MDP Ok";
+        }
+        elseif($password== "quit"){
+            exit;
+        }
+    } while (Verifier($login,$password));
+
     do{
-    $userLogin=readline("Identifiant : ");
-    if ($userLogin == "quit") {
-        exit;
-    }
-    $userMdp=readline("Mot de passe : ");
-    if ($userMdp == "quit") {
-        exit;
-    }
-    } while(testConnexion($userLogin,$userMdp) == false);
-
-    //Actions
-    do{
-        $userAction=readline(SQL);
-        $userAction=strtolower($userAction);
-        quit($userAction);
-    } while (cta($userAction)==false)
-?>              
-
+        $inputUser=readline(SQL);
+        quit($inputUser);
+    } while (call($function)==0);                                                                                                                                                                                                                                                                                                                                                                                                  
+?>
