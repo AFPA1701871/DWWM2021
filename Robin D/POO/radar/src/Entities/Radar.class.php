@@ -4,11 +4,15 @@
         private $_radarFlashedACar=false;
 
         public function set_speedMinForFlash($speedLimit) {
-            $this->_speedMinForFlash=$speedLimit;
-            echo "le radar flashera les véhicules à partir de $speedLimit km/h !\n";
+            $this->_speedMinForFlash=$speedLimit+1;
+            echo "le radar flashera les véhicules à partir de $this->_speedMinForFlash km/h !\n";
+        }
+
+        public function get_speedMinForFlash() {
+            return $this->_speedMinForFlash;
         }
     
-        public function getRadarFlashedACar() {
+        public function get_RadarFlashedACar() {
             return $this->_radarFlashedACar;
         }
 
