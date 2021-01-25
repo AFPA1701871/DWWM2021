@@ -1,6 +1,0 @@
-libelle;description;prix unitaire
-banane;banane Guadeloupe;0.99
-pomme;pomme golden;1.99
-ananas;ananas bio;2
-poire;poire belle helene;2
-fraise;fraise rouge classique;5.99

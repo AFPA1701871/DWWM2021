@@ -1,4 +1,0 @@
-wyts;jordan;banane;20;0.99;19.8;pomme;30;1.99;59.7
-verhille;matthieu;ananas;10;2;20
-a;z;banane;10;0.99;9.9;poire;2;2;4
-poix;martine;banane;15;0.99;14.85
