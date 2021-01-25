@@ -4,7 +4,7 @@
         private $_point;
         private $_montant;
 
-        public function __construct(int $point,int $montant){
+        public function __construct(int $point,string $montant){
             $this->setPoint($point);
             $this-> setMontant($montant);
         }
@@ -15,11 +15,16 @@
         public function getPoint(){
             return $this-> _point;
         }
-        public function setMontant(int $montant){
+        public function setMontant(string $montant){
             $this-> _montant = $montant;
         }
         public function getMontant(){
             return $this-> _montant;
+        }
+
+        public function afficherAmende(){
+            echo "Amende : ".$this->getMontant() ."\n";
+            echo "Nombre de point en moins : ".$this->getPoint()."\n\n";
         }
     }
 
