@@ -81,3 +81,6 @@ CREATE TABLE IF NOT EXISTS `mabase` (`id` int(11) NOT NULL auto_increment,`nom` 
 
 
 
+Jean Dupond
+Jean Dupond
+Jean Dupond
