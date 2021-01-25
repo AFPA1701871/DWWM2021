@@ -15,9 +15,6 @@
             $this->setCouleur($couleur);
             $this->_vitesse=0;
         }
-        public function toString(){
-            echo " \n Marque : $this->_marque \n Modèle : $this->_modele \n Immatriculation : $this->_immatriculation \n Couleur : $this->_couleur";
-        }
         //Les setters et les getters pour pouvoir manipuler mes attributs
         public function setMarque(String $marque){
             $this->_marque=$marque;

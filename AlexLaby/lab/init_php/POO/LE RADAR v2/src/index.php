@@ -23,23 +23,20 @@
     for($i=1;$i<=$nbVoiture;$i++){
         ${ "Voiture" . $i }->demarrer($i);
     }
+    //Pour marquer un temps de pause histoire de lire la console si on à bcp de voitures
+    readline(" ");
     //Pour les faire accélérer et pour que le radar regarde leur vitesse
     do {
         for($i=1;$i<=$nbVoiture;$i++){
             $random=rand(1,25);
             ${ "Voiture" . $i }->accélérer($random,$i);
             $stockVitesse=${ "Voiture" . $i }->getVitesse();
-            $stockRadar=$radar->flash($stockVitesse);
+            $stockRadar=$radar->flash($stockVitesse, $i);
+            readline(" ");
             if($stockRadar>0){
                 break;
             }
-        } 
-        //Pour marquer un temps d'arrêt
-        readline(" ");      
-    } while ($stockRadar==0);
-
-    $radar->créePv($i,$stockRadar);
-    ${ "Voiture" . $i }->toString();
-
+        }       
+    } while ($stockRadar==0)
 
 ?>
