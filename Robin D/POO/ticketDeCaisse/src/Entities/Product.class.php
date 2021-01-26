@@ -23,15 +23,15 @@
         }
 
         public function get_wording() {
-            return $this_wording;
+            return $this->_wording;
         }
 
         public function get_description() {
-            return $this_description;
+            return $this->_description;
         }
 
         public function get_price() {
-            return $this_price;
+            return $this->_price;
         }
     }
 ?>
