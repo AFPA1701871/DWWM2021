@@ -21,5 +21,17 @@
             $this->set_description($description);
             $this->set_price($price);
         }
+
+        public function get_wording() {
+            return $this_wording;
+        }
+
+        public function get_description() {
+            return $this_description;
+        }
+
+        public function get_price() {
+            return $this_price;
+        }
     }
 ?>
