@@ -1,5 +1,38 @@
 <?php
 
+    function f_testUpdateSet(string $saisie){// Test si SET est OK
+        $bool=false;
+        if(striPos($saisie,"SET ")===false){
+            // Il n'y a pas de SET
+            echo "La requete doit contenir \"SET \" !!"."\n";
+            $bool=true;
+        }
+        // Test si rien entre UPDATE et SET
+        if(striPos($saisie,"SET ")=== 0){
+            echo "La requete ne comporte aucune table !!"."\n";
+            $bool=true;
+        }
+        return $bool;
+    }
+
+    function f_decoupageUpdateWhere(string $saisie,array &$tab1,array &$tab2){
+        // recuperer champ=rchamp =>  autant de fois qu'il y en a
+        $tab1=explode(",",substr($saisie,0,stripos($saisie," WHERE ")));
+
+        // recuperer apres WHERE
+        $tab2 = explode("=",substr($saisie,stripos($saisie," WHERE ")+7));
+    }
+
+    function f_decoupageUpdate(string &$saisie,string &$table){
+        // Le nom de la table
+        
+        $table=trim(substr($saisie,0,striPos($saisie," SET ")));
+        $saisie=substr($saisie,strlen($table));
+
+        // Les parametres APRES SET 
+        $saisie=substr($saisie,5,-1);
+    }
+
     function f_updateSet(array $tabParam,array &$tab,string $table){
         
         // Boucle sur mes parametres (champs d'entree)
@@ -24,7 +57,7 @@
 
         // Retranscrire le tableau dans le fichier
         // Ouvre le fichier
-        $fp = fopen($table,"w");
+        $fp = fopen(REP_BDD.$table.EXTENSION_BDD,"w");
         // Vider le fichier
         ftruncate($fp,0);
         $i=0;
@@ -79,7 +112,7 @@
 
         // Retranscrire le tableau dans le fichier
         // Ouvre le fichier
-        $fp = fopen($table,"w");
+        $fp = fopen(REP_BDD.$table.EXTENSION_BDD,"w");
         // Vider le fichier
         ftruncate($fp,0);
         $i=0;
