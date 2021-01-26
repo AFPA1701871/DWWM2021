@@ -54,7 +54,7 @@
             echo "n°".$i." : ".$product[$i]->get_wording()."-->".$product[$i]->get_description()."-->".$product[$i]->get_price()."€\n";
         }
 
-        // sélection des produits et ajout de ceux-ci et de leur quantité dans des objets CartLine
+        // sélection des produits et ajout de ceux-ci et de leur quantité dans des objets CartLine contenus dans un tableau
         $cartLine=[];
         do { 
             $productSelected=readline("entrez le numéro du produit que vous souhaitez ajouter à votre commande: ");
@@ -70,13 +70,24 @@
         print_r($cartLine); // à supprimer
 
         // création d'un objet Cart (=panier) contenant le tableau $cartLine
-        $cart=[];
-        array_push($cart,new Cart($client,$cartLine));
+        
+        $cart=new Cart($client,$cartLine);
 
         print_r($cart); // à supprimer
 
-        // affichage du ticket de caisse
+        // récolte des données pour le ticket de caisse
+        $ticketLine=[];
+        for ($i=0; $i < count($cartLine); $i++) { 
+            # code...
+        }
         
+        // affichage du ticket de caisse
+        $wordingLine="Produit			Qté		Prix Unitaire		Prix Total";
+        $separationLine="-------------------------------------------------------------------------------------------------";
+        echo $separationLine."\n";
+        echo $wordingLine."\n";
+        echo $separationLine."\n";
+        echo $product[0]->get_wording(); // ligne d'essai
     }
     
 ?>
