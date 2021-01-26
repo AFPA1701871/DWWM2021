@@ -50,41 +50,33 @@
 
         // affichage des produits disponibles
         echo "les produits disponibles sont : \n";
-        for ($i=0; $i < count($lineList); $i++) { 
-            echo "n°".$i."-->".$lineList[$i][0]."-->".$lineList[$i][1]."-->".$lineList[$i][2]."€"."\n";
+        for ($i=0; $i < count($product); $i++) { 
+            echo "n°".$i." : ".$product[$i]->get_wording()."-->".$product[$i]->get_description()."-->".$product[$i]->get_price()."€\n";
         }
 
-        // sélection des produits par le client et ajout de ceux-ci dans un ticket: $tableReceipt
-        $tableReceipt=[];
-        array_push($tableReceipt,array("Produit","Qté","Prix Unitaire","Prix Total"));
-
-        print_r($tableReceipt); // à supprimer
-        
+        // sélection des produits et ajout de ceux-ci et de leur quantité dans des objets CartLine
+        $cartLine=[];
         do { 
             $productSelected=readline("entrez le numéro du produit que vous souhaitez ajouter à votre commande: ");
             $quantity=readline("entrez le nombre de produits de ce type que vous souhaitez ajouter à votre commande: ");
-
-            array_push($tableReceipt,array($lineList[$productSelected][0],$quantity,$lineList[$productSelected][2],($quantity*$lineList[$productSelected][2])));
-
+    
+            array_push($cartLine,new CartLine($product[$productSelected],$quantity));
+    
             do {
                $continueShopping=readline("voulez-vous sélectionner un autre article ? (O/N) "); 
             } while ($continueShopping!="O" and $continueShopping!="N");
         } while ($continueShopping=="O");
 
-        print_r($tableReceipt); // à supprimer
+        print_r($cartLine); // à supprimer
 
-        //calcul du "Total Ticket"
-        $totalTicket=0;
-        for ($i=1; $i < count($tableReceipt); $i++) { 
-            $totalTicket+=$tableReceipt[$i][3];
-        }
+        // création d'un objet Cart (=panier) contenant le tableau $cartLine
+        $cart=[];
+        array_push($cart,new Cart($client,$cartLine));
 
-        // ajout du "Total Ticket" au ticket: $tableReceipt
-        array_push($tableReceipt,array("Total Ticket","","",$totalTicket));
+        print_r($cart); // à supprimer
 
-        // affichage du ticket
+        // affichage du ticket de caisse
         
-        print_r($tableReceipt); // à supprimer
     }
     
 ?>
