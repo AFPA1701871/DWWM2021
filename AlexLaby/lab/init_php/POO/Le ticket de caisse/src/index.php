@@ -6,4 +6,9 @@
     }
     spl_autoload_register('chargerClasse');
 
+    $nomClient=readline("Quel est le nom du client ? ");
+    $prenomClient=readline("Quel est le prénom du client ? ");
+    $listeProduit=array ("Pomme","Banane","Poire","Pêche");
+    $quantitéProduit=readline("Quelle quantité souhaitez-vous ?")
+
 ?>
