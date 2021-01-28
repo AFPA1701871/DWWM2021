@@ -6,10 +6,20 @@
     spl_autoload_register('chargerClasse');
 
 
-    $Guerrier=new Guerrier("Alexandre le Grand",1000,500);
+    $GuerrierGentil=new GuerrierGentil("Alexandre le Grand",1000,500,100);
 
-    $Guerrier->parler();
-    $Guerrier->BoirePotion();
-    $Guerrier->Dormir();
+    $GuerrierGentil->parler();
+    $GuerrierGentil->BoirePotion();
+    $GuerrierGentil->coupDépée();
+    $GuerrierGentil->courbette();
+    $GuerrierGentil->ouvrirParam();
+
+    $GuerrierMechant=new GuerrierMechant("Alexandre le méchant",100,100,100);
+    $GuerrierMechant->parler();
+    $GuerrierMechant->BoirePotion();
+    $GuerrierMechant->coupDépée();
+
+    $GuerrierMechant->ouvrirParam();
+    
 
 ?>
