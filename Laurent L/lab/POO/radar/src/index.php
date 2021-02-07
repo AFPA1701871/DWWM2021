@@ -8,11 +8,9 @@
     do {
         $limitation = intval(readline ("fixer la limite de vitesse : "));
     }while ($limitation<50 || $limitation>130);
-
     $radar = new Radar($limitation);
     
-
-    //Nombre de voiture particitante
+    //Nombre de voitures particitantes
     do{
         $nbreVoitures = intval(readline("Nombre de voitures participantes : "));
     }while ($nbreVoitures<2);
@@ -26,8 +24,7 @@
         $immat = readline("L'immatriculation du véhicule : ");
         $couleur = readline("La couleur du véhicule : ");
         $voiture = "voiture$i";
-        $$voiture = new Voiture($marque, $modele, $immat, $couleur);
-        
+        $$voiture = new Voiture($marque, $modele, $immat, $couleur);        
     }
 
     //démarrage voiture initialisation vitesse à 0
@@ -42,10 +39,15 @@
             $voiture = "voiture$i";
             $$voiture->acceleration();
             echo $$voiture->affichageAccelVitesse();
-            if ($$voiture->get_vitesse()>$limitation){
+            $stock1 = $$voiture->get_vitesse();
+            $stock2 = $radar->get_limitation();
+            if ($stock1 >$stock2){
+                echo $radar->affichageVoitureFlashee($$voiture,$stock1);
+                echo $radar->sanction($stock1);
                 $infraction = true;
-                $voitureFlashee = $$voiture;
+                break; 
             }
+
         }
     }
         
