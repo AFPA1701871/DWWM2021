@@ -31,7 +31,7 @@
 //**********************************************************COMMANDE SQL************************************************************************************* */
 
         }while(($boolean != true) && ($repUser != "quit"));         //Faire jusqu'a ce que lidentifiant est bon ou que lutilisateur n'ecris pas "quit"
-
+    if($repUser !="quit"){
         echo "help pour plus d'information"."\n"."quit pour quitter"."\n";
     
         do{
@@ -109,6 +109,7 @@
                 }
             }
         }while(true);
+    }
                
             
 
