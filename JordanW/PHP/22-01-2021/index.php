@@ -17,11 +17,6 @@
     // Creation du radar avec la limitation saisie
     $leRadar = new Radar($intLimitation);
 
-    // Création des amendes
-    $amendeLegere = new Amende(1,45);
-    $amendeLourde = new Amende(3,90);
-    $amendeGrave = new Amende(12,"Rendez-vous à la Gendarmerie !");
-
     // Saisie du nombre de voiture
     do{
         $intNombreVoiture=readline("Saisir le nombre de voiture : ");
@@ -48,37 +43,40 @@
             // Boucle sur le nombre de voiture pour l'accelaration
             for ( $i=1; $i <= $intNombreVoiture; $i++){
 
-                // on recupere l'immatriculation
+                /*// on recupere l'immatriculation
                 $strImmatriculation = ${ "voiture" . $i }->getImmatriculation();
                     
                 // Acceleration
                 $intAcceleration = ${ "voiture" . $i }->accelerer();
                 // Recuperer la nouvelle vitesse
-                $intVitesse= ${ "voiture" . $i }->getVitesse();
+                $intVitesse= ${ "voiture" . $i }->getVitesse();*/
 
-                echo "La voiture immatriculée ".$strImmatriculation." vient d'accélerer de ".$intAcceleration."km/h ";
-                echo "et roule désormais à ". $intVitesse."km/h"."\n";
+                echo "La voiture immatriculée ". ${ "voiture" . $i }->getImmatriculation() ." vient d'accélerer de ". ${ "voiture" . $i }->accelerer() ."km/h ";
+                echo "et roule désormais à ". ${ "voiture" . $i }->getVitesse()."km/h"."\n";
 
                 // Controle radar
-                if($leRadar->controleVitesse($intVitesse)==true){
+                if($leRadar->controleVitesse(${ "voiture" . $i }->getVitesse())){
                     
-                    echo "La voiture immatriculée ".$strImmatriculation 
-                        ." a franchi la limitation à ".$intLimitation."km/h"."\n";
+                    echo "La voiture immatriculée ".${ "voiture" . $i }->getImmatriculation() . " a été flashée";
+                        //." a franchi la limitation à ".$intLimitation."km/h"."\n";
                     
                     // RDV Gendarmerie (enleve tous les points)
-                    if(($intVitesse - $leRadar-> getLimitation())>20){
+                    if((${ "voiture" . $i }->getVitesse() - $leRadar-> getLimitation())>20){
                         //echo "Amende : ".$amendeGrave-> getMontant()."\n";
+                        $amendeGrave=new Amende(12,"Rendez vous à la gendarmerie",${ "voiture" . $i });
                         $amendeGrave->afficherAmende();
-                        //${ "voiture" . $i }->setMontantPV($amendeGrave->getMontant());
+                        ${ "voiture" . $i }->setMontantPV($amendeGrave->getMontant());
                         ${ "voiture" . $i }->enleverPoint($amendeGrave->getPoint());
                         
                     // 3 points - 90e
-                    }elseif(($intVitesse - $leRadar-> getLimitation())>10){
+                    }elseif((${ "voiture" . $i }->getVitesse() - $leRadar-> getLimitation())>10){
+                        $amendeLourde=new Amende(3,90,${ "voiture" . $i });
                         $amendeLourde-> afficherAmende();
                         ${ "voiture" . $i }->setMontantPV($amendeLourde->getMontant());
                         ${ "voiture" . $i }->enleverPoint($amendeLourde->getPoint());
                     // 1 point - 45e
-                    }elseif(($intVitesse - $leRadar-> getLimitation())>0){
+                    }elseif((${ "voiture" . $i }->getVitesse() - $leRadar-> getLimitation())>0){
+                        $amendeLegere=new Amende(1,45,${ "voiture" . $i });
                         $amendeLegere->afficherAmende();
                         ${ "voiture" . $i }->setMontantPV($amendeLegere->getMontant());
                         ${ "voiture" . $i }->enleverPoint($amendeLegere->getPoint());
@@ -92,7 +90,7 @@
                 }
                 
             }
-        }while($boolFlash=false);
+        }while($boolFlash==false);
 
 
         // test si retrait de permis

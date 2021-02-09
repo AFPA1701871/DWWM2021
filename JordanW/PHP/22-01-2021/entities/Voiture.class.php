@@ -63,7 +63,6 @@
             $acceleration = rand(1,25);
             $this-> setVitesse($acceleration);
             return $acceleration;
-
         }
 
         public function setVitesse(int $acceleration){
