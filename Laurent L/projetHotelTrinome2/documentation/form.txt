@@ -1,0 +1,25 @@
+- accueil :
+	date
+	(1) client
+	(2) gestionnaire
+	(3) quit
+
+- 2 / accès gestionnaire (résultat 2) :
+	log ((1)log/(2)quit)
+	
+	liste chambres avec infos pertinentes
+	affichage personnalisé de l'ensemble des détails d'une chambre séléctionnée
+	état chambre (libre ou non, tx d'occupation) (Bonus affichage des chambres libres)
+	voir réservations globales dans l'hotel
+		??? resa en cours et/ou celles à venir
+	voir les détails d'une reservation
+	retour accueil
+
+- 1 / accès client (résultat 1) :
+	réserver (nb adulte/enfant,date début-fin,vue,option)
+	indications chambres correspondantes
+	choix chambre+vérif si dispo
+	saisi nom,prenom pour enregistrement
+	afficher réservation client
+	retour accueil
+

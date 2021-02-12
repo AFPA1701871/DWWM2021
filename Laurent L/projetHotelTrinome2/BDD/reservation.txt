@@ -1,0 +1,4 @@
+numReservation;numClient;chambreReserves;dateArrivee;dateDepart;nbreAdulte;nbreEnfant;
+1000;1;5;05-02-2021;08-02-2021;2;2;
+1001;2;6,12;09-02-2021;15-02-2021;2;6;
+1002;3;53;12-02-2021;21-02-2021;1;2;

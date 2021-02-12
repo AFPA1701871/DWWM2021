@@ -1,10 +1,5 @@
 <?php 
 
-    function chargementClass($classe){
-        require('./entities/'. $classe .'.class.php');
-    }
-    spl_autoload_register('chargementClass');
-
     define("LIEN_TICKET","./entities/ticket.txt");
     define("LIEN_PRODUIT","./entities/produit.txt");
 
@@ -28,7 +23,6 @@
             f_gestionnaire();
         }
     }
-   
    
         
 ?>  
