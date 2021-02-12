@@ -1,12 +1,13 @@
 <?php 
 
     class Player extends Character{
-        protected $_score=0;
+        protected $_score;
         protected $_pseudo;
 
         public function __construct(string $pseudo){
             parent::__construct(100,20);
             $this->_pseudo=$pseudo;
+            $this->_score=0;
         }
 
         public function move(){
