@@ -1,6 +1,6 @@
 <?php
-
-    class Personne {
+    require ("../Interface/iParam.php");
+    abstract class Personne implements Paramètres{
         protected $_nom;
         protected $_pointsDeVie;
 
@@ -11,17 +11,15 @@
 
       
 
+    
         public function parler(){
             echo "Je suis un personnage qui s'appelle $this->_nom et qui à $this->_pointsDeVie points de vie. \n";
         }
 
-        public function BoirePotion(){
+        final public function BoirePotion(){
             echo "Je bois une potion.\n";
         }
 
-        public function Dormir(){
-            echo "Je dors.\n";
-        }
     }
 
 ?>
