@@ -8,10 +8,20 @@
     }
     spl_autoload_register('chargerClasse');
 
-    $lapinBlanc= new Lapin("blanc",4,true);
+    $lapin= new Lapin("lapin","blanc",4,true);
     $paul=new Chasseur("Paul","fusil");
 
-    echo "Le lapin ".$lapinBlanc->getCouleur()." à ".$lapinBlanc->getNombrePatte(). " a été crée. \n";
-    echo "Le chasseur ".$paul->getNom()." a été crée avec son ".$paul->getArme().".\n";
+    echo "Le lapin ".$lapin->getCouleur()." à ".$lapin->getNombrePatte(). " pattes a été crée. \n";
+    echo "Le chasseur ".$paul->getNom()." a été crée avec son ".$paul->getArme().".\n\n";
 
+    $lapin->seNourrir();
+
+    while($lapin->getEnVie()==true){
+        $paul->seDeplacer();
+        $lapin->crier();
+        readline("");
+        $paul->chasser($lapin);
+        $lapin->fuir($lapin);
+        readline("");
+    }
 ?>
