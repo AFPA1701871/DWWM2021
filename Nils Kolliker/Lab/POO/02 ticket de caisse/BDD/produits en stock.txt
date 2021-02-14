@@ -1,2 +1,0 @@
-produit1;tata;2;
-produit2;tata;4;
