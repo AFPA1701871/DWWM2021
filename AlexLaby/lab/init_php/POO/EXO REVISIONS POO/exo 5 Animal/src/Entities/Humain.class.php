@@ -2,14 +2,14 @@
 
     abstract class Humain implements IMobile{
         //Attributs
-        private $nom;
+        protected $_nom;
 
         //Getters setters
         public function getNom(){
-            return $this->nom;
+            return $this->_nom;
         }
         public function setNom(string $nom){
-            $this->nom = $nom;
+            $this->_nom = $nom;
         }
 
         //Constructeur
