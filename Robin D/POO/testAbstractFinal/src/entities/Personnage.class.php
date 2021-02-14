@@ -1,5 +1,5 @@
 <?php
-    class Personnage {
+    abstract class Personnage {
         protected $_name;
         protected $_sex;
         
@@ -24,13 +24,13 @@
             return $this->_sex;
         }
 
-        public function sePresenter() {
-            echo "je suis un personnage ".$this->get_sex()." et je me nomme ".$this->get_name()."\n";
-        }
+        abstract public function parler();
 
         public function crier() {
-            echo $this->get_name(). " se met à crier comme un dingue\n";
+            echo "je suis un personnage!\n";
         }
+
+
     }
     
 ?>
