@@ -1,4 +1,4 @@
-<?php
+n<?php
     require("./entities/reservation.class.php");
     require("./entities/Client.class.php");
     
@@ -100,10 +100,8 @@
 
 
     do{
-        $numReservation = readline("Quelle réservation détaillée voulez-vous connaitre ? ");
-        
-        affichageReservation($numReservation);        
-
+        $numReservation = readline("Quelle réservation détaillée voulez-vous connaitre ? ");        
+        affichageReservation($numReservation);   
         $nouvelleRecherche = strtoupper(readline("Voulez-vous procéder à une nouvelle recherche ? "));
     } while($nouvelleRecherche=="OUI");    
 
