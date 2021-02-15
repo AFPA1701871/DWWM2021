@@ -5,6 +5,10 @@
 
         public function __construct($name,$sex,$force) {
             parent::__construct($name,$sex);
+            $this->set_force($force);
+        }
+
+        public function set_force($force){
             $this->_force=$force;
         }
 
