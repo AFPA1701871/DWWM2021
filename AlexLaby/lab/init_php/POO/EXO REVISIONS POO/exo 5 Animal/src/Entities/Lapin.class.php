@@ -1,34 +1,22 @@
 <?php
 
     Class Lapin extends Animal{
-        //Attributs
-        private $enVie;
-
-        //Getters setters
-        public function getEnVie(){
-            return $this->enVie;
-        }
-        public function setEnVie(bool $enVie){
-            $this->enVie = $enVie;
-        }
 
         //Constructeur
-        public function __construct($couleur,$nombrePatte,$enVie){
-            parent::__construct($couleur,$nombrePatte);
-            $this->setEnVie($enVie);
+        public function __construct($race,$couleur,$nombrePatte,$enVie){
+            parent::__construct($race,$couleur,$nombrePatte,$enVie);
         }
 
         public function seDeplacer(){
-            
+            echo "Le " .$this->getRace(). " fuit. \n";
         }
 
         public function seNourrir(){
-            echo "Le lapin ". $this->getCouleur." se nourrit \n";
-
+            echo "Le " .$this->getRace() ." " .$this->getCouleur()." se nourrit. \n\n";
         }
 
-        public function fuir(){
-
+        public function fuir($lapin){
+            $lapin->seDeplacer();
         }
     }
 ?>
