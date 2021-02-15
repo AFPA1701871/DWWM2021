@@ -21,12 +21,11 @@
             //demarrage
         public function demarrage(){
             $this->set_vitesse(0);
-            //echo $this->get_vitesse();
         }
 
             //acceleration
         public function acceleration(){
-            $acceleration = intval(rand(0,25));
+            $acceleration = intval(rand(1,25));
             $this->set_acceleration($acceleration);
             $vitesse = $this->_vitesse + $this->_acceleration;
             $this->set_vitesse($vitesse);
@@ -37,8 +36,6 @@
         public function affichageAccelVitesse(){
             return "\nLa voiture immatriculée ".$this->_immatriculation.", de marque ".$this->_marque.", de type ".$this->_modele." et de couleur ".$this->_couleur." vient d'accélérer de ".$this->_acceleration." km/h et roule maintenant à ".$this->_vitesse." km/h.";
         }
-        
-
 
             //getter et setter
         public function get_marque(){
@@ -77,7 +74,7 @@
             return $this->_vitesse;
         }
 
-        public function set_vitesse($_vitesse){
+        public function set_vitesse(int $_vitesse){
             $this->_vitesse = $_vitesse;
         }
 

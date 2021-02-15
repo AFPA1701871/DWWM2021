@@ -1,7 +1,7 @@
 <?php
    function help($repUser){
     echo "1.create table nomTable(titreColonne1, titreColonne2,titreColonne3,tite); (création de table) \n
-2.insert into table (insertion de données dans une table)\n
+2.insert into table values(insertion de données dans une table)\n
 3.SELECT * FROM nomTable; (Affiche tout le fichier en tableau) \n
 4.SELECT nom_du_champ from nom_de_la_table; (Affiche la colonne entrer )\n
 5.SELECT noms1,noms2 from nomTable (Affiche plusieurs colonne entrer)\n
@@ -21,6 +21,7 @@
                 }
             }
         fclose($f);                             //fermeture du fichier
+        echo "Fichier crée.\n";
     }else{
         echo"Erreur : Se fichier existe deja \n";   //Si fichier existe pas msg d'erreur
     }

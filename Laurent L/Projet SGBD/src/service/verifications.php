@@ -33,7 +33,7 @@ function verifSaisie($saisie){
             insert($saisie);
             break;
         case ($tabSaisie[0]=="SELECT" and $tabSaisie[1]=="*" and $tabSaisie[2]=="FROM" and substr($saisie,-1)==";"):
-            selectFrom($tabSaisie[3]);
+            // selectFrom($tabSaisie[3]);
             break;
         default : 
             echo "Votre commande est invalide.\n";

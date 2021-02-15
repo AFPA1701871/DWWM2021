@@ -1,0 +1,2 @@
+numReservation;dateReservation;dateArrivee;dateDepart;numClient;nomClient;prenomClient;nbrChambres;numChambre;
+R-1007;04/02/2021;05/02/2021;06/02/2021;C-036;Leroux;Laurent;1;15,47,48,15;

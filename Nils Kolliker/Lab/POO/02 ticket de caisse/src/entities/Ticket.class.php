@@ -1,4 +1,5 @@
 <?php
+//require "./services/affichage.php";
 class Ticket{
     private $_nom;
     private $_prenom;
@@ -56,9 +57,29 @@ class Ticket{
     }
 
     public function save(){
-        $fp = fopen("./BDD/ticket de caisse.txt", "a");
+        $fp = fopen("../BDD/ticket de caisse.txt", "a");
         fputs($fp,$this->toutEnString()."\n");
         fclose($fp);
+    }
+
+    public function afficheLigne(){
+        for ($i=0;$i<57;$i++){
+            echo"-";
+        }
+        echo"\n";
+    }
+    public function affichageDuTicket(){
+        $tab=$this->prixTotal();
+        echo $this->_nom." ".$this->_prenom;
+        $this->afficheLigne();
+        echo"Produit            Qté     Prix Unitaire       Prix Total\n";//18 7 20 10
+        $this->afficheLigne();
+        for ($i=0;$i<count($this->_listeDeProduit);$i++){
+            echo chaineDeBonneLongueur($this->_listeDeProduit[$i]->getLibelle(),18)." ".chaineDeBonneLongueur($this->_quantiteDuProduit[$i],7)." ".chaineDeBonneLongueur($this->_listeDeProduit[$i]->getPrixUnitaire(),19)." ".chaineDeBonneLongueur($tab[$i],10)."\n";
+        }
+        $this->afficheLigne();
+        echo "Total Ticket                                   ".chaineDeBonneLongueur($this->totalTicket(),10);
+        
     }
 }
 ?>
