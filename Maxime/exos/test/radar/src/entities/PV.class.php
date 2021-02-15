@@ -2,16 +2,17 @@
     class PV{
         private $_amende;
 
-        public function setAmount($marque,$modele,$immat,$couleur,$vitesseLim,$vitesseVoit){
-            if($vitesseVoit>=$vitesseLim+10){
-                $this->_amende=45;
+        public function setAmende($difVit){
+            if($difVit<=10){
+                $_amende="-1pt et 45€ d'amende";
             }
-            else if($vitesseVoit>=$vitesseLim+10){
-                $this->_amende=90;
+            else if($difVit<=10 and $difVit<20){
+                $_amende="-3pt et 90€ d'amende";
             }
             else{
-                $this->_amende="";
+                $_amende="RDV gendarmeire";
             }
+            echo $_amende;
         }
     }
 ?>
