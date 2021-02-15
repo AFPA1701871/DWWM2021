@@ -54,11 +54,11 @@
 
     
     //LL cette fonction renvoie l'integralité des informations d'un chambre
-    //Elle ne nécessite aucun argument mais pour son fonctionnement elle utilise
+    //L'argument est le numéro de chambre pour son fonctionnement elle utilise
     //les fonctions suivantes : enteteInv, affichageChamp, et ligneSéparation
     //la fonction return un affichage de la fiche complete
 
-    function detailChambre($chambreDetail){
+    function affichageDetailChambre($chambreDetail){
         $ligneSeparation = ligneSeparation(120,"-");
         echo "\n$ligneSeparation";
         echo "\nNuméro de chambre :  ".affichageChamp(20,$chambreDetail->getNumRoom())."Prestation : ".affichageChamp(50,$chambreDetail->getType())."Prix : ".affichageChamp(7,$chambreDetail->getPrix())." €";
@@ -119,7 +119,7 @@
     $chambreDetail = creationObjetChambreDetail($numChambre);
 
     
-    detailChambre($chambreDetail);
+    affichageDetailChambre($chambreDetail);
 
 
 ?>
