@@ -50,7 +50,7 @@ function resultat($saisieUser){
 //Insertion du vainqueur dans le fichier winner
 function insertionVainqueur($theWinner){
     $fp = fopen("winner.txt", "a+");
-    fputs($fp, $theWinner."\n");
+    fputs( $fp, $theWinner . "\n");
     fclose($fp);
 
 }
@@ -67,9 +67,11 @@ function voirListeGagnant(){
 function afficheVainqueurs(){
     $fp = fopen("winner.txt", "r");
     echo "Voici la liste des vainqueurs du CHIFOUMI \n ";
+    $compteur = 0;
     while (!feof($fp)) {
         $ligne = fgets($fp,4096);
-        echo $ligne;
+        $compteur++;
+        echo $compteur." - " .$ligne;
     }
 }
 ?>

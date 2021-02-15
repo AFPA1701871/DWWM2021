@@ -1,9 +1,5 @@
-Hoa Thi
-Xuan Babin
-Jules Hoye
-Momo Kiki
-Kp Kp
-Pou Pou
-Pou Pou
-Kesary Pavaday
-Chi Pette
+John Doe
+Marie Curry
+Jane Doe
+Toto Titi
+Toto Toto
