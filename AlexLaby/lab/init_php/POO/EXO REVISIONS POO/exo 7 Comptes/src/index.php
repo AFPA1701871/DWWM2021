@@ -12,6 +12,6 @@
     $compte2= new Compte ("1098","0");
     $client2= new Client ("tata",$compte1->get_numeroCompte());
 
-    id($inputUser);
+    id($client);
 
 ?>
