@@ -8,8 +8,17 @@ return " votre table a ete cree \n";}
 function InsertInto($file,$champInsert){
 $file="C:/git/mohammed/DWWM2021/mohammed/lab/init_php/.vscode/projet_SGBD/src/service/". $file .".dwwm";
 $ouvrir = fopen( $file, "a");
-fputs($ouvrir,$champInsert);
+fputs($ouvrir,$champInsert)
 $champInsert = str_replace(",",";",$champInsert);
 return " votre champ a ete ajouter \n";
 }
+function SelectFrom ($file){
+    $file="C:/git/mohammed/DWWM2021/mohammed/lab/init_php/.vscode/projet_SGBD/src/service/". $file .".dwwm";
+    $ouvrir = fopen( $file, "r");
+    while (!feof($file)) {
+       $line= fgets($file,4096);
+       echo $line."\n";
+    }
+    return " votre affichage est celui la  \n";
+    }
 ?>

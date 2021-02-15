@@ -37,7 +37,7 @@ class Produit{
 
     public function estEnStock(){
         $booleen=false;
-        $fp = fopen("./BDD/produits en stock.txt", "r");
+        $fp = fopen("../BDD/produits en stock.txt", "r");
         while (!feof($fp)){
             ($this->_libelle==stristr (fgets($fp,4096),";",true))?$booleen=true:null;
         }
@@ -49,7 +49,7 @@ class Produit{
         if ($this->estEnStock()){
             echo "erreur, produit déjà ressencé\n";
         }else{
-            $fp = fopen("./BDD/produits en stock.txt", "a");
+            $fp = fopen("../BDD/produits en stock.txt", "a");
             fputs($fp,$this->toutEnString()."\n");
             fclose($fp);
         }
