@@ -18,7 +18,7 @@
 
         //Methodes
 
-        public function toString(Employe $salarié){
+        public function toString(){
             echo "\n".$this->get_prenom()." ".$this->get_nom()." fait parti(e) des effectifs de notre société.\nSon N° de Sécurité Sociale est ".$this->get_numSecu().". \nSon salaire mensuel brut est de ".$this->get_salaire()." €. \nIl / Elle exerce le métier suivant : ".$this->get_job().".";
         }
 
@@ -34,8 +34,8 @@
                 case "magasinière" :
                     echo "\n".$this->get_prenom()." ".$this->get_nom()." a en charge stock de l'entreprise, son approvisionnement, sa gestion, sa rotation, anticiper une eventuelle rupture d'une réference.\n";
                     break;
-                case "cadre" :
-                    echo "\n".$this->get_prenom()." ".$this->get_nom()." chappote une équipe de salariés avec pour objectif, accomplir les taches qui incombent à l'équipe ou au service.\n";
+                case "chef maintenance" :
+                    echo "\n".$this->get_prenom()." ".$this->get_nom()." est le numero 1 du service maintenance.\n";
                     break;
                 default :
                     echo "Oups";

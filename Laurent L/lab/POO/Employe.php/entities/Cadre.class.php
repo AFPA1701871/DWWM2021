@@ -9,20 +9,18 @@
         }
 
         // Méthodes 
-        public function manage(Employe $salarie){
-            array_push($this->_listeEmploye,$salarie);
+        public function manage(array $salarie){
+            foreach($salarie as $element){
+                $this->_listeEmploye[]=$element;
+                $nom = $element->get_nom();
+                echo "\nMonsieur ".$this->get_nom()." encadre ".$nom.".";
+            }
+
         }
 
         public function augmenterUnSalarie(Employe $salarie, int $pourcentage){
-            for($i=0;$i<count($this->_listeEmploye);$i++){
-                if($this->get_listeEmploye()[$i]->get_nom() == $salarie){
-                    $salaire = $this->get_listeEmploye()[$i]->get_salaire()*(1+($pourcentage/100));
-                    $this->get_listeEmploye()[$i]->set_salaire($salaire);
-                    echo $this->get_listeEmploye()[$i]->get_nom()." ".$this->get_listeEmploye()[$i]->get_salaire();
-                }
-            }
-
-
+            $salaireActuel = $salarie->get_salaire();
+            $salarie->set_salaire(round($salaireActuel*(1+($pourcentage/100)),2));
         }
 
 
