@@ -3,7 +3,7 @@
 abstract class Character{
     //Attributs
     protected $_lifepoint;
-    protected $strenghtPoint;
+    protected $_strenghtPoint;
 
     //GETTERs et SETTERs
     public function get_lifepoint(){
