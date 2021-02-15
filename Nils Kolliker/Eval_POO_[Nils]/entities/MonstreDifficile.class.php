@@ -26,7 +26,7 @@ class MonstreDifficile extends MonstreFacile{
         }
         if(!$joueur->leveeDeBouclier($de,$trace)){
             if($deDeMana==6){//une chance sur 6
-                $joueur->subitDegats(0,$trace);
+                $joueur->subitDegats(0,$trace);//juste pour l'affichage si la trace est demandé
             }else{
                 $joueur->subitDegats(5*$deDeMana,$trace);//ça pique en vrai... 12.5 de dégats en moyenne
             }

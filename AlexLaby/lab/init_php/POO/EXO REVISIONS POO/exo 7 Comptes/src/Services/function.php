@@ -1,21 +1,21 @@
 <?php
 
     //Pour identifier son client
-    function id($inputUser,$client){
+    function id($client1, $client2){
         $inputUser=readline("Selectionner un client en tapant son numéro de compte ou son nom : ");
-        if($inputUser=="12345678910" or $inputUser=="toto"){
-            menu($client);
+        if($inputUser==$client1->get_compteBancaire() or $inputUser=="toto"){
+            menu($inputUser);
         }else if($inputUser=="1098" or $inputUser=="tata"){
-            menu($client);
+            menu($inputUser);
         }else{
             echo "Le client n'existe pas \n";
-            id($inputUser,$client);
+            id($client1, $client2);
         }
     }
 
 
     //Pour faire des actions sur le client
-    function menu($client){
+    function menu($inputUser,$client1,$client2){
 
         echo "1. Afficher les infos du client\n";
         echo "2. Afficher les infos d'un de ses comptes\n";
