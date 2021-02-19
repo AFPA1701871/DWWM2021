@@ -4,11 +4,13 @@
         //Attribut
         private $_pointVie;
         private $_score;
+        private $_de;
 
         //Constructeur
-        public function __construct($pointVie){
+        public function __construct($pointVie,$de){
             $this->set_pointVie($pointVie);
             $this->_score=0;
+            $this->_de = $de;
         }
 
         //Méthodes
@@ -24,8 +26,8 @@
 
         public function attaque(MonstreFacile $adversaire, $gain){
             $deJoueur = De::lanceLeDe();
-            $adversaire = De::lanceLeDe();
-            if ($deJoueur>=$adversaire){
+            $deAdversaire = De::lanceLeDe();
+            if ($deJoueur>=$deAdversaire){
                 echo "Hero gagne";
                 $this->scoreAugmente($gain);
                 $adversaire->set_enVie(false);
