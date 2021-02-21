@@ -7,10 +7,11 @@
         private $prix;
 
 
-        public function __construct($libelle,$description,$prix){
+        public function __construct($libelle,$description,$prix,$quantite){
             $this->setLibelle($libelle);
             $this->setDescription($description);
             $this->setPrix($prix);
+            $this->setQuantite($quantite);
         }
 
         public function setLibelle($libelle){
@@ -25,6 +26,10 @@
             $this->_prix = $prix;
         }
 
+        public function setQuantite($quantite){
+            $this->_quantite = $quantite;
+        }
+
         public function getLibelle(){
             return $this->_libelle;
         }
@@ -35,6 +40,10 @@
 
         public function getPrix(){
             return $this->_prix;
+        }
+
+        public function getQuantite(){
+            return $this->_quantite;
         }
 
     }

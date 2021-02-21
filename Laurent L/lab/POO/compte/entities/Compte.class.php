@@ -35,25 +35,23 @@
         }
 
         //
-        public function virementCompte($montant, Compte $numeroCompte){
+        public function virementCompte($montant, $numeroCompte, array $listeCompte){
             $this->retrait($montant);
-            for($i = 1 ; $i<3 ; $i++){
-                $client = "client$i";
-                for($j = 0 ; $j<count($$client->get_compteBancaire());$j++){
-                    if($numeroCompte == $$client->get_compteBancaire()[$j]->get_numeroCompte()){
-                        $numeroCompte->set_solde($numeroCompte->get_numeroCompte()+$montant);
-                    }
+            for($i=0; $i<count($listeCompte); $i++){
+                if($listeCompte[$i]->get_numeroCompte()==$numeroCompte){
+                    $listeCompte[$i]->versement($montant);                    
                 }
-
             }
-            
-            if(isset($numeroCompte)){
-                echo "Le compte existe";
-                //$numeroCompte->set_solde($numeroCompte->get_solde()+$montant);
-            }
-            
+            // $numeroCompte->versement($montant);
 
+            
         }
+            
+
+       
+                        
+
+    
 
         // get et set
 

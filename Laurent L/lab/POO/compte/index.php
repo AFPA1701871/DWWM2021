@@ -8,6 +8,8 @@
     $compte3 = new Compte(46086861903);
     $compte4 = new Compte(46086861904);
 
+    $listeCompte = [$compte1,$compte2,$compte3,$compte4];
+
     $client1 = new Client("Gustave",[$compte1,$compte2]);
     $client2 = new Client("Léon",[$compte3,$compte4]);
 
@@ -53,8 +55,8 @@
             case 5 :
                 $compteChoix = $client->choixCompte();
                 $mttVirement = intval(readline("Quel est le montant de votre virement ? "));
-                $compteACrediter = intval(readline("N° de compte bénéficiant du virement : "));
-                $client->get_compteBancaire()[$compteChoix]->virementCompte($mttVirement,$compteACrediter);                
+                $compteACrediter = readline("N° de compte bénéficiant du virement : ");
+                $client->get_compteBancaire()[$compteChoix]->virementCompte($mttVirement,$compteACrediter,$listeCompte);                       
                 break;
             default :
                 echo "Cela ne devrait pas être le cas...";
