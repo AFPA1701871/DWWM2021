@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="initiation HTML" content="Debut initiation ">
+    <title>Page de formulaire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html">Accueil</a>
+
+    <h1>Notre formulaire</h1>
+    <form action="traitement.php" method="post">
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom" placeholder="Dupont" required> </br>
+        <label for="prenom">Prenom</label>
+        <input type="text" name="prenom" id="prenom" placeholder="Charles" required></br>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="abc@abc.az" required></br>
+        </br>
+        <input type="radio" name="sexe" id="sexe" value="Femme">
+        <label for="sexe">Femme</label></br>
+        <input type="radio" name="sexe" id="sexe" value="Homme">
+        <label for="sexe">Homme</label></br>
+        </br>
+        <label for="iamge">Choisir un fichier image</label>
+        <input type="file" name="image" id="image" accept="image/png, image/jpeg"></br>
+        </br>
+        <label for="pays">Habitez-vous dans l'un de ces pays?</label></br>
+        <select name="pays" id="pays">
+            <option value="france">France</option>
+            <option value="belgique">Belgique</option>
+            <option value="luxembourg">Luxembourg</option>
+            <option value="autre">Autre</option>
+        </select>
+        </br></br>
+        <label for="langage">Langage(s) préféré(s)</label></br>
+        <input type="checkbox" name="php" id="php">
+        <label for="php">Php</label></br>
+        <input type="checkbox" name="html" id="html">
+        <label for="html">Html</label></br>    
+        <input type="checkbox" name="css" id="css">
+        <label for="css">CSS</label></br>
+        <input type="checkbox" name="avascript" id="avascript">
+        <label for="javascript">Javascript</label></br>
+
+
+
+    </form>
+</body>
+</html>
