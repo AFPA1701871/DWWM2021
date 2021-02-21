@@ -1,0 +1,35 @@
+body {
+    margin: 1em 3em;
+}
+
+header nav {
+    border-style: dashed;
+    padding: 1.3em 0;
+}
+
+header li {
+    display: inline-block;  
+}
+
+section {
+    display: inline-block;
+    width: 70%;
+}
+
+article {
+    margin: 1em;
+    margin: 1.5em;
+    border-style: dashed;
+    padding: 1em;
+}
+
+article div {
+    background-color: rgba(194, 193, 193, 0.945);
+    padding: 1em 3em;
+}
+
+aside {
+    display: inline-block;
+    width: 29%;
+    background-color: red;
+}
