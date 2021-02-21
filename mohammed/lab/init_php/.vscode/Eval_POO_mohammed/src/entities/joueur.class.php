@@ -17,25 +17,40 @@ class joueur {
        public function get_pointVie(){
           return $this->_pointVie;
         } 
+        public function get_score(){
+            return $this->_score;
+        }
+        //setters 
+        public function set_score(){
+           $this->_score++;
+        }
+        public function set_pointVie($pointVie){
+             $this->_pointVie=$pointVie;
+          } 
    
 
 
     //methode 
-    public function score(){
-        $this->_score++;
-        return  $this->_score;
-    }
+    
    public function EstVivant(){
        if ($this->_pointVie>0) {
-           echo " notre heros est toujours en vie \n";
-           $bol=true; 
+           $bol=true;
         }
-         return $bol;
+        return $bol; 
     }
-   public function Attaque (){
-       $jetHero=rand(1,6);
-       return $jetHero;
-   }
+   public function Attaque ( $De,$monstre  ){
+       $De->get_nom();
+       echo " le joueur joue :".$lancejoueur= $De->lanceDe()."\n";
+      echo " le monstre joue ".$lanceMonstre=$De->lanceDe() ."\n";
+      if ($lancejoueur>=$lanceMonstre) {
+          echo " joueur gagne \n";
+          echo "************************ monstre suivant \n";
+          $this->_score++;
+          $monstre ->set_vie(0);
+      }
+      
+      }
+
    public function SubitDegats(){
        $bouclier=rand(1,6);
        if ($bouclier<=2) {
