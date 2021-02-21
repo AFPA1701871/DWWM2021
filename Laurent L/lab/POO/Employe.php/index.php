@@ -16,11 +16,11 @@
     $employe3->toString();
     $employe3->effectueSonJob();
 
-    $cadre = new Cadre("Alain","Deloin",1840259453666,2100.23,"chef maintenance");
+    $cadre = new Cadre("Alain","Deloin",1840259453666,2100.23,"chef maintenance",[$employe1,$employe3]);
     $cadre->toString();
     $cadre->effectueSonJob();
 
-    $cadre->manage([$employe1,$employe3]);
+    $cadre->manage();
    
 
     // print_r($cadre->get_listeEmploye());

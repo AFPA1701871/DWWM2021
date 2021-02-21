@@ -3,41 +3,59 @@
         require( "./entities/".$class .'.class.php');
     }
     spl_autoload_register('chargementClass'); // chargement automatique des classes
-         $choixMonstre=rand(1,2);             // choix de l'adverssaire  
+                     // choix de l'adverssaire  
          $joueur =new joueur;
               sleep (1);
-     if ($choixMonstre==1) {
-                  echo " monstre facile \n";
-                  $monstreFacile = new monstreFacile;
-             do {
-                 $attaqueHero=$joueur->Attaque ();
-                 $attaquePetitMonstre=$monstreFacile->AttaquePetitMonstre();
-                   echo "mon heros attaque :" .$attaqueHero. " le monstre attaque :". $attaquePetitMonstre."\n";
-                   if ($attaqueHero >= $attaquePetitMonstre) {
-                     echo $attaqueHero."\n";
-                     echo $attaquePetitMonstre."\n";
-                        echo " heros gagne "
-                        ."*************************************************************   monstre suivant "."\n";
-                        $joueur->score();
-                        break;
-                    }  
-                    else if ($attaqueHero <$attaquePetitMonstre) {
-                            echo "monstre attaque :" .$attaquePetitMonstre . " hero :".$attaqueHero."\n";
-                                if ($attaqueHero>$attaquePetitMonstre) {
-                                        echo " heros gagne "
-                                        ."*************************************************************   monstre suivant "."\n";
-                                        break;       
-                                }  
-                               else {
-                                echo  $joueur->SubitDegats();
-                               }
-                      }   
-                      echo " le reste ds point de vie ".$joueur->get_pointVie();
-                        ;
-                     echo " votre score est de ".$joueur->score();
-                } while ($attaqueHero<$attaquePetitMonstre and  $joueur->EstVivant( )==true);
+ do { 
+     $choixMonstre=rand(1,2); 
+      if ($choixMonstre==1) {
+                echo " monstre facile \n";
+                $de=new De;
+                $monstreFacile = new monstreFacile;
+                echo " un nouvau monstre a ete cree \n";
+           do {
+                $joueur->Attaque ( $de, $monstreFacile );
+                    if ($monstreFacile->get_vie()==0) {
+                         break;
+                    }
+                $monstreFacile ->AttaqueMonstre ($de,$joueur);
+            } while ($monstreFacile->get_vie()>0);
+          
+        } 
+        
             
-       /* else {
+    else {
+             echo " monstre difficile \n";
+                  $de=new De;
+                $monstreDifficile = new monstreDifficile ;
+                echo " un nouvau monstre a ete cree \n";
+                 do {
+                        $joueur->Attaque ( $de, $monstreDifficile );
+                        if ($monstreDifficile->get_vie()==0) {
+                            break;
+                        }
+                       $monstreDifficile ->AttaqueMonstredificcile  ($de,$joueur);
+                    } while ($monstreDifficile->get_vie()>0);               
+         }        
+} while ( $joueur->EstVivant( )==true);
+              echo  "vous avez tuez ". $joueur->get_score()." monstre \n";
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
                  echo " monste difficile \n";
                  $de=new De;
                  $monstreDifficile = new monstreDifficile ;
@@ -53,7 +71,7 @@
                        $joueur->SubitDegats();
   
                  } while ($joueur->Attaque ()<$monstreFacile->Attaque () and  EstVivant( )==true);*/
-            }
+            
 
 
     
