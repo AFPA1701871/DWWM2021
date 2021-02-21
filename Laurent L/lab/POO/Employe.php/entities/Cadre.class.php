@@ -9,11 +9,13 @@
         }
 
         // Méthodes 
+        //Renvoie un affichage determinant le manager et le salarié sous sa responsabilité
+        //l'argument correspond à un tableau des salariés subordonnés à un manager
         public function manage(array $salarie){
             foreach($salarie as $element){
-                $this->_listeEmploye[]=$element;
                 $nom = $element->get_nom();
-                echo "\nMonsieur ".$this->get_nom()." encadre ".$nom.".";
+                $prenom = $element->get_prenom();
+                echo "\nMonsieur ".$this->get_nom()." encadre ".$prenom." ".$nom.".\n";
             }
 
         }

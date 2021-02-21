@@ -9,9 +9,9 @@
     }while ( $choixAffichage!=1 && $choixAffichage !=2);
 
 
-   
+    $de = new De();
     
-    $hero = new Joueur(50);
+    $hero = new Joueur(50,$de);
 
     while ($hero->get_pointVie()>0){
         //choix adversaire
