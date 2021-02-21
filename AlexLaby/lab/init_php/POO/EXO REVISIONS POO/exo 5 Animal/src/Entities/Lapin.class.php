@@ -18,5 +18,8 @@
         public function fuir($lapin){
             $lapin->seDeplacer();
         }
+        public function crier(){
+            echo "Le ". $this->getRace()." ".$this->getCouleur(). " glapie de peur. \n";
+        }
     }
 ?>

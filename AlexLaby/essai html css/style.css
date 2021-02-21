@@ -1,0 +1,14 @@
+.rouge{
+    background-color: rgb(196, 98, 98);
+    display: block;
+}
+.verte{
+    background-color: rgb(80, 206, 80);
+    text-align: center;
+    font-size: 1.10em;
+    display:block;
+}
+
+body{
+    background-color: rgb(238, 244, 248);
+}
