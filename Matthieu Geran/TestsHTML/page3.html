@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 3</title>
+</head>
+<body>
+    <h1>Formulaire</h1>
+
+    <p>Merci de remplir ce formulaire.</p>
+
+    <form method="POST" action="traitement.php">
+    <fieldset>
+        <legend>Informations personnelles</legend>
+            <table>
+                <tr>
+                    <td><label for="nom">Nom : </label></td>
+                    <td><input type="text" name="nom"></td>
+                </tr>
+                <tr>
+                    <td><label for="prenom">Prénom : </label></td>
+                    <td><input type="text" name="prenom"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email : </label></td>
+                    <td><input type="email" name="email"></td>
+                </tr>
+            </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>Sexe</legend>
+            <p>
+                <input type="radio" name="sexe" value="femme" id="femme"/> <label for="femme">Femme</label>
+                <input type="radio" name="sexe" value="homme" id="homme"/> <label for="homme">Homme</label>
+            </p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Photo</legend>
+            <p>
+                <input type="file" id="photo" name="photo" accept="image/png, image/jpeg">Formats autorisés : <b>PNG</b>, <b>JPEG</b>
+            </p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Pays</legend>
+            <p>
+                <label for="pays">Dans quel pays habitez-vous ?</label><br/>
+                <select name="pays" id="pays">
+                <optgroup label="Europe">
+                <option value="france">France</option>
+                <option value="espagne">Espagne</option>
+                <option value="italie">Italie</option>
+                <option value="royaume-uni">Royaume-Uni</option>
+                </optgroup>
+                <optgroup label="Amérique">
+                <option value="canada">Canada</option>
+                <option value="etats-unis">Etats-Unis</option>
+                </optgroup>
+                <optgroup label="Asie">
+                <option value="chine">Chine</option>
+                <option value="japon">Japon</option>
+                </optgroup>
+                </select>
+                </p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Langues préférées</legend>
+            <p>
+                Quelles sont vos langues préférées ?<br />
+                <input type="checkbox" name="francais" id="francais" /><label for="francais">Français</label><br/>
+                <input type="checkbox" name="anglais" id="anglais" /><label for="anglais">Anglais</label><br/>
+                <input type="checkbox" name="allemand" id="allemand" /><label for="allemand">Allemand</label><br/>
+                <input type="checkbox" name="ougandais" id="ougandais" /><label for="ougandais">Ougandais</label>
+            </p>
+
+    </fieldset>
+
+    <br/><input type="submit" value="Envoyer"/><input type="reset" value="Réinitialiser"/>
+    </form>
+</body>
+</html>
