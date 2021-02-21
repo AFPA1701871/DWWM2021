@@ -17,11 +17,12 @@
         }
 
         //Methodes
-
+        //Renvoie un affichage du salarié
         public function toString(){
             echo "\n".$this->get_prenom()." ".$this->get_nom()." fait parti(e) des effectifs de notre société.\nSon N° de Sécurité Sociale est ".$this->get_numSecu().". \nSon salaire mensuel brut est de ".$this->get_salaire()." €. \nIl / Elle exerce le métier suivant : ".$this->get_job().".";
         }
 
+        //Renvoie un affichage du descriptif du métier de l'employé
         public function effectueSonJob(){
             $saFonction = $this->get_job();
             switch($saFonction){
