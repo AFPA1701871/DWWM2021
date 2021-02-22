@@ -1,0 +1,16 @@
+header {
+    border: 0.063em dashed black;
+    padding: 2em 3em;
+}
+
+.inline {
+    display: inline;
+}
+
+body {
+    padding: 1em 3em;
+}
+
+nav {
+    padding: 30em 1em;
+}

@@ -1,0 +1,21 @@
+body{
+    background-color: #202020;
+    background-image: url(https://iphonesoft.fr/images/_082019/fond-ecran-dynamique-macos-wallpaper-club.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+b{
+    color: aqua;
+}
+.troll{
+    color:red;
+    font-size: 1.4em;
+}
+#green{
+    color:green;
+}
+div{
+    display: inline-block;
+    width: 40%;
+}

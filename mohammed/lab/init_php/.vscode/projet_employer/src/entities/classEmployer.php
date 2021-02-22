@@ -31,6 +31,9 @@ class employer {
         //setters
         public function set_salaire($salaire){
             $this->_salaire=$salaire;}
+            public function set_nom($nom){
+                 $this->_nom=$nom;
+            }
          // methode
          public function job_soudeur(){
              echo " le soudeur fabrique des objet en les assemblant des pieces mettalique\n";

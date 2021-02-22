@@ -1,6 +1,6 @@
 <?php
   class De {
-     private $_nom=" le De ";
+     private $_nom=" le De se lance !!! ";
         // methode 
         public function lanceDe(){
             $valeur=rand(1,6);
