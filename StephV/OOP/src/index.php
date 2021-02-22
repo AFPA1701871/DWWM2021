@@ -1,7 +1,7 @@
 <?php
 
 function loadClass($classe){
-    require("./Entities/".$classe.".class.php");}
+    require("./Entities/".$classe.".php");}
 spl_autoload_register("loadClass");
 
 //input user

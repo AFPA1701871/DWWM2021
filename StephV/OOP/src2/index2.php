@@ -1,6 +1,6 @@
 <?php
 function chargementClasse($classe){
-    require("./entities/".$classe.".php");
+    require("./entities2/".$classe.".php");
 }
 spl_autoload_register("chargementClasse");
 

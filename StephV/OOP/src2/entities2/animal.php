@@ -1,32 +1,32 @@
 <?php
 abstract class Animal implements seDeplacer
 {
-    protected $color;
-    protected $nbPaws;
+    protected $_color;
+    protected $_nbPaws;
 
     public function __construct(string $color,int $nbPaws){
-        $this->set_color=$color;
-        $this->set_nbPaws=$nbPaws;
+        $this->_color=$color;
+        $this->_nbPaws=$nbPaws;
     }
 
-    public function get_color(){
+    public function getColor(){
         return $this->_color;
     }
-    public function get_nbPaws(){
+    public function getNbPaws(){
         return $this->_nbPaws;
     }
 
     public function setColor($color){
-        $this->color=$color;
+        $this->_color=$color;
     }
     public function setNbPaws($nbPaws){
-            $this->nbPaws=$nbPaws;
+            $this->_nbPaws=$nbPaws;
     }
 
     abstract function crier();
 
     public function seDeplacer(){
-        echo " bondit sur ses 4 pattes ";
+        echo " bondit sur ses ".$this->getNbPaws()." pattes\n";
     }
 }   
 

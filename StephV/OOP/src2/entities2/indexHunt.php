@@ -1,20 +1,22 @@
 <?php
-function chargerClasse($classe){
-    require $classe.'.php';
+function loadClass($class){
+    require $class.'.php';
 }
-spl_autoload_register('chargerClasse');
+spl_autoload_register('loadClass');
 
 
-$lapin= new Lapin("blanc",4,true);
+$lapin= new Lapin(); 
 
-$chasseur= new Chasseur("fusil","Paul");
+$chasseur= new Chasseur();
 
 $lapin->seNourrir();
+
 do{
-$chasseur->seDeplacerAvecSonFusil("fusil","Paul");
-$lapin->crier();
-$chasseur->chasser($lapin);
-$lapin->fuir();
-}while($enVie=true);
+    $chasseur->seDeplacerAvecSonFusil($chasseur);
+    $lapin->crier();
+    $chasseur->chasser($lapin);
+}while($lapin->getEnVie=true);
+
+
 
 ?>
