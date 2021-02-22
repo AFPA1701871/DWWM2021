@@ -1,0 +1,5 @@
+Exercice 3
+1 - Non car cardinalité max 2
+2 - D'après l'image oui puisque le joueur ne joue pas forcément, cardinalité min 0, mais logiquement non
+3 - date-heure n'étant pas une clé, il est possible d'il y avoir doublon
+4 - Oui car lié au match, qui est lié au terrain

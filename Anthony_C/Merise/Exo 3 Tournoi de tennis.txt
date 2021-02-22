@@ -1,0 +1,15 @@
+1. Peut-on jouer des matchs de double :
+
+Non 2,2 représente qu'uniquement 2 joueurs peuvent jouer un match.
+
+2. Un joueur peut-il gagner un match sans y avoir participé ?
+
+Non, il est obliger de passer par un match.
+
+3. Peut-il y avoir deux matchs sur le même terrain à la même heure ?
+
+Non, par contre il y a plusieur terrain.
+
+4. connaissant un joueur, peut-on savoir sur quels terrains il a joué ?
+
+Oui si on a la date et l'heure et le numéro de terrain.

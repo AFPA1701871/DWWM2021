@@ -14,9 +14,9 @@
 
     liste($articles);
 
-    achat($articles);
-
-    ticket($articles);
+    
+$listeAchats = achat($articles);
+    ticket($articles,$listeAchats);
 
 
 

@@ -5,13 +5,13 @@ class MonstreDifficile extends MonstreFacile
         Parent::__construct($alive=true);
     }
 
-    public function attack($joueur){
+    public function attack($joueur){      //faut surcharger la méthode pour y faire venir la méthode spell
         echo "Le monstre attaque le héros\n";
        
     }
 
     public function spell(){
-        echo "Le monstre lance un sort\n";
+        echo "Le monstre lance un sort\n";  
 
     }
 }

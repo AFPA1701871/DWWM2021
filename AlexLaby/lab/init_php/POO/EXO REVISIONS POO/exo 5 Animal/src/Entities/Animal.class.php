@@ -46,10 +46,8 @@
         }
 
         //Pour crier
-        public function crier(){
-            echo "Le ". $this->getRace()." ".$this->getCouleur(). " glapie de peur. \n";
-        }
-
+        abstract public function crier();
+        abstract public function seDeplacer();
     }
 
 ?>

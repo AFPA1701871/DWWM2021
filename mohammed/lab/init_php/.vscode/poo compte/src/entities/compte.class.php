@@ -25,7 +25,7 @@ class compte {
         echo "numero de compte est :".$this->_numeroCompte;
         echo " votre solde est de :".$this->_solde;
     }
-    public function retrait($montantRerait){
+    public function retrait0($montantRerait){
         $this->_solde=$this->_solde-$montantRerait;
     }
     public function versement($versement) {

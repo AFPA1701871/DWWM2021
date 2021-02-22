@@ -12,10 +12,10 @@ echo "Il fait une mauvaise rencontre...\n";
 a:
 $intAlea=rand(1,6);
         if($intAlea<=3){
-            $monstre= new MonstreFacile;
+            $monstre= new MonstreFacile();
             echo "C'est un monstre facile\n";
         }elseif($intAlea>=4){
-            $monstre= new MonstreDifficile;            
+            $monstre= new MonstreDifficile();            
             echo "C'est un monstre difficile\n";
         }
 
