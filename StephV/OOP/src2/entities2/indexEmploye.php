@@ -8,6 +8,7 @@ $employe1= new Employe ("Neymar", "Jean", 1850389546458, 1500.56, "soudeur");
 $employe2= new Employe ("Jeremy", "Simon", 179028955812, 1700.47, "assistant mécanicien");
 $employe3= new Employe ("Deray", "Odile", 285097154678, 1900.14, "magasinière");
 
+
 echo $employe1->effectueSonJob($employe1);
 echo "\n";
 echo $employe2->effectueSonJob($employe2);
@@ -22,8 +23,17 @@ echo "\n";
 echo $cadre->manage($employe1,$employe3);
 echo "\n";
 echo $cadre->augmenteUnSalarie($employe1, $employe3);
-/*$cadre->set_listeEmploye($listeEmployeTab=[]);
-echo $listeEmploye=implode(",",$listeEmployeTab);*/
+echo "\n";
 
+$listeEmploye=[];
+array_push($listeEmploye, $employe1, $employe2,$employe3,$cadre);
+for($i=0;$i<count($listeEmploye);$i++){
+    echo " ".$i." : ".$listeEmploye[$i]->getNom()." ".$listeEmploye[$i]->getPrenom()." ".$listeEmploye[$i]->getNumSecu()." ".$listeEmploye[$i]->getJob()." ".$listeEmploye[$i]->getSalaire()."\n";
+}
+echo "\n\n";
+array_pop($listeEmploye);
+for($i=0;$i<count($listeEmploye);$i++){
+    echo " ".$i." : ".$listeEmploye[$i]->getNom()." ".$listeEmploye[$i]->getPrenom()." ".$listeEmploye[$i]->getNumSecu()." ".$listeEmploye[$i]->getJob()." ".$listeEmploye[$i]->getSalaire()."\n";
+}
 
 ?>

@@ -19,6 +19,7 @@ switch ($choix) {
         break;
     case 3:
         echo "Le résultat de l'opération est : ".($nombre1 * $nombre2);
+        break;
     default:
         echo "Le résultat de l'opération est : ".($nombre1/$nombre2);
         break;
