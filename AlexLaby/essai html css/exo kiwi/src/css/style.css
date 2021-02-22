@@ -5,20 +5,54 @@
 }
 
 .d1,.d2,.d3,.d4{
-    display: inline-block;   
+    display: inline-block;
+}
+.d1{
+    padding-left:2em;
 }
 
-.mid1{
+article{
     padding: 1em;
     border: 0.063em dashed black;
-
+    margin-left: 2.6em;
+    width: 96.875em;
 }
+
 .entete{
     background-color: rgb(226, 226, 226);
-    padding: 20px 20px;
-
+    padding: 1.25em 1.25em;
 }
 
 aside {
-    float: right;
+    width: 9.375em;
+    padding-right:2em;
+    border: 0.063em dashed black;
+    margin-right: 2.6em;
+    position:absolute;
+    left:87%;
+}
+
+.image{
+    margin-top: 0.625em;
+    display: flex;
+    justify-content: center;
+    height: 12.5em;
+    width: auto;
+}
+
+.tangentiel{
+    border: 0.063em dashed black;
+    padding: 0.5em;
+    margin:auto;
+    height: 1.875em;
+    width: 35em;
+}
+
+.piedarticle{
+    background-color: rgb(226, 226, 226);
+    padding: 2.5em 1.25em;
+}
+
+.as1{
+    padding-left:2em;
 }

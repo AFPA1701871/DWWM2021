@@ -1,3 +1,66 @@
+header{
+    border:1px dotted black;
+    background-color: white;
+    padding: 0.5%;
+    position: fixed;
+    width: 95%;
+    margin-top: -4.5%;
+}
+
 nav li{
     display:inline-block;
+}
+
+nav li a:hover{
+    color:black;
+    font-weight: bold;
+}
+
+nav li + li:before{
+    content:" | ";
+}
+
+body{
+    margin:2%;
+    margin-top: 5%;
+}
+
+#article{
+    border: 1px dotted black;
+    margin:1%;
+    padding: 1%;
+    width:75%;
+}
+
+#entetePied{
+    background-color: rgb(194, 194, 194);
+    padding:0.6em;
+}
+
+#tangentiel{
+    border: 1px dotted black;
+    border-radius: 10px;
+    margin:2% 5%;
+    padding: 1%;    
+}
+
+#sidebar{
+    float:right;
+    border: 1px dotted black;
+    margin-right:1%;
+    padding: 1%;
+    width: 17%;
+}
+
+#imagesKiwi img{
+    display: inline-flex;
+    max-height: 150px;
+    margin:1% 0;
+    border-radius: 10px;
+}
+
+#peepo img{
+    max-height: 50px;
+    float:left;
+    margin-right: 1%;
 }
