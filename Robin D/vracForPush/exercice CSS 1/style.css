@@ -1,0 +1,47 @@
+body{
+    background-image: url('https://cefiac.fr/wp-content/uploads/2017/09/background-website-01.jpg');
+    font-family: sans-serif;
+}
+
+nav {
+    text-align: center;
+}
+
+nav a {
+    color:blue
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: rgb(0, 139, 19);
+}
+
+nav ul {
+    background-color: blue;
+}
+
+nav li {
+    display: inline-block;
+    background-color: red;
+}
+
+p {
+    background-color: yellow;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+div {
+    color: blue;
+    background-color: red;
+    text-align: right;
+}
+
+span {
+    background-color: green;
+}
+
+div p {
+    font-size: 1.2em;
+    background-color: teal;
+}

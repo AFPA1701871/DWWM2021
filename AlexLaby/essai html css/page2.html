@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page 2</title>
+</head>
+<body>
+    <header>
+        <fieldset>
+            <legend>Formulaire d'inscription</legend>
+            <table>
+                <tr>
+                    <td><label>Entrez votre nom</label></td>
+                    <td><input type="text" name="nom" id="nom" placeholder="Ex:Dupont" size="40" maxlength="30" autofocus/></td>
+                </tr>
+                <tr>
+                    <td><label>Entrez votre prénom</label></td>
+                    <td><input type="text" name="prénom" id="prénom" placeholder="Ex:Pierre" size="40" maxlength="30"/></td>
+                </tr>
+                <tr>
+                    <td><label>Entrez votre email</label></td>
+                    <td><input type="email" name="email" id="email" placeholder="exemple@gmail.com"/></td>
+                </tr>
+                <tr>
+                    <td><label>Sexe</label></td>
+                    <td>
+                        Masculin <input type="radio" name="sexe" id="Homme" value="Homme"/>
+                        Feminin <input type="radio" name="sexe" id="Femme" value="Femme"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Image</label></td>
+                    <td><input type="file" id="image" name="image" accept="image/png, image/jpeg"/></td>
+                </tr>
+                <tr>
+                    <td><label>Pays</label></td>
+                    <td>
+                        <select>
+                            <option>France</option>
+                            <option>Espagne</option>
+                            <option>Russie</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Les langages préférés</td>
+                    <td><select multiple="multiple">
+                        <option>Java</option>
+                        <option>Python</option>
+                        <option>PHP</option>
+                        <option>C</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td></br></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Envoyez le Formulaire"></td>
+                </tr>
+            </table>  
+        </fieldset> 
+    </header>
+    
+</body>
+</html>

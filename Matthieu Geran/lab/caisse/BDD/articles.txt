@@ -1,0 +1,4 @@
+LIBELLE;DESCRIPTION;PRIX
+ecran;18 pouces full HD;80
+clavier;AZERTY mecanique;30
+souris;5 boutons;25
