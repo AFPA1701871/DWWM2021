@@ -9,7 +9,13 @@
     }
 
     //Méthodes
-    public function appliqueInteret(){}
+    public function appliqueInteret(int $pourcentage){
+        $newSoldeInteret = $this->_montant * ($pourcentage/100);
+        echo $newSoldeInteret;
+    
+
+
+    }
 
  }
 
