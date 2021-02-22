@@ -1,0 +1,52 @@
+body{
+    margin:0% 1%;
+}
+
+nav{
+    border:1px dashed;
+    margin: 15px 0px;
+    padding: 30px 70px;
+}
+
+aside{
+    position:absolute;
+    left: 72%;
+    border:1px dashed;
+    width:25%;
+    margin: 15px;
+}
+
+article{
+    border:1px dashed;
+    width:70%;
+    margin: 15px;
+}
+
+header, footer{
+    background-color: rgb(215, 215, 215);
+    margin: 15px;
+    padding: 20px;
+}
+
+.tangeantiel{
+    border:1px dashed;
+    margin: 15px 70px;
+    padding: 15px;
+}
+
+.corps{
+    margin: 15px;
+}
+
+.navigation{
+    text-align: center ;
+}
+
+.image{
+    display: flex;
+}
+
+img{
+    max-height: 169px;
+    max-width: 100%;
+}
