@@ -1,0 +1,420 @@
+/*GENERAL*/
+
+*{
+    font-family: sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+p {
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+h1 {
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*HEADER et FOOTER*/
+
+header, footer {
+    width: 100%;
+    padding: 20px 0px;
+    background-color: darkslategray;
+}
+
+header{
+    border-bottom: 3px solid gray;
+    height: auto;
+}
+
+header h1 {
+    color: white;
+    font-size: 1.5em;
+    width: 90%;
+    margin: auto;
+}
+
+footer {
+    border-top: 3px solid gray;
+}
+
+footer p {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+}
+
+/* Navigation */
+
+nav
+{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    padding: 10px 0px;
+    
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 40px;
+}
+
+nav a {
+    font-family: sans-serif;
+    font-size: 1em;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition-property: color;
+    transition-duration: 1s;
+}
+
+nav a:hover {
+    color: darkred;
+}
+
+/*STYLE DES SECTIONS*/
+
+section {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin: 10px auto;
+    padding-bottom: 15px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    background-color: white;
+}
+
+section h2 {
+    margin: 20px 0;
+    
+    text-align: center;
+}
+
+section div {
+    width: 90%;
+}
+
+/*SECTION PRESENTATION*/
+
+#bloc-identite {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.contact, .qui {
+    flex: 0 0 45%;
+    margin: auto;
+}
+
+.contact {
+    border-right: 2px dotted gray;
+    
+    margin-left: auto;
+}
+
+.contact p {
+    text-align: center;
+    line-height: 2em;
+    font-weight: 600;
+    color: darkred;
+}
+
+.contact a {
+    color: darkred;
+    transition-property: color font-size;
+    transition-duration: 0.8s;
+}
+
+.contact a:hover {
+    font-size: 1.5em;
+    color: darkblue;
+}
+
+.qui {
+    margin: auto;
+}
+
+.qui a {
+    display: block;
+    text-align: center;
+    padding: 5px;
+    margin: 20px auto;
+    color: white;
+    background-color: yellowgreen;
+    border-radius: 20px;
+}
+
+/*SECTIONS EXPERIENCES et FORMATION */
+
+.experiences, .formation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid darkgray;
+    width: 100%;
+}
+
+.experiences-logo, .formation-logo {
+    flex: 0 0 25%;
+    max-width: 100px;
+    margin-left: auto;
+}
+
+.experiences-logo img, .formation-logo img {
+    width: 100%;
+}
+
+.experiences-infos, .formation-infos {
+    display: flex;
+    flex-flow: column wrap;
+    flex: 0 0 70%;
+    margin-left: auto;
+}
+
+.experiences h3, .formation h3 {
+    font-size:  1.3em;
+    line-height: 2em;
+    color: darkred;
+}
+
+.experiences h4, .formation h4 {
+    font-size:  1.1em;
+    font-weight: normal;
+    line-height: 2em;
+    color: darkblue;
+}
+
+.experiences p {
+    font-size:  0.9em;
+    font-weight: normal;
+    line-height: 3em;
+}
+
+/*SECTION SKILLS*/
+
+.compétences-type {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.competences {
+    display:flex;
+    flex-flow: row wrap;
+    margin-bottom: 10px;
+}
+.competences p {
+    flex: 0 0 40%;
+}
+
+.box-skill {
+    flex: 0 0 60%;
+    border-radius: 4px;
+    background-color: lightgray;
+}
+
+.jauge {
+    display: block;
+    height: 100%;
+}
+
+.taille5 {
+    width: 5%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille10 {
+    width: 10%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille15 {
+    width: 15%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille20 {
+    width: 20%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille25 {
+    width: 25%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille30 {
+    width: 30%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille35 {
+    width: 35%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille40 {
+    width: 40%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille45 {
+    width: 45%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille50 {
+    width: 50%;
+    background-color: darkseagreen;
+   border-radius: 4px;
+}
+
+.taille55 {
+    width: 55%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille60 {
+    width: 60%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille65 {
+    width: 65%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille70 {
+    width: 70%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille75 {
+    width: 75%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille80 {
+    width: 80%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille85 {
+    width: 85%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille90 {
+    width: 90%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille95 {
+    width: 95%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+.taille100 {
+    width: 100%;
+    background-color: darkseagreen;
+    border-radius: 4px;
+}
+
+/*SECTION LANGUES*/
+
+.langue {
+    display: flex;
+    flex: 0 1 25%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.langue img {
+    width: 120px;
+    height: 80px;
+    border-radius: 10%;
+    border: 5px solid lightgray;
+}
+
+
+/*VERSION MOBILE*/
+
+@media screen and (max-width: 1024px){
+
+    header h1
+    {
+        font-size: 1em; 
+    }
+    
+    nav {
+        display: block;
+        line-height: 1.5em;
+    }
+    
+    nav li {
+        display: block;
+        margin: 10px 0;
+    }
+    
+    .contact {
+        border-right: none;
+        padding-bottom: 20px;
+        border-bottom: 2px dotted gray;
+    }
+    
+    .contact, .qui {
+        display: block;
+        width: 90%;
+        flex: none;
+    }
+
+    .contact p {
+        line-height: 1.5em;
+    }
+
+}

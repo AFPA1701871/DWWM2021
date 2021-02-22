@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav{
+    margin : 10px;
+    padding: 14px 0 0 15px;
+    border : 2px solid #000;
+    height: 50px;
+    list-style: none;
+    
+}
+
+nav li{
+    display: inline;
+}
+
+section{
+    margin : 20px;
+    width: 75%;
+    border : 2px solid #000;
+    padding : 10px;
+
+}
+
+.enteteArticle{
+    height: 80px;
+    background-color: darkgrey;
+    padding: 1.2em;    
+}
+
+.tangentiel{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 2px dashed gray;
+    padding : 10px
+}
