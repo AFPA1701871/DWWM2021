@@ -3,7 +3,7 @@ class Compte{
     protected $_numero;
     protected $_montant;
 
-    public function __construct(string $numero, $montant){
+    public function __construct(string $numero, int $montant){
         $this->_numero = $numero;
         $this->_montant = $montant;
     }
@@ -24,8 +24,18 @@ class Compte{
     }
 
     //Les méthodes
-    public function debiter(){}
-    public function crediter(){}
+    public function debiter($montantAdebiter){
+        echo "Le client depense 10€\n";
+        $newSolde = $this->set_montant($this->get_montant() - $montantAdebiter);
+        return $newSolde;
+
+    }
+
+    public function crediter(int $montantAcrediter){
+        echo "Le client reçoit 50€\n";
+        $newSolde = $this->set_montant($this->get_montant() + $montantAcrediter);
+        return $newSolde;
+    }
 
  
 }

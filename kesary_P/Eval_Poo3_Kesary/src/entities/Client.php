@@ -43,10 +43,15 @@ class Client{
 
     public function recevoir(){}
     public function depenser(){}
-    public function epargner(){}
+    public function epargner($montantAEpargner){
+        echo "Le client épargne 100€ \n";
+        $newSoldeCompte = $this->_compte->get_montant() - $montantAEpargner;
+        $newSoldeLivret = $this->_livret->get_montant() + $montantAEpargner;
+        echo "Le client ".$this->get_nom()." ".$this->get_prenom(). " a ". $newSoldeCompte ." € sur son compte ".$this->_compte->get_numero(). " et ". $newSoldeLivret. " € sur son livret ". $this->_livret->get_numero();
+    }
 
     public function afficher(){
-        echo "Le client ".$this->get_nom() ." " .$this->get_prenom(). " ". $this->get_numero();
+        echo "Le client ".$this->get_nom() ." " .$this->get_prenom(). " a ". $this->_compte->get_montant(). "€ sur son compte et ".$this->_livret->get_montant(). " € sur son livret ". $this->_livret->get_numero();
     }
 }
 
