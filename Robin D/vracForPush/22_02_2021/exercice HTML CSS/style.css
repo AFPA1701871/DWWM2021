@@ -1,0 +1,79 @@
+body {
+    margin: 1em 3em;
+}
+
+header {
+    border: 1px dashed;
+    padding: 1em;
+}
+
+header li {
+    display: inline-block;
+
+}
+
+.conteneurArticle {
+    width: 74%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+aside {
+    display: inline-block;
+    width : 15%;
+}
+
+article {
+    border: 1px dashed;
+    margin: 1em;
+}
+
+article .enTete {
+    background-color: rgb(209, 212, 212);
+    margin: 1em;
+    padding: 1em;
+}
+
+article .conteneurImage {
+    display: flex;
+    flex-direction: row;
+    margin: 1em;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+article .conteneurImage img {
+    height: 150px;
+    border: 1px solid;
+}
+
+article .contenu {
+    margin: 1em;
+}
+
+article .contenuTangentiel {
+    border: 1px dashed rgb(209, 212, 212);
+    margin: 1em 3em;
+    padding: 1em;
+}
+
+article .pied {
+    background-color: rgb(209, 212, 212);
+    margin: 1em;
+    padding: 1em; 
+}
+
+aside {
+    display: inline-block;
+    width: 25%;
+}
+
+aside .conteneurSideBar {
+    border: 1px dashed;
+    margin: 1em 0;
+}
+
+aside li {
+    display: inline-block;
+    vertical-align: top;
+}
