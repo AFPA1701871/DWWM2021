@@ -1,0 +1,87 @@
+html{
+    background-color:rgb(238, 167, 13);
+}
+
+body{
+    border: 0px 15px;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    background-color:white;
+    border-width: medium;
+    color: rgba(1, 1, 31, 0.836);
+}
+main{
+    margin-top: 0%;
+}
+h1{
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0%;
+    padding-top: 2%;
+}
+
+h3{
+    text-align: center;
+    font-weight: lighter;
+}
+
+.Sujet{
+    font-size: 110%;
+}
+
+.Gauche {
+    width: 48%;
+    text-align: right;
+    float: left;
+    border-right:rgb(238, 167, 13) solid 10px;
+    padding-right: 30px;
+}
+
+.Droite{
+    width: 48%;
+    float:right;
+    text-align: left;
+}
+#profil{
+    width: 40%;
+    text-align: right;
+    float: right;
+}
+
+#contact{
+    width: 30%;
+    text-align: left;
+    float: left;
+}
+
+.ligne{
+    display: inline-block;
+    background-color: white;
+    width: 100%;
+}
+
+.imgLigne{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin: 2% 2%;
+}
+
+.Titre{
+    font-weight: bold;
+    font-size: 110%;
+    display: block;
+}
+
+.Contenu{
+    padding-bottom: 10px;
+    display: block;
+}
+
+.liste{
+    display: block;
+    padding-bottom: 5%;
+}
