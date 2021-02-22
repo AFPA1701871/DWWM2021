@@ -1,0 +1,52 @@
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+header{
+    display : flex;
+    flex-direction: row;
+    background-color : #121316;
+    height: 300px;
+}
+
+.identite{
+    display: flex;
+    padding-top : 75px;
+    margin-left: 450px;
+    flex-direction: column;
+}
+
+.prenom{
+    color :whitesmoke;
+    font-size : 30px;
+    
+}
+
+.nom{
+    color: skyblue;
+    font-size : 40px;
+    
+}
+
+.separation{
+    width: 80%;
+    height: 3px;
+    margin : 0 auto;
+    background-color: skyblue;
+}
+
+.localisation{
+    display: flex;
+    padding : 45px;
+    margin-left: 300px;
+    flex-direction: column;
+}
+
+.info{
+    color: whitesmoke;
+    font-size: 20px;
+    padding : 10px
+}
+
