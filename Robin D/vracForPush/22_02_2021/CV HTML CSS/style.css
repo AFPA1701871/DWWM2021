@@ -1,0 +1,55 @@
+body {
+    font-family: sans-serif;
+    margin: auto;
+}
+
+footer {
+    text-align: center;
+}
+
+header, footer {
+    background-color: rgb(189, 192, 192);
+}
+
+header h1 {
+    margin: 0;
+    padding: 0 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    text-decoration: none;
+}
+
+nav li {
+    background-color:rgba(192, 75, 7, 0.37);
+    border-radius: 20px;
+    margin: 5px;
+    padding: 5px;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: darkred;
+}
+
+@media screen and (max-width: 1024px){
+
+    nav {
+        text-align: center;
+    }
+
+    nav ul {
+        display: inline-block;
+    }
+
+}

@@ -1,75 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiwi</title>
 </head>
 <body>
-    <header>
-        <div>
-            <a href="index.html">Rubrique 1</a>
-            <a href="index.html">Rubrique 2</a>
-            <a href="index.html">Rubrique 3</a>
-            <a href="index.html">Rubrique 4</a>
-        </div>
-    </header>
-    <div>
+    <nav>
+        <a href="index.html">Rubrique 1</a>
+        <a href="index.html">Rubrique 2</a>
+        <a href="index.html">Rubrique 3</a>
+        <a href="index.html">Rubrique 4</a>
+    </nav>
+    <aside>
         <h1>Sidebar</h1>
         <h3>Navigation</h3>
-        <a href="index.html">lien 1</a>
-        <a href="index.html">lien 2</a>
-        <a href="index.html">lien 3</a>
+        <p class="navigation">
+            <a href="index.html">lien 1</a>
+            <a href="index.html">lien 2</a>
+            <a href="index.html">lien 3</a>
+        </p>
         <h3>Autre titre</h3>
         <p>Autres informations...</p>
-    </div>
-    <div>
-        <div><!--entere de l'article-->
+    </aside>
+    <article>
+        <header><!--entere de l'article-->
             <h1>
                 En tête de l'article
             </h1>
             <p>
                 Date de publication, auteur
             </p>
-        </div>
-        <p><!--contenu de l'article-->
+        </header>
+        <section>
+        <p class="corps"><!--contenu de l'article-->
             Contenu de l'article, contenu de l'article, contenu de l'article, contenu de l'article, contenu de l'article, contenu de l'article, contenu de l'article...
         </p>
-        <div><!--contenu tangentiel-->
+        <div class="tangeantiel"><!--contenu tangentiel-->
             <p>
                 Contenu tangentiel
             </p>
         </div>
-        <div><!--pied d'article-->
+        <footer><!--pied d'article-->
             <p>
                 Pied d'article
             </p>
-        </div>
-    </div>
-    <div>
-        <div><!--entere de l'article-->
+        </footer>
+    </article>
+    <article>
+        <header><!--entere de l'article-->
             <h1>
                 La production de kiwis dans le monde
             </h1>
             <p>
                 Par Georges, le 2 février 2012
             </p>
-        </div>
-        <p><!--contenu de l'article-->
+        </header>
+            <div class="image">
+                <div>
+                    <img src="image/2Q (1).png" alt="1kiwi et demi avec autocolant">
+                </div>
+                <div>
+                    <img src="image/2Q (2).png" alt="1kiwi + 2tranches">
+                </div>
+                <div>
+                    <img src="image/2Q.png" alt="3kiwis sur l'arbre">
+                </div>
+                <div>
+                    <img src="image/9k.png" alt="5kiwis dont un coupé en 2">
+                </div>
+                <div>
+                    <img src="image/Alimentarium_Kiwi_Apteryx_oiseau.png" alt="kiwi mais l'oiseau">
+                </div>
+            </div>
+        <section>
+        <p class="corps"><!--contenu de l'article-->
             L'Italie est le premier producteur mondial en 2009, d'où ses recherches dans le développement de nouveaux cultivars comme à l'Universitéd'Udine. La France (5e mondial et troisième européen) produisait un peu moins de 76 000 tonnes en 2004, son premier client est l'Espagne. Il est cultivé dans l'Ariège, en Tarn-et-Garonne et sur la façade atlantique du Pays basque à la Bretagne.
         </p>
-        <div><!--contenu tangentiel-->
+        <div class="tangeantiel"><!--contenu tangentiel-->
             <p>
-
+                Les kiwis sont des fruits de plusieurs espèces de lianes du genre Actinidia, famille des Actinidiaceae. Ils sont originaires de Chine, notamment de la province de Shaanxi.
             </p>
         </div>
-        <div><!--pied d'article-->
+        <footer><!--pied d'article-->
             <p>
-                
+                Source :
+                <a href="https://fr.wikipedia.org/wiki/Kiwi">Wikipedia</a>
             </p>
-        </div>
-    </div>
+        </footer>
+    </article>
     
 </body>
 </html>
