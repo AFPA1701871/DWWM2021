@@ -1,16 +1,22 @@
 <?php
 abstract class Humain implements SeDeplacer
 {
-    protected string $nom;
+    protected string $_nom;
 
     public function __construct($nom){
-        $this->set_nom=$nom;
+        $this->_nom=$nom;
     }
-    public function get_nom(){
-        return $this->nom;
+
+    public function setNom($nom){
+        $this->_nom=$nom;
     }
-    public function seDeplacer(){}
-            
+    public function getNom(){
+        return $this->_nom;
+    }      
+
+    public function seDeplacer(){
+        echo "Il se déplace lentement ";
+    }    
     
 
 }

@@ -1,0 +1,24 @@
+.head{
+    padding: 1.875em;
+    border: 0.063em dashed black;
+    margin:1.25em;
+}
+
+.d1,.d2,.d3,.d4{
+    display: inline-block;   
+}
+
+.mid1{
+    padding: 1em;
+    border: 0.063em dashed black;
+
+}
+.entete{
+    background-color: rgb(226, 226, 226);
+    padding: 20px 20px;
+
+}
+
+aside {
+    float: right;
+}

@@ -1,0 +1,34 @@
+#madiv{
+    color:white;
+    background-color: darkolivegreen;
+    display: inline;    
+}
+
+nav ul{
+    padding:0px;
+}
+nav li{
+    display:inline-block;
+    border:1px solid black;
+    padding: 10px;
+    background-color: white;
+}
+
+nav li a:hover{
+    background-color: chartreuse;
+    font-size: 150%;
+    transition-duration: 0.5s;
+}
+
+body{
+    background-color:grey;
+    padding: 20px 20px;
+}
+
+h1{
+    text-align: center;
+}
+
+img{
+    border:3px dotted greenyellow;
+}

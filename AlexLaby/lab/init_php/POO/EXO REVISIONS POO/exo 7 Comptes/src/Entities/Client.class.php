@@ -16,7 +16,7 @@
         public function get_compteBancaire(){
             return $this->_compteBancaire;
         }
-        public function set_compteBancaire($compteBancaire){
+        public function set_compteBancaire(array $compteBancaire){
             $this->_compteBancaire = $compteBancaire;
         }
 

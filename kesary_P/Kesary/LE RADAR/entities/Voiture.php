@@ -2,21 +2,25 @@
 
 class Voiture{
     //Attributs
-    public $_model;
-    public $_marque;
-    public $_immatriculation;
-    public $_couleur;
-    public $_vitesseDemarage = 15;
-    public $_vitesseAccelerer = 20;
+    private $_model;
+    private $_marque;
+    private $_immatriculation;
+    private $_couleur;
+    private $_vitesse = 0;
     private $_nom;
 
     //Constructeur
-    public function __construct($nom,$couleur, $model,$marque,$immatriculation){
-       $this -> _nom = $nom;
+    public function __construct( string $nom, string $couleur, string $model, string $marque, string $immatriculation){
+      /* $this -> _nom = $nom;
        $this -> _couleur = $couleur;
        $this -> _model = $model;
        $this -> _marque = $marque;
-       $this -> _immatriculation = $immatriculation;
+       $this -> _immatriculation = $immatriculation;*/
+       $this -> set_nom($nom);
+       $this -> set_couleur($couleur);
+       $this -> set_model($model);
+       $this -> set_marque($marque);
+       $this -> set_immatriculation($immatriculation);
 
     }
 
@@ -39,6 +43,9 @@ class Voiture{
 
     public function get_couleur(){
         return $this -> _couleur;
+    }
+    public function get_vitesse(){
+        return $this -> _vitesse;
     }
 
     //Liste des setters
@@ -70,11 +77,11 @@ class Voiture{
     }
 
     public function accelerer(){
-
+        $rand = random_int(1,25);
+        $this -> _vitesse = $this -> _vitesse + $rand;
+        echo "La voiture immatriculée ". $this -> _immatriculation . " de la marque ". $this -> _marque . " , modèle : " . $this ->_model . 
+        " de couleur ". $this -> _couleur . " a accéléré de " . $rand ." km/h et roule désormée à " . $this -> get_vitesse . " km/h \n";
     }
-
-
-
 }
 
 

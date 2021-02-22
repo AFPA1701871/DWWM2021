@@ -57,6 +57,7 @@
             $indice = 0;
             $trouve = false;
             $fini = "toto";
+            $listeAchats = array();
 
             foreach ($colonne as $valeur){
                 if ($choix == $valeur){
@@ -73,12 +74,12 @@
                 } while ($quantite <= 0);
 
                 $somme += ($articles[$indice][2] * $quantite);
-
                 $libelle = $articles[$indice][0];
                 $description = $articles[$indice][1];
                 $prix = $articles[$indice][2];
-                $$libelle = new Article($libelle,$description,$prix);
-                
+                $$libelle = new Article($libelle,$description,$prix,$quantite);
+                array_push($listeAchats,$$libelle);
+ 
                 do{
                 $fini = readline("Souhaitez-vous acheter un autre article ? (oui/non) ");
                 } while (strtolower($fini) <> "oui" and strtolower($fini) <> "non");
@@ -89,15 +90,28 @@
 
         } while (!$trouve and strtolower($fini) <> "non");
 
-
+return $listeAchats;
     }
 
-    function ticket($articles){
+    function ticket($articles,$listeAchats){
+
+        $total = 0;
 
         echo "_______________________________________________\n";
         echo "Produit        Qté   Prix Unitaire   Prix Total\n";
         echo "_______________________________________________\n";
-        echo $ecran->getLibelle();
+
+        for ($i=0;$i<count($listeAchats);$i++){
+            echo $listeAchats[$i]->getLibelle();
+            /*for ($j=0;$j<(15-strlen($listeAchats[$i]));$j++){
+                echo " ";
+            }*/
+            echo "        ".$listeAchats[$i]->getQuantite()."     ".$listeAchats[$i]->getPrix()."              ".$listeAchats[$i]->getPrix() * $listeAchats[$i]->getQuantite()."\n";
+            $total += ($listeAchats[$i]->getPrix() * $listeAchats[$i]->getQuantite());
+        }
+
+        echo "_______________________________________________\n";
+        echo "Prix total                            $total\n";
 
     }
 ?>
