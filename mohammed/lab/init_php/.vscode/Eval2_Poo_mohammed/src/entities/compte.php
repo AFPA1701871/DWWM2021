@@ -2,7 +2,7 @@
  class compte {
      protected $_numero;
      protected $_montant;
-     public function __construct($numero,$montant){
+     public function __construct(string $numero, int $montant){
          $this->_numero=$numero;
          $this->_montant=$montant;
      }
@@ -14,10 +14,10 @@
         return $this->_montant;
     }
         //getteres
-    public function set_numero($numero){
+    public function set_numero(string $numero){
           $this->_numero=$numero;
     }
-    public function set_montant($montant){
+    public function set_montant(int $montant){
           $this->_montant=$montant;
     }
     //methode 

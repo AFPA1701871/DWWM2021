@@ -4,9 +4,9 @@ html {
   body {
     width: 600px;
     margin: 0 auto;
-    background-color: #346960;
+    background-color: #1e7062;
     padding: 0 20px 20px 20px;
-    border: 10px solid black;
+    border: 10px solid rgb(46, 34, 34);
   }
   li{
     height: auto;
