@@ -1,0 +1,70 @@
+* {
+    font-family: sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    padding-left: 2em;
+    padding-right: 2em;
+    font-family: sans-serif;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+}
+
+header, footer {
+    background-color: darkslategray;
+}
+
+header .enTete {
+    text-align: center;
+}
+
+header .enTete h1 {
+    display: inline-block;
+    background-color: darkgray;
+    border-radius: 1em;
+    padding: 0.5em;
+}
+
+header nav {
+    padding-bottom: 0.1em;
+}
+
+header nav ul {
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline-block;
+    background-color: darkgray;
+    border-radius: 1em;
+    padding: 0.5em;
+    margin: 1em;
+}
+
+header nav ul li a {
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+header nav ul li a:hover {
+    color: orangered;
+}
+
+@media screen and (max-width: 1024px){
+    
+    header .enTete h1 {
+        
+    }
+
+    header nav ul li {
+        display: block;
+        
+    }
+}
