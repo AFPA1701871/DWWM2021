@@ -1,24 +1,34 @@
 <?php
     
     function chargerClasse($classe){
-        require $classe.".class.php";   
+        require "../Entities/".$classe.".class.php";   
     }
     spl_autoload_register("chargerClasse");
-    $voiture1 =  new Voiture();
-    $voiture2 = new Voiture();
-
-    $marque = readline("Ecrire la marque de la voiture : ");
-    $voiture1->set_marque($marque);
-    $voiture2->set_marque($marque);
-    echo $voiture1->get_marque();
-    $model = readline("Ecrire le model de la voiture : ");
-    $voiture1->set_model($model);
-    $voiture2->set_model($model);
-    $couleur = readline ("Ecrire la couleur de la voiture : ");
-    $voiture1->set_couleur($couleur);
-    $voiture2->set_couleur($couleur);
-    $immatricule= readline("Ecrire l'immatriculation de la voiture ");
-    $voiture1->set_immatriculation($immatricule);
-    $voiture2->set_immatriculation($immatricule);
+    $isFlash=false;
+    do{
+        $nbVoiture=readline("Nombre de voiture :");
+    }while ($nbVoiture<2);
+    for ($i=1; $i <= $nbVoiture ; $i++) { 
+        $marque=readline("Quelle est la marque de la voiture $i ? ");
+        $model=readline("Quelle est le model de la voiture $i ");
+        $immatriculation=readline("Quelle est l'immatriculation de la voiture $i ");
+        $couleur=readline("Quelle est la couleur de la voiture $i");
+        ${"voiture".$i} = new Voiture($marque,$model,$immatriculation,$couleur);
+    }
+    $limitation = readline("Quelle est la limitation de vitesse : ");
+    $radar =new radar($limitation);
+    do{
+    for ($i=1; $i <=$nbVoiture; $i++) { 
+        $vitesseRdm = rand(1,25);
+        ${"voiture".$i}->accelerer($vitesseRdm,$i);
+        $isFlash = $radar->flash(${"voiture".$i}->get_vitesse(),$i);
+        if($isFlash){
+            break;
+        }
+    }
+    }while($isFlash==false);
+    
+    ${"voiture".$i}->toString();
+    
 
 ?>
