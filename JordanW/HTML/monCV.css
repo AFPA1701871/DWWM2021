@@ -1,87 +1,210 @@
-html{
-    background-color:rgb(238, 167, 13);
+html {
+  scroll-behavior: smooth;
+}
+body {
+  width: calc(100% - 6%);
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  background-color: white;
+  text-align: center;
+  color: rgba(1, 1, 31, 0.836);
+  background-color: rgb(238, 167, 13);
+}
+main {
+  margin-top: 0%;
+  border-left: 15%;
+  border-right: 15%;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-color: white;
 }
 
-body{
-    border: 0px 15px;
-    margin-left: 3%;
-    margin-right: 3%;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    background-color:white;
-    border-width: medium;
-    color: rgba(1, 1, 31, 0.836);
+#ligneJW {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-main{
-    margin-top: 0%;
+#prenom {
+  text-align: right;
+  padding-right: 20px;
 }
-h1{
-    font-weight: bold;
-    text-align: center;
-    margin-top: 0%;
-    padding-top: 2%;
+#nom {
+  text-align: left;
+  padding-left: 20px;
+}
+h1 {
+  width: 100%;
+  font-weight: bold;
+  font-size: 300%;
+  margin-top: 0%;
+  padding-top: 80px;
+}
+em {
+  text-align: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 15px;
 }
 
-h3{
-    text-align: center;
-    font-weight: lighter;
-}
-
-.Sujet{
-    font-size: 110%;
+h3 {
+  text-align: center;
+  font-style: italic;
+  font-size: 150%;
 }
 
 .Gauche {
-    width: 48%;
-    text-align: right;
-    float: left;
-    border-right:rgb(238, 167, 13) solid 10px;
-    padding-right: 30px;
+  width: 47%;
+  text-align: right;
+  font-size: 1em;
+  float: left;
+  padding-right: 20px;
 }
 
-.Droite{
-    width: 48%;
-    float:right;
-    text-align: left;
+.milieu {
+  border-left: rgb(238, 167, 13) solid 10px;
+  float: left;
 }
-#profil{
-    width: 40%;
-    text-align: right;
-    float: right;
+#milieu1 {
+  height: 170px;
 }
-
-#contact{
-    width: 30%;
-    text-align: left;
-    float: left;
+#milieu2 {
+  height: 210px;
+}
+#milieu3 {
+  height: 190px;
 }
 
-.ligne{
-    display: inline-block;
-    background-color: white;
-    width: 100%;
+.Droite {
+  width: 47%;
+  float: left;
+  text-align: left;
+  font-size: 1em;
+  padding-left: 20px;
+}
+#profil {
+  width: 50%;
+  text-align: right;
+  float: right;
 }
 
-.imgLigne{
+#contact {
+  width: 100%;
+  text-align: left;
+  float: left;
+}
+
+.ligne {
+  display: inline-block;
+  background-color: white;
+  width: 100%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.Titre {
+  font-weight: bold;
+  font-size: 1em;
+  display: block;
+}
+
+.Contenu {
+  padding-bottom: 10px;
+  display: block;
+}
+.Loisirs {
+  height: 190px;
+}
+ul {
+  padding-left: 0%;
+}
+li {
+  list-style-type: none;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+.socialbtns {
+  float: right;
+}
+.socialbtns,
+.socialbtns ul,
+.socialbtns li {
+  margin: 0;
+  padding: 5px;
+}
+
+.socialbtns li {
+  list-style: none outside none;
+  display: inline-block;
+}
+
+.socialbtns .fa {
+  width: 40px;
+  height: 28px;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid rgb(238, 167, 13);
+  padding-top: 12px;
+  border-radius: 22px;
+  -moz-border-radius: 22px;
+  -webkit-border-radius: 22px;
+  -o-border-radius: 22px;
+}
+
+.socialbtns .fa:hover {
+  color: #fff;
+  background-color: rgb(238, 167, 13);
+  border: 1px solid rgb(238, 167, 13);
+}
+
+@media screen and (max-width: 800px) {
+  .socialbtns {
+    float: none;
+  }
+  #ligneJW {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #prenom {
+    margin-bottom: -50px;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0%;
+  }
+  #nom {
+    text-align: center;
+    padding-left: 0;
+  }
+  .ligne {
+    width: 100%;
+  }
+  #profil,
+  #contact {
+    text-align: center;
+    width: 100%;
+  }
+  .Gauche,
+  .Droite {
+    width: 100%;
+    text-align: center;
     display: block;
-    margin: 2% 2%;
-}
+    padding: 0px;
+  }
 
-.Titre{
-    font-weight: bold;
-    font-size: 110%;
-    display: block;
-}
+  .milieu {
+    display: none;
+  }
 
-.Contenu{
-    padding-bottom: 10px;
-    display: block;
-}
-
-.liste{
-    display: block;
-    padding-bottom: 5%;
+  img {
+    display: none;
+  }
 }

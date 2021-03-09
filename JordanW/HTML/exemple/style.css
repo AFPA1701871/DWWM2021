@@ -1,0 +1,28 @@
+li {
+  background-color: brown;
+  text-align: center;
+}
+
+p {
+  font-style: italic;
+}
+
+h1 {
+  font-weight: large;
+}
+
+.fondCode {
+  background-image: "./code.jpg";
+}
+
+.article td {
+  border-style: solid;
+  border-color: rgb(115, 107, 184);
+  font-size: xx-large;
+}
+
+.article tfoot td {
+  border-style: solid;
+  border-color: rgb(115, 107, 184);
+  font-size: x-small;
+}
