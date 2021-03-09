@@ -1,5 +1,5 @@
 /*header*/
-body{
+*{
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -8,13 +8,130 @@ body{
     width: 9em;
 }
 
+/*header : Nom prénom + titre*/
 #nomprenom{
-    
+    font-size:2em;
+    font-weight:100;
 }
-#titre{
-    
+
+#titre{ 
+    font-size:0.8em;
+    color: #706f6f;
 }
+
+/*header : Contact*/
+.adresse{
+    font-size:0.8em;
+    color: #706f6f;
+}
+
+#linkedin{
+    text-decoration: none;
+    color:#027cb7;
+    font-weight: bolder;
+}
+
 /*body*/
 h2{
-    font-size: medium;
+    font-size:1.1em;
+    text-underline-offset:0.35em;
+    border-bottom: black dotted 2px;
+    width: 20%;
+}
+
+/*body : Informations sur moi*/
+.presentation{
+    font-size:0.9em;
+    color:#676b6d;
+}
+
+/*body : Compétences*/
+h3{
+    font-size:0.8em;
+    color:#9d9d9c;
+    font-style: italic;
+}
+
+.informatique , .savoirs{
+    color:#878787;
+    font-size: 0.7em;
+}
+
+/*body : Langues*/
+.langue , .langueita{
+    font-size:0.9em;
+}
+.langue{
+    color:#575756;
+    display: flex;
+}
+.languecolor{
+    color:#878787;
+}
+.espagnol img , .anglais img{
+    width:40%;
+}
+
+.espagnol span{
+    margin-top: -25%;
+    text-align: center;
+}
+.espagnol{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.anglais{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.anglais span{
+    margin-top: -25%;
+    text-align: center;
+}
+
+/*body : Expériences pro*/
+.exppro{
+    font-size: 0.9em;
+}
+.dates{
+    color:#676b6d;
+}
+.poste{
+    color:#1d1d1b;
+    font-weight: bold;
+}
+.entreprises{
+    color: #676b6d;
+
+}
+.missions{
+    color:#1d1d1b;
+}
+
+/*body : Formations*/
+.formations{
+    font-size: 0.9em;
+}
+
+/*body : Intérêts*/
+.interets img{
+    width: 60%;
+}
+
+.interets{
+    display: flex;
+}
+
+.items{
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.items span{
+    font-size: 0.9em;
+    margin-top: -2.8em;
 }
